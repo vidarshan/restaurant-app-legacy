@@ -1,0 +1,167 @@
+/*size container*/
+
+:root {
+  /*variables*/
+  --header-height: 3rem;
+  --first-color: #069c54;
+  --first-color-alt: #048654;
+  --title-color: #393939;
+  --text-color: #707070;
+  --text-color-light: #a6a6a6;
+  --grey-color: #ccc;
+  --body-color: #fbfefd;
+  --container-color: #ffffff;
+  --badge-color: #e14c38;
+  --info-color: #3d7ea6;
+  --danger-color: #e14c38;
+  --success-color: #048654;
+
+  /*fonts*/
+  --body-font: 'Product Sans', sans-serif;
+  --biggest-font-size: 2.25rem;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: 0.938rem;
+  --small-font-size: 0.813rem;
+  --smaller-font-size: 0.75rem;
+
+  /*font weight*/
+  --font-medium: 500;
+  --font-semi-bold: 600;
+}
+
+/*-----------------------------size-selector styling*/
+
+.size-container {
+  display: flex;
+  height: 100px;
+  justify-content: space-around;
+}
+
+.size-item {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  padding: 0.2rem;
+  background-color: var(--grey-color);
+  border-radius: 0.5rem;
+}
+
+.size-item:hover {
+  background-color: var(--first-color);
+}
+
+.size-price {
+  font-size: 14px;
+}
+
+.size-description {
+  font-size: 14px;
+}
+
+.select-size-label {
+  font-size: var(--normal-font-size);
+  color: var(--text-color);
+  margin: 5px;
+  padding: 0rem;
+}
+
+/*------------------------------add-to-order styling*/
+.add-to-order-button {
+  background-color: var(--first-color);
+  border-radius: 0.5rem;
+  font-size: var(--h1-font-size);
+  color: var(--body-color);
+}
+
+.add-to-order-button:hover {
+  background-color: var(--first-color-alt);
+}
+
+/*------------------------------quantity selector styling*/
+.quantity-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  border-bottom: 1px solid var(--grey-color);
+}
+
+.decrease-quantity {
+  padding: 0rem;
+}
+
+.quantity {
+  padding: 0rem;
+}
+
+.increase-quantity {
+  padding: 0rem;
+}
+
+.quantity-label {
+  font-size: var(--normal-font-size);
+  color: var(--text-color);
+  margin-top: 10px;
+  padding: 0rem;
+  justify-content: flex-start;
+  border-top: 1px solid var(--grey-color);
+}
+
+/*--------------------------------add-ons styling*/
+.addons-container {
+  display: flex;
+  height: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  justify-content: space-around;
+}
+
+.addons-item {
+  width: auto;
+  height: auto;
+  margin: auto;
+  padding: 0.2rem;
+  background-color: var(--grey-color);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.addons-item:hover {
+  background-color: var(--first-color);
+}
+
+.addons-price {
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.addons-name {
+  font-size: 14px;
+}
+
+.addons-label {
+  font-size: var(--normal-font-size);
+  color: var(--text-color);
+  margin-top: 5px;
+  padding: 0rem;
+  justify-content: flex-start;
+}
+
+/*-----------------------------------description styling*/
+
+.info-container {
+  border-bottom: 1px solid var(--grey-color);
+}
+.description {
+  font-size: var(--normal-font-size);
+  color: var(--title-color);
+  text-align: center;
+}
+
+.name {
+  font-size: var(--h1-font-size);
+  color: var(--title-color);
+  text-align: center;
+}
