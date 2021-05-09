@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/Message';
-import { Link } from 'react-router-dom';
+
 import Icon from '@mdi/react';
 import { addToOrder, removeFromOrder } from '../actions/orderActions';
 import { mdiDelete } from '@mdi/js';

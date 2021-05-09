@@ -8,7 +8,7 @@ const ProfileScreen = ({ history }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [setMessage] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const dispatch = useDispatch();
@@ -48,6 +48,7 @@ const ProfileScreen = ({ history }) => {
     <section className='section bd-container' id='menu'>
       <div className='flex-container-profile'>
         <div class='flex-item-left'>
+          {error && <Message message={error}></Message>}
           {loading && <Loader size='small'></Loader>}
           {success && (
             <Message

@@ -4,14 +4,11 @@ import { mealItem } from '../actions/mealActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPizzaSlice, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const MealScreen = ({ history, match }) => {
-  const addOnContainer = useRef([]);
+  let addOnContainer = useRef([]);
   const [size, setSize] = useState();
   const [sizePrice, setSizePrice] = useState(0);
-  const [addOns, setAddOns] = useState();
   const [enableAddOns, setEnableAddOns] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [configuredPrice, setConfiguredPrice] = useState(0);
@@ -22,8 +19,6 @@ const MealScreen = ({ history, match }) => {
   const item = useSelector((state) => state.mealItem);
 
   const { loading, error, meal } = item;
-
-  const { name, description, image, addons } = meal;
 
   const setQuantityAndQuantityPrice = (type) => {
     let tempQuantity;
@@ -42,28 +37,28 @@ const MealScreen = ({ history, match }) => {
     }
   };
 
-  const setSizeAndSizePrice = (e, price) => {
-    let temp;
-    let total;
-    setSizePrice(price);
+  // const setSizeAndSizePrice = (e, price) => {
+  //   let temp;
+  //   let total;
+  //   setSizePrice(price);
 
-    if (sizePrice === price) {
-      setSize(e);
-      setSizePrice(price);
-    } else if (sizePrice > price) {
-      temp = sizePrice - price;
-      total = totalPrice - temp;
-      setSize(e);
-      setTotalPrice(total);
-    } else if (sizePrice < price) {
-      temp = price - sizePrice;
-      total = totalPrice + temp;
-      setSize(e);
-      setTotalPrice(total);
-      setConfiguredPrice(total);
-    }
-    setEnableAddOns(false);
-  };
+  //   if (sizePrice === price) {
+  //     setSize(e);
+  //     setSizePrice(price);
+  //   } else if (sizePrice > price) {
+  //     temp = sizePrice - price;
+  //     total = totalPrice - temp;
+  //     setSize(e);
+  //     setTotalPrice(total);
+  //   } else if (sizePrice < price) {
+  //     temp = price - sizePrice;
+  //     total = totalPrice + temp;
+  //     setSize(e);
+  //     setTotalPrice(total);
+  //     setConfiguredPrice(total);
+  //   }
+  //   setEnableAddOns(false);
+  // };
 
   function selectAddOn(addOnName, addOnPrice) {
     let temp = totalPrice;

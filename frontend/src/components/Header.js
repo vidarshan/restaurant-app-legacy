@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Icon from '@mdi/react';
-import { mdiAccount } from '@mdi/js';
 import 'boxicons';
 import { logout } from '../actions/userActions';
 
@@ -65,7 +63,7 @@ const Header = () => {
                     <div class='dropdown'>
                       <div class='dropbtn'>{userInfo.name}</div>
                       <div class='dropdown-content'>
-                        <a href='#'>
+                        <a href='/orders'>
                           {' '}
                           <box-icon
                             name='dish'
