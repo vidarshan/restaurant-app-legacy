@@ -4,6 +4,7 @@ import { mealItem } from '../actions/mealActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { Link } from 'react-router-dom';
+import { map } from '../lodash';
 
 const MealScreen = ({ history, match }) => {
   let addOnContainer = useRef([]);
@@ -111,60 +112,75 @@ const MealScreen = ({ history, match }) => {
                 <div className='name'>{meal.name}</div>
                 <div className='description'>{meal.description}</div>
               </div>
-              <div>
-                <label className='size-label'>
-                  <input type='radio' name='editList' value='always' />x 4 |
-                  Small
-                </label>
-                <label className='size-label'>
-                  <input type='radio' name='editList' value='never' />x 6 |
-                  Medium
-                </label>
-                <label className='size-label'>
-                  <input type='radio' name='editList' value='costChange' />x 8 |
-                  Large
-                </label>
-              </div>
-              <div>
-                <div className='quantity-label'></div>
-                <div className='quantity-container'>
-                  <div className='decrease-quantity'>-</div>
-                  <div className='quantity'>3</div>
-                  <div className='increase-quantity'>+</div>
-                </div>
-              </div>
-              {sizePrice > 0 ? (
-                <div className='addon-container'>
-                  <div className='add-on-row'>
-                    {meal.addons !== undefined ? (
-                      meal.addons.map((addon) => (
-                        <div className='add-on-column'>
-                          <div class='pretty p-default font-small'>
-                            <input
-                              type='checkbox'
-                              value={addon.addOnName}
-                              onChange={(e) =>
-                                selectAddOn(e.target.value, addon.addOnPrice)
-                              }
-                              disabled={enableAddOns}
-                            />
-                            <div class='state p-success'>
+              <div className='action-labels'>Select Add-ons</div>
+              <div className='size-container-meal'>
+                {meal.sizes !== undefined
+                  ? map(meal.sizes, (e) => {
+                      return (
+                        <div className='size-container-meal-item'>
+                          <div class='pretty p-icon p-round'>
+                            <input type='radio' name='icon_solid' />
+                            <div class='state p-primary'>
+                              <i class='icon mdi mdi-check'></i>
                               <label>
-                                {addon.addOnName} | {addon.addOnPrice}
+                                {e.size} | {e.price}
                               </label>
                             </div>
                           </div>
                         </div>
-                      ))
-                    ) : (
-                      <Message message='An error occured. Please retry'></Message>
-                    )}
+                      );
+                    })
+                  : console.log('wft')}
+              </div>
+
+              <div className='seperator'></div>
+              <div className='action-labels'>Select Add-ons</div>
+              <div class='flex-container-addon'>
+                {meal.addons !== undefined ? (
+                  map(meal.addons, (e) => {
+                    return (
+                      <div className='flex-left-addon'>
+                        <div class='pretty p-default p-fill'>
+                          <input type='checkbox' />
+                          <div class='state'>
+                            <label>
+                              {e.addOnName} | {e.addOnPrice}
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <></>
+                )}
+              </div>
+
+              <div className='notes-textarea-container'>
+                <textarea
+                  id='w3review'
+                  name='w3review'
+                  rows='4'
+                  cols='50'
+                  placeholder='Add notes here'></textarea>
+              </div>
+
+              <div className='quantity-add-to-order-container'>
+                <div className='quantity-holder-flex-item'>
+                  <div className='quantity-container'>
+                    <div className='quantity-minus'>-</div>
+                    <div className='quantity-text'>1</div>
+                    <div className='quantity-add'>+</div>
                   </div>
                 </div>
-              ) : (
-                <>Select size to add extras</>
-              )}
-              {sizePrice > 0 ? (
+                <div className='add-to-cart-btn-flex-item'>
+                  <div className='add-to-cart-btn-flex-item'>
+                    <div className='add-to-order-button'>Add to Cart</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* {sizePrice > 0 ? (
                 <div className='notes-container'>
                   <textarea
                     placeholder='Additional Notes...'
@@ -175,42 +191,7 @@ const MealScreen = ({ history, match }) => {
                 </div>
               ) : (
                 <>Select size to add notes</>
-              )}
-              {sizePrice > 0 ? (
-                <div className='add-to-cart-quantity-container'>
-                  <div className='quantity-container'>
-                    <div class='num-block skin-2'>
-                      <div class='num-in'>
-                        <span
-                          class='minus dis'
-                          onClick={() =>
-                            setQuantityAndQuantityPrice('d')
-                          }></span>
-                        <input
-                          type='text'
-                          class='in-num default-font'
-                          value={quantity}
-                          readonly=''
-                        />
-                        <span
-                          class='plus'
-                          onClick={() =>
-                            setQuantityAndQuantityPrice('i')
-                          }></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='btn-container'>
-                    <Link
-                      onClick={addToOrderHandler}
-                      className='add__to__order__button '>
-                      Add to Order |{totalPrice}
-                    </Link>
-                  </div>
-                </div>
-              ) : (
-                <>Select Size to select quantity</>
-              )}
+              )} */}
             </div>
           </div>
         )}

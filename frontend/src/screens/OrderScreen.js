@@ -1,9 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import Icon from '@mdi/react';
 import { addToOrder, removeFromOrder } from '../actions/orderActions';
-import { mdiDelete } from '@mdi/js';
 
 const OrderScreen = ({ match, location, history }) => {
   const mealId = match.params.id;
@@ -71,14 +68,7 @@ const OrderScreen = ({ match, location, history }) => {
                   onClick={() => removeFromOrderHandler(o.meal)}>
                   Remove
                 </Link> */}
-                <div className='order-list-item'>
-                  <Icon
-                    path={mdiDelete}
-                    size={1}
-                    color='#e14c38'
-                    onClick={() => removeFromOrderHandler(o.meal)}
-                  />
-                </div>
+                <div className='order-list-item'></div>
               </div>
             );
           })}
