@@ -79,8 +79,12 @@ const MealScreen = ({ history, match }) => {
       addOnContainer.current = [];
 
       addOnContainer.current = Array.from(sample);
-      setTotalPrice(totalPrice - addOnPrice);
-      setConfiguredPrice(totalPrice - addOnPrice);
+
+      let addOnPriceTotal = addOnPrice * quantity;
+      console.log(addOnPriceTotal);
+
+      setTotalPrice(totalPrice - addOnPriceTotal);
+      setConfiguredPrice(totalPrice - addOnPriceTotal);
     }
   };
 
@@ -162,7 +166,7 @@ const MealScreen = ({ history, match }) => {
                           />
                           <div class='state'>
                             <label>
-                              {e.addOnName} | {e.addOnPrice}
+                              {e.addOnName} | {e.addOnPrice * quantity}
                             </label>
                           </div>
                         </div>
