@@ -8,7 +8,7 @@ import { map, remove } from '../lodash';
 
 const MealScreen = ({ history, match }) => {
   let addOnContainer = useRef([]);
-  let tempAddOnContainer = useRef([]);
+
   const [size, setSize] = useState();
   const [sizePrice, setSizePrice] = useState(0);
   const [enableOptions, setEnableOptions] = useState(true);
@@ -33,11 +33,11 @@ const MealScreen = ({ history, match }) => {
       setSizePrice(selectedSizePrice);
     } else {
       if (selectedSize > size) {
-        temp = selectedSizePrice - sizePrice;
+        temp = (selectedSizePrice - sizePrice) * quantity;
         setTotalPrice(totalPrice + temp);
         setConfiguredPrice(totalPrice + temp);
       } else if (selectedSize < size) {
-        temp = sizePrice - selectedSizePrice;
+        temp = (sizePrice - selectedSizePrice) * quantity;
         setTotalPrice(totalPrice - temp);
         setConfiguredPrice(totalPrice - temp);
       } else if (selectedSize === size) {
@@ -67,12 +67,14 @@ const MealScreen = ({ history, match }) => {
   };
 
   const handleAddOnPriceToTotalPrice = (addOnName, addOnPrice) => {
-    let temp = totalPrice;
-
     if (!addOnContainer.current.includes(addOnName)) {
       addOnContainer.current.push(addOnName);
-      setTotalPrice(totalPrice + addOnPrice);
-      setConfiguredPrice(totalPrice + addOnPrice);
+
+      let addOnPriceTotal = addOnPrice * quantity;
+      console.log(addOnPriceTotal);
+
+      setTotalPrice(totalPrice + addOnPriceTotal);
+      setConfiguredPrice(totalPrice + addOnPriceTotal);
     } else {
       let sample = addOnContainer.current.filter((e) => e !== addOnName);
 
@@ -113,7 +115,8 @@ const MealScreen = ({ history, match }) => {
                 <div className='name'>{meal.name}</div>
                 <div className='description'>{meal.description}</div>
               </div>
-              <div className='action-labels'>Select Add-ons</div>
+
+              <div className='action-labels'>Select Size</div>
               <div className='size-container-meal'>
                 {meal.sizes !== undefined ? (
                   map(meal.sizes, (e) => {
@@ -144,7 +147,6 @@ const MealScreen = ({ history, match }) => {
                 )}
               </div>
 
-              <div className='seperator'></div>
               <div className='action-labels'>Select Add-ons</div>
               <div class='flex-container-addon'>
                 {meal.addons !== undefined ? (
@@ -180,45 +182,67 @@ const MealScreen = ({ history, match }) => {
 
               <div className='notes-textarea-container'>
                 <textarea
-                  id='w3review'
-                  name='w3review'
+                  name='notes'
                   rows='4'
                   cols='50'
                   placeholder='Add notes here'
+                  value={notes}
                   disabled={enableOptions}></textarea>
               </div>
 
-              <div className='quantity-add-to-order-container'>
-                <div className='quantity-holder-flex-item'>
-                  <div className='quantity-container'>
-                    <input
-                      className='quantity-minus'
-                      type='button'
-                      value='-'
-                      onClick={(e) => handleQuantityPriceToTotalPrice('d')}
-                      disabled={enableOptions}
-                    />
-                    <div className='quantity-text'>{quantity}</div>
-                    <input
-                      className='quantity-add'
-                      type='button'
-                      value='+'
-                      onClick={(e) => handleQuantityPriceToTotalPrice('i')}
-                      disabled={enableOptions}
-                    />
-                  </div>
+              <div className='quantity-add-to-order-button-container'>
+                <div className='quantity-container'>
+                  <input
+                    className='quantity-minus'
+                    type='button'
+                    value='-'
+                    onClick={(e) => handleQuantityPriceToTotalPrice('d')}
+                    disabled={enableOptions}
+                  />
+                  <div className='quantity-text'>{quantity}</div>
+                  <input
+                    className='quantity-add'
+                    type='button'
+                    value='+'
+                    onClick={(e) => handleQuantityPriceToTotalPrice('i')}
+                    disabled={enableOptions}
+                  />
                 </div>
-                <div className='add-to-cart-btn-flex-item'>
-                  <div className='add-to-cart-btn-flex-item'>
-                    <input
-                      type='button'
-                      value={`Add to Order | ${totalPrice} | ${configuredPrice}`}
-                      className='add-to-order-button'
-                      disabled={enableOptions}
-                    />
-                  </div>
-                </div>
+                <input
+                  type='button'
+                  value={`Add to Order | ${totalPrice}`}
+                  className='add-to-order-button'
+                  disabled={enableOptions}
+                />
               </div>
+              {/* <div className='quantity-add-to-order-container'>
+                <div className='quantity-container'>
+                  <input
+                    className='quantity-minus'
+                    type='button'
+                    value='-'
+                    onClick={(e) => handleQuantityPriceToTotalPrice('d')}
+                    disabled={enableOptions}
+                  />
+                  <div className='quantity-text'>{quantity}</div>
+                  <input
+                    className='quantity-add'
+                    type='button'
+                    value='+'
+                    onClick={(e) => handleQuantityPriceToTotalPrice('i')}
+                    disabled={enableOptions}
+                  />
+                </div>
+
+                <div className='add-to-cart-btn-flex-item'>
+                  <input
+                    type='button'
+                    value={`Add to Order | ${totalPrice}`}
+                    className='add-to-order-button'
+                    disabled={enableOptions}
+                  />
+                </div>
+              </div> */}
             </div>
           </div>
         )}

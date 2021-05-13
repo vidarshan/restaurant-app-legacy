@@ -1313,9 +1313,13 @@ input:checked + .slider:before {
 /*------------------------------add-to-order styling*/
 .add-to-order-button {
   background-color: var(--first-color);
-  border-radius: 0.5rem;
-  font-size: var(--h1-font-size);
+  border-radius: 4em;
+  font-size: var(--h3-font-size);
+  font-family: inherit;
   color: var(--body-color);
+  border: none;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .add-to-order-button:hover {
@@ -1534,11 +1538,16 @@ textarea {
   flex-direction: row;
   font-size: var(--normal-font-size);
   text-align: center;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .size-container-meal-item {
-  padding: 10px;
+  padding: 5px;
   flex: 50%;
+  background-color: var(--grey-color);
+  margin: 0.1rem;
+  border-radius: 4em;
 }
 
 /*add on selector*/
@@ -1548,22 +1557,17 @@ textarea {
   grid-template-columns: repeat(2, 1fr);
   padding-left: 10px;
   padding-right: 10px;
+  justify-content: space-around;
 }
 
 .flex-left-addon {
   margin: 5px;
   padding: 5px;
-  border: 1px solid var(--grey-color);
   font-size: var(--normal-font-size);
   text-align: left;
-}
-
-.flex-right-addon {
-  width: 50%;
-  margin: 5px;
-  padding: 5px;
-  border: 2px solid green;
-  font-size: var(--normal-font-size);
+  border-radius: 4em;
+  background-color: var(--grey-color);
+  text-align: center;
 }
 
 /*quantity selector*/
@@ -1605,20 +1609,14 @@ textarea {
   }
 }
 
-.add-to-order-button {
-  font-size: var(--h2-font-size);
-  border-radius: 0.2rem;
-  padding-left: 20px;
-  padding-right: 20px;
-  width: auto;
-}
-
 .quantity-add-to-order-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  padding: 10px;
+  justify-content: space-between;
+  padding-left: 15px;
+  padding-right: 15px;
   padding-top: 0px;
+  background-color: red;
 }
 
 .quantity-holder-flex-item {
@@ -1631,11 +1629,12 @@ textarea {
 
 .quantity-minus {
   font-size: var(--h2-font-size);
-  padding-left: 15px;
-  padding-right: 15px;
-  border-top-left-radius: 0.2rem;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-top-left-radius: 4em;
   background-color: var(--grey-color);
-  border-bottom-left-radius: 0.2rem;
+  border-bottom-left-radius: 4em;
+  border: none;
 }
 
 .quantity-minus:hover {
@@ -1649,11 +1648,12 @@ textarea {
 .quantity-add {
   font-size: var(--h2-font-size);
   margin-right: auto;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
   background-color: var(--grey-color);
-  border-top-right-radius: 0.2rem;
-  border-bottom-right-radius: 0.2rem;
+  border-top-right-radius: 4em;
+  border-bottom-right-radius: 4em;
+  border: none;
   /* padding-bottom: 5px;
   padding-top: 5px; */
 }
@@ -1663,6 +1663,9 @@ textarea {
   justify-content: center;
   padding-left: 15px;
   padding-right: 15px;
+  width: 60px;
+
+  background-color: var(--grey-color);
 }
 
 .quantity-container {
@@ -1697,4 +1700,11 @@ textarea {
     display: flex;
     flex-direction: column;
   }
+}
+.quantity-add-to-order-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 15px;
+  padding-right: 15px;
 }
