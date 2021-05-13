@@ -1146,6 +1146,7 @@ input:checked + .slider:before {
   padding-left: 10px;
   flex: 50%;
   padding-right: 10px;
+  padding-bottom: 10px;
 }
 
 /* meal specification : one column-layout instead of two-column layout */
@@ -1607,7 +1608,9 @@ textarea {
 .add-to-order-button {
   font-size: var(--h2-font-size);
   border-radius: 0.2rem;
-  width: 300px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: auto;
 }
 
 .quantity-add-to-order-container {
@@ -1687,4 +1690,11 @@ textarea {
 
 .seperator {
   border: 1px solid var(--grey-color);
+}
+
+@media (max-width: 992px) {
+  .quantity-add-to-order-container {
+    display: flex;
+    flex-direction: column;
+  }
 }

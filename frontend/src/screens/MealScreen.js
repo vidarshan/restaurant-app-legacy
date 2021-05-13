@@ -1,19 +1,21 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { InputGroup, FormControl } from 'react-bootstrap';
 import { mealItem } from '../actions/mealActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { Link } from 'react-router-dom';
-import { map } from '../lodash';
+import { map, remove } from '../lodash';
 
 const MealScreen = ({ history, match }) => {
   let addOnContainer = useRef([]);
+  let tempAddOnContainer = useRef([]);
   const [size, setSize] = useState();
   const [sizePrice, setSizePrice] = useState(0);
-  const [enableAddOns, setEnableAddOns] = useState(true);
+  const [enableOptions, setEnableOptions] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [configuredPrice, setConfiguredPrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+
   const [notes, setNotes] = useState('');
 
   const dispatch = useDispatch();
@@ -21,16 +23,42 @@ const MealScreen = ({ history, match }) => {
 
   const { loading, error, meal } = item;
 
-  const setQuantityAndQuantityPrice = (type) => {
+  const handleSizePriceToTotalPrice = (selectedSize, selectedSizePrice) => {
+    let temp;
+
+    if (sizePrice == 0) {
+      setTotalPrice(selectedSizePrice);
+      setConfiguredPrice(selectedSizePrice);
+      setSize(selectedSize);
+      setSizePrice(selectedSizePrice);
+    } else {
+      if (selectedSize > size) {
+        temp = selectedSizePrice - sizePrice;
+        setTotalPrice(totalPrice + temp);
+        setConfiguredPrice(totalPrice + temp);
+      } else if (selectedSize < size) {
+        temp = sizePrice - selectedSizePrice;
+        setTotalPrice(totalPrice - temp);
+        setConfiguredPrice(totalPrice - temp);
+      } else if (selectedSize === size) {
+      }
+    }
+
+    setSize(selectedSize);
+    setSizePrice(selectedSizePrice);
+    setEnableOptions(false);
+  };
+
+  const handleQuantityPriceToTotalPrice = (increaseOrDecrease) => {
     let tempQuantity;
     let tempTotalPrice;
 
-    if (type === 'i' && quantity <= 9) {
+    if (increaseOrDecrease === 'i' && quantity <= 9) {
       tempQuantity = quantity + 1;
       tempTotalPrice = totalPrice + configuredPrice;
       setQuantity(tempQuantity);
       setTotalPrice(tempTotalPrice);
-    } else if (type === 'd' && quantity > 1) {
+    } else if (increaseOrDecrease === 'd' && quantity > 1) {
       tempQuantity = quantity - 1;
       tempTotalPrice = totalPrice - configuredPrice;
       setQuantity(tempQuantity);
@@ -38,54 +66,23 @@ const MealScreen = ({ history, match }) => {
     }
   };
 
-  // const setSizeAndSizePrice = (e, price) => {
-  //   let temp;
-  //   let total;
-  //   setSizePrice(price);
-
-  //   if (sizePrice === price) {
-  //     setSize(e);
-  //     setSizePrice(price);
-  //   } else if (sizePrice > price) {
-  //     temp = sizePrice - price;
-  //     total = totalPrice - temp;
-  //     setSize(e);
-  //     setTotalPrice(total);
-  //   } else if (sizePrice < price) {
-  //     temp = price - sizePrice;
-  //     total = totalPrice + temp;
-  //     setSize(e);
-  //     setTotalPrice(total);
-  //     setConfiguredPrice(total);
-  //   }
-  //   setEnableAddOns(false);
-  // };
-
-  function selectAddOn(addOnName, addOnPrice) {
+  const handleAddOnPriceToTotalPrice = (addOnName, addOnPrice) => {
     let temp = totalPrice;
-    var updatedAddOns = [];
+
     if (!addOnContainer.current.includes(addOnName)) {
       addOnContainer.current.push(addOnName);
-      temp = totalPrice + addOnPrice;
-      setTotalPrice(temp);
-      setConfiguredPrice(temp);
+      setTotalPrice(totalPrice + addOnPrice);
+      setConfiguredPrice(totalPrice + addOnPrice);
     } else {
-      updatedAddOns = addOnContainer.current.filter(function (
-        value,
-        index,
-        arr
-      ) {
-        return value !== addOnName;
-      });
+      let sample = addOnContainer.current.filter((e) => e !== addOnName);
 
-      addOnContainer.current.length = 0;
-      addOnContainer = Array.from(updatedAddOns);
+      addOnContainer.current = [];
 
-      temp = totalPrice - addOnPrice;
-      setTotalPrice(temp);
-      setConfiguredPrice(temp);
+      addOnContainer.current = Array.from(sample);
+      setTotalPrice(totalPrice - addOnPrice);
+      setConfiguredPrice(totalPrice - addOnPrice);
     }
-  }
+  };
 
   useEffect(() => {
     dispatch(mealItem(match.params.id));
@@ -114,23 +111,33 @@ const MealScreen = ({ history, match }) => {
               </div>
               <div className='action-labels'>Select Add-ons</div>
               <div className='size-container-meal'>
-                {meal.sizes !== undefined
-                  ? map(meal.sizes, (e) => {
-                      return (
-                        <div className='size-container-meal-item'>
-                          <div class='pretty p-icon p-round'>
-                            <input type='radio' name='icon_solid' />
-                            <div class='state p-primary'>
-                              <i class='icon mdi mdi-check'></i>
-                              <label>
-                                {e.size} | {e.price}
-                              </label>
-                            </div>
+                {meal.sizes !== undefined ? (
+                  map(meal.sizes, (e) => {
+                    return (
+                      <div className='size-container-meal-item'>
+                        <div
+                          class='pretty p-icon p-round'
+                          onClick={() =>
+                            handleSizePriceToTotalPrice(e.size, e.price)
+                          }>
+                          <input
+                            type='radio'
+                            name='icon_solid'
+                            value={e.price}
+                          />
+                          <div class='state p-primary'>
+                            <i class='icon mdi mdi-check'></i>
+                            <label>
+                              {e.size} | {e.price}
+                            </label>
                           </div>
                         </div>
-                      );
-                    })
-                  : console.log('wft')}
+                      </div>
+                    );
+                  })
+                ) : (
+                  <></>
+                )}
               </div>
 
               <div className='seperator'></div>
@@ -140,8 +147,19 @@ const MealScreen = ({ history, match }) => {
                   map(meal.addons, (e) => {
                     return (
                       <div className='flex-left-addon'>
-                        <div class='pretty p-default p-fill'>
-                          <input type='checkbox' />
+                        <div
+                          class='pretty p-default p-fill'
+                          onClick={() =>
+                            handleAddOnPriceToTotalPrice(
+                              e.addOnName,
+                              e.addOnPrice
+                            )
+                          }>
+                          <input
+                            type='checkbox'
+                            value={e.addOnPrice}
+                            disabled={enableOptions}
+                          />
                           <div class='state'>
                             <label>
                               {e.addOnName} | {e.addOnPrice}
@@ -162,36 +180,41 @@ const MealScreen = ({ history, match }) => {
                   name='w3review'
                   rows='4'
                   cols='50'
-                  placeholder='Add notes here'></textarea>
+                  placeholder='Add notes here'
+                  disabled={enableOptions}></textarea>
               </div>
 
               <div className='quantity-add-to-order-container'>
                 <div className='quantity-holder-flex-item'>
                   <div className='quantity-container'>
-                    <div className='quantity-minus'>-</div>
-                    <div className='quantity-text'>1</div>
-                    <div className='quantity-add'>+</div>
+                    <input
+                      className='quantity-minus'
+                      type='button'
+                      value='-'
+                      onClick={(e) => handleQuantityPriceToTotalPrice('d')}
+                      disabled={enableOptions}
+                    />
+                    <div className='quantity-text'>{quantity}</div>
+                    <input
+                      className='quantity-add'
+                      type='button'
+                      value='+'
+                      onClick={(e) => handleQuantityPriceToTotalPrice('i')}
+                      disabled={enableOptions}
+                    />
                   </div>
                 </div>
                 <div className='add-to-cart-btn-flex-item'>
                   <div className='add-to-cart-btn-flex-item'>
-                    <div className='add-to-order-button'>Add to Cart</div>
+                    <input
+                      type='button'
+                      value={`Add to Order | ${totalPrice} | ${configuredPrice}`}
+                      className='add-to-order-button'
+                      disabled={enableOptions}
+                    />
                   </div>
                 </div>
               </div>
-
-              {/* {sizePrice > 0 ? (
-                <div className='notes-container'>
-                  <textarea
-                    placeholder='Additional Notes...'
-                    cols='30'
-                    value={notes}
-                    onChange={(e) => setNotes(e.target.value)}
-                    rows='5'></textarea>
-                </div>
-              ) : (
-                <>Select size to add notes</>
-              )} */}
             </div>
           </div>
         )}
