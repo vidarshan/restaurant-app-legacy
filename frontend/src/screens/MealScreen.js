@@ -11,10 +11,11 @@ const MealScreen = ({ history, match }) => {
 
   const [size, setSize] = useState();
   const [sizePrice, setSizePrice] = useState(0);
+
   const [enableOptions, setEnableOptions] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [configuredPrice, setConfiguredPrice] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(10000);
 
   const [notes, setNotes] = useState('');
 
@@ -24,70 +25,58 @@ const MealScreen = ({ history, match }) => {
   const { loading, error, meal } = item;
 
   const handleSizePriceToTotalPrice = (selectedSize, selectedSizePrice) => {
-    let temp;
-
-    if (sizePrice == 0) {
-      setTotalPrice(selectedSizePrice);
-      setConfiguredPrice(selectedSizePrice);
+    if (sizePrice === 0) {
       setSize(selectedSize);
       setSizePrice(selectedSizePrice);
+      setTotalPrice(totalPrice + selectedSizePrice);
     } else {
-      if (selectedSize > size) {
-        temp = (selectedSizePrice - sizePrice) * quantity;
+      if (selectedSizePrice > sizePrice) {
+        let temp = selectedSizePrice - sizePrice;
+        temp = temp * quantity;
         setTotalPrice(totalPrice + temp);
-        setConfiguredPrice(totalPrice + temp);
-      } else if (selectedSize < size) {
-        temp = (sizePrice - selectedSizePrice) * quantity;
+      } else if (sizePrice > selectedSizePrice) {
+        let temp = sizePrice - selectedSizePrice;
+        temp = temp * quantity;
         setTotalPrice(totalPrice - temp);
-        setConfiguredPrice(totalPrice - temp);
-      } else if (selectedSize === size) {
       }
     }
 
     setSize(selectedSize);
     setSizePrice(selectedSizePrice);
-    setEnableOptions(false);
   };
 
   const handleQuantityPriceToTotalPrice = (increaseOrDecrease) => {
     let tempQuantity;
     let tempTotalPrice;
-
     if (increaseOrDecrease === 'i' && quantity <= 9) {
       tempQuantity = quantity + 1;
       tempTotalPrice = totalPrice + configuredPrice;
       setQuantity(tempQuantity);
-      setTotalPrice(tempTotalPrice);
+      // setTotalPrice(tempTotalPrice);
     } else if (increaseOrDecrease === 'd' && quantity > 1) {
       tempQuantity = quantity - 1;
       tempTotalPrice = totalPrice - configuredPrice;
       setQuantity(tempQuantity);
-      setTotalPrice(tempTotalPrice);
+      // setTotalPrice(tempTotalPrice);
     }
   };
 
   const handleAddOnPriceToTotalPrice = (addOnName, addOnPrice) => {
-    if (!addOnContainer.current.includes(addOnName)) {
-      addOnContainer.current.push(addOnName);
-
-      let addOnPriceTotal = addOnPrice * quantity;
-      console.log(addOnPriceTotal);
-
-      setTotalPrice(totalPrice + addOnPriceTotal);
-      setConfiguredPrice(totalPrice + addOnPriceTotal);
-    } else {
-      let sample = addOnContainer.current.filter((e) => e !== addOnName);
-
-      addOnContainer.current = [];
-
-      addOnContainer.current = Array.from(sample);
-
-      let addOnPriceTotal = addOnPrice * quantity;
-      console.log(addOnPriceTotal);
-
-      setTotalPrice(totalPrice - addOnPriceTotal);
-      setConfiguredPrice(totalPrice - addOnPriceTotal);
-    }
+    // if (!addOnContainer.current.includes(addOnName)) {
+    //   addOnContainer.current.push(addOnName);
+    //   let addOnPriceTotal = addOnPrice * quantity;
+    //   console.log(addOnPriceTotal);
+    //   setTotalPrice(totalPrice + addOnPriceTotal);
+    //   setConfiguredPrice(totalPrice + addOnPriceTotal);
+    // } else {
+    //   let sample = addOnContainer.current.filter((e) => e !== addOnName);
+    //   addOnContainer.current = [];
+    //   addOnContainer.current = Array.from(sample);
+    //   let addOnPriceTotal = addOnPrice * quantity;
+    //   console.log(addOnPriceTotal);
+    //   setTotalPrice(totalPrice - addOnPriceTotal);
+    //   setConfiguredPrice(totalPrice - addOnPriceTotal);
+    // }
   };
 
   useEffect(() => {
@@ -135,7 +124,7 @@ const MealScreen = ({ history, match }) => {
                           <div class='state p-primary'>
                             <i class='icon mdi mdi-check'></i>
                             <label>
-                              {e.size} | {e.price}
+                              {e.size} | {e.price * quantity}
                             </label>
                           </div>
                         </div>
@@ -197,7 +186,6 @@ const MealScreen = ({ history, match }) => {
                     type='button'
                     value='-'
                     onClick={(e) => handleQuantityPriceToTotalPrice('d')}
-                    disabled={enableOptions}
                   />
                   <div className='quantity-text'>{quantity}</div>
                   <input
@@ -205,14 +193,12 @@ const MealScreen = ({ history, match }) => {
                     type='button'
                     value='+'
                     onClick={(e) => handleQuantityPriceToTotalPrice('i')}
-                    disabled={enableOptions}
                   />
                 </div>
                 <input
                   type='button'
                   value={`Add to Order | ${totalPrice}`}
                   className='add-to-order-button'
-                  disabled={enableOptions}
                 />
               </div>
               {/* <div className='quantity-add-to-order-container'>
