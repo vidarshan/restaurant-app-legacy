@@ -12,10 +12,12 @@ const MealScreen = ({ history, match }) => {
   const [size, setSize] = useState();
   const [sizePrice, setSizePrice] = useState(0);
 
+  const [totalAddOnPrices, setTotalAddOnPrices] = useState(0);
+
   const [enableOptions, setEnableOptions] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [configuredPrice, setConfiguredPrice] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(10000);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const [notes, setNotes] = useState('');
 
@@ -40,43 +42,42 @@ const MealScreen = ({ history, match }) => {
         setTotalPrice(totalPrice - temp);
       }
     }
-
     setSize(selectedSize);
     setSizePrice(selectedSizePrice);
   };
 
   const handleQuantityPriceToTotalPrice = (increaseOrDecrease) => {
     let tempQuantity;
-    let tempTotalPrice;
+
     if (increaseOrDecrease === 'i' && quantity <= 9) {
       tempQuantity = quantity + 1;
-      tempTotalPrice = totalPrice + configuredPrice;
       setQuantity(tempQuantity);
-      // setTotalPrice(tempTotalPrice);
+      setTotalPrice(totalPrice + (totalAddOnPrices + sizePrice));
     } else if (increaseOrDecrease === 'd' && quantity > 1) {
       tempQuantity = quantity - 1;
-      tempTotalPrice = totalPrice - configuredPrice;
+
       setQuantity(tempQuantity);
-      // setTotalPrice(tempTotalPrice);
+      setTotalPrice(totalPrice - (totalAddOnPrices + sizePrice));
     }
   };
 
   const handleAddOnPriceToTotalPrice = (addOnName, addOnPrice) => {
-    // if (!addOnContainer.current.includes(addOnName)) {
-    //   addOnContainer.current.push(addOnName);
-    //   let addOnPriceTotal = addOnPrice * quantity;
-    //   console.log(addOnPriceTotal);
-    //   setTotalPrice(totalPrice + addOnPriceTotal);
-    //   setConfiguredPrice(totalPrice + addOnPriceTotal);
-    // } else {
-    //   let sample = addOnContainer.current.filter((e) => e !== addOnName);
-    //   addOnContainer.current = [];
-    //   addOnContainer.current = Array.from(sample);
-    //   let addOnPriceTotal = addOnPrice * quantity;
-    //   console.log(addOnPriceTotal);
-    //   setTotalPrice(totalPrice - addOnPriceTotal);
-    //   setConfiguredPrice(totalPrice - addOnPriceTotal);
-    // }
+    if (!addOnContainer.current.includes(addOnName)) {
+      addOnContainer.current.push(addOnName);
+      let addOnPriceTotal = addOnPrice * quantity;
+      setTotalPrice(totalPrice + addOnPriceTotal);
+      setTotalAddOnPrices(totalAddOnPrices + addOnPrice);
+    } else {
+      let addOnsAfterRemove = addOnContainer.current.filter(
+        (e) => e !== addOnName
+      );
+      addOnContainer.current = [];
+      addOnContainer.current = Array.from(addOnsAfterRemove);
+
+      let addOnPriceTotal = addOnPrice * quantity;
+      setTotalPrice(totalPrice - addOnPriceTotal);
+      setTotalAddOnPrices(totalAddOnPrices - addOnPrice);
+    }
   };
 
   useEffect(() => {
@@ -153,7 +154,7 @@ const MealScreen = ({ history, match }) => {
                           <input
                             type='checkbox'
                             value={e.addOnPrice}
-                            disabled={enableOptions}
+                            // disabled={enableOptions}
                           />
                           <div class='state'>
                             <label>
@@ -197,7 +198,7 @@ const MealScreen = ({ history, match }) => {
                 </div>
                 <input
                   type='button'
-                  value={`Add to Order | ${totalPrice}`}
+                  value={`Add to Order | ${totalPrice} | ${quantity}`}
                   className='add-to-order-button'
                 />
               </div>
