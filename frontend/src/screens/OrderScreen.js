@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToOrder /*removeFromOrder */ } from '../actions/orderActions';
+import { addToOrder, removeFromOrder } from '../actions/orderActions';
 
 const OrderScreen = ({ match, location, history }) => {
   const mealId = match.params.id;

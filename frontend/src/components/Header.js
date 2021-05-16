@@ -46,7 +46,9 @@ const Header = () => {
                 </Link>
               </li>
               <li className='nav__item'>
-                <box-icon name='shopping-bag'></box-icon>
+                <Link to='/order' className='nav__link'>
+                  <box-icon name='shopping-bag'></box-icon>
+                </Link>
               </li>
               {/* <li className='nav__item'>
                 <box-icon
@@ -56,44 +58,11 @@ const Header = () => {
                   id='theme-button'></box-icon>
               </li> */}
               {userInfo ? (
-                <>
-                  <li className='nav__item'>
-                    {/* <box-icon name='user-circle' type='solid'></box-icon> */}
-                    {/* <Link className='nav__link'>
-                      <box-icon name='user-circle' type='solid'></box-icon>
-                    </Link> */}
-
-                    <div class='dropdown'>
-                      <div class='dropbtn'>
-                        <box-icon name='user'></box-icon>
-                      </div>
-                      <div class='dropdown-content'>
-                        <a href='/orders'>
-                          {' '}
-                          <box-icon
-                            name='dish'
-                            type='solid'
-                            color='#a6a6a6'></box-icon>{' '}
-                          Orders
-                        </a>
-                        <Link to='/profile'>
-                          <box-icon
-                            name='user-circle'
-                            type='solid'
-                            color='#a6a6a6'></box-icon>
-                          Profile
-                        </Link>
-                        <Link onClick={logoutHandler}>
-                          {' '}
-                          <box-icon
-                            name='log-out'
-                            color='#a6a6a6'></box-icon>{' '}
-                          Logout
-                        </Link>
-                      </div>
-                    </div>
-                  </li>
-                </>
+                <li className='nav__item'>
+                  <Link to='/profile' className='nav__link'>
+                    <box-icon name='user'></box-icon>
+                  </Link>
+                </li>
               ) : (
                 <li className='nav__item'>
                   <Link to='/login' className='nav__link'>

@@ -3,7 +3,6 @@ import React from 'react';
 const Loader = ({ size }) => {
   return (
     <div className={`loading__container__${size}`}>
-      {console.log(size)}
       <svg
         class='spinner'
         width={size === 'small' ? '30px' : '30px'}

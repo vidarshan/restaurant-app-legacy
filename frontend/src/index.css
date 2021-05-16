@@ -1326,7 +1326,7 @@ input:checked + .slider:before {
 }
 
 .add-to-order-button:hover {
-  background-color: var(--first-color-alt);
+  background-color: var(--grey-color);
 }
 
 /*-------------------------------loading container*/
