@@ -1316,10 +1316,13 @@ input:checked + .slider:before {
   border-radius: 4em;
   font-size: var(--h3-font-size);
   font-family: inherit;
+  display: flex;
+  flex-direction: row;
   color: var(--body-color);
   border: none;
   padding-left: 20px;
   padding-right: 20px;
+  padding-top: 5px;
 }
 
 .add-to-order-button:hover {

@@ -46,12 +46,15 @@ const Header = () => {
                 </Link>
               </li>
               <li className='nav__item'>
+                <box-icon name='shopping-bag'></box-icon>
+              </li>
+              {/* <li className='nav__item'>
                 <box-icon
                   name='moon'
                   color='#a6a6a6'
                   className='change-theme'
                   id='theme-button'></box-icon>
-              </li>
+              </li> */}
               {userInfo ? (
                 <>
                   <li className='nav__item'>
@@ -61,7 +64,9 @@ const Header = () => {
                     </Link> */}
 
                     <div class='dropdown'>
-                      <div class='dropbtn'>{userInfo.name}</div>
+                      <div class='dropbtn'>
+                        <box-icon name='user'></box-icon>
+                      </div>
                       <div class='dropdown-content'>
                         <a href='/orders'>
                           {' '}

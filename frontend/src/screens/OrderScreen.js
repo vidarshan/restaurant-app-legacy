@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToOrder, removeFromOrder } from '../actions/orderActions';
+import { addToOrder /*removeFromOrder */ } from '../actions/orderActions';
 
 const OrderScreen = ({ match, location, history }) => {
   const mealId = match.params.id;
 
   const qty = location.search ? Number(location.search.split('=')[1]) : 1;
-  // const size = location.search ? location.search.split('size=')[1] : 1;
   const size = '';
   console.log(location);
 
@@ -15,11 +14,11 @@ const OrderScreen = ({ match, location, history }) => {
   const order = useSelector((state) => state.order);
   const { orderItems } = order;
 
-  const removeFromOrderHandler = (id) => {
-    console.log(id);
-    console.log(orderItems);
-    dispatch(removeFromOrder(id));
-  };
+  // const removeFromOrderHandler = (id) => {
+  //   console.log(id);
+  //   console.log(orderItems);
+  //   dispatch(removeFromOrder(id));
+  // };
 
   useEffect(() => {
     if (mealId) {
