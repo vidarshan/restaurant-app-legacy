@@ -1,16 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/Message';
-import { Link } from 'react-router-dom';
-import Icon from '@mdi/react';
-import { addToOrder, removeFromOrder } from '../actions/orderActions';
-import { mdiDelete } from '@mdi/js';
+import { addToOrder /*removeFromOrder */ } from '../actions/orderActions';
 
 const OrderScreen = ({ match, location, history }) => {
   const mealId = match.params.id;
 
   const qty = location.search ? Number(location.search.split('=')[1]) : 1;
-  // const size = location.search ? location.search.split('size=')[1] : 1;
   const size = '';
   console.log(location);
 
@@ -19,11 +14,11 @@ const OrderScreen = ({ match, location, history }) => {
   const order = useSelector((state) => state.order);
   const { orderItems } = order;
 
-  const removeFromOrderHandler = (id) => {
-    console.log(id);
-    console.log(orderItems);
-    dispatch(removeFromOrder(id));
-  };
+  // const removeFromOrderHandler = (id) => {
+  //   console.log(id);
+  //   console.log(orderItems);
+  //   dispatch(removeFromOrder(id));
+  // };
 
   useEffect(() => {
     if (mealId) {
@@ -72,14 +67,7 @@ const OrderScreen = ({ match, location, history }) => {
                   onClick={() => removeFromOrderHandler(o.meal)}>
                   Remove
                 </Link> */}
-                <div className='order-list-item'>
-                  <Icon
-                    path={mdiDelete}
-                    size={1}
-                    color='#e14c38'
-                    onClick={() => removeFromOrderHandler(o.meal)}
-                  />
-                </div>
+                <div className='order-list-item'></div>
               </div>
             );
           })}

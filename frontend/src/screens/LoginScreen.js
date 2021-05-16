@@ -22,7 +22,7 @@ const LoginScreen = ({ location, history }) => {
     if (userInfo) {
       history.push(redirect);
     }
-  }, [history, location, userInfo]);
+  }, [history, location, userInfo, redirect]);
 
   return (
     <section className='section bd-container-login'>

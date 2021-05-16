@@ -1,225 +1,230 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Animated } from 'react-animated-css';
 import { mealItem } from '../actions/mealActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPizzaSlice, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { map } from '../lodash';
 
 const MealScreen = ({ history, match }) => {
-  const addOnContainer = useRef([]);
+  let addOnContainer = useRef([]);
+
+  //eslint-disable-next-line
   const [size, setSize] = useState();
   const [sizePrice, setSizePrice] = useState(0);
-  const [addOns, setAddOns] = useState();
-  const [enableAddOns, setEnableAddOns] = useState(true);
+
+  const [totalAddOnPrices, setTotalAddOnPrices] = useState(0);
+
+  const [enableOptions, setEnableOptions] = useState(true);
   const [quantity, setQuantity] = useState(1);
-  const [configuredPrice, setConfiguredPrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [notes, setNotes] = useState('');
+  const [showAnimation, setShowAnimation] = useState(false);
+
+  const [notes] = useState('');
 
   const dispatch = useDispatch();
   const item = useSelector((state) => state.mealItem);
 
   const { loading, error, meal } = item;
 
-  const { name, description, image, addons } = meal;
+  const handleSizePriceToTotalPrice = (selectedSize, selectedSizePrice) => {
+    if (sizePrice === 0) {
+      setSize(selectedSize);
+      setSizePrice(selectedSizePrice);
+      setTotalPrice(totalPrice + selectedSizePrice);
+    } else {
+      if (selectedSizePrice > sizePrice) {
+        let temp = selectedSizePrice - sizePrice;
+        temp = temp * quantity;
+        setTotalPrice(totalPrice + temp);
+      } else if (sizePrice > selectedSizePrice) {
+        let temp = sizePrice - selectedSizePrice;
+        temp = temp * quantity;
+        setTotalPrice(totalPrice - temp);
+      }
+    }
+    setSize(selectedSize);
+    setSizePrice(selectedSizePrice);
 
-  const setQuantityAndQuantityPrice = (type) => {
+    setShowAnimation(true);
+    setEnableOptions(false);
+  };
+
+  const handleQuantityPriceToTotalPrice = (increaseOrDecrease) => {
     let tempQuantity;
-    let tempTotalPrice;
 
-    if (type === 'i' && quantity <= 9) {
+    if (increaseOrDecrease === 'i' && quantity <= 9) {
       tempQuantity = quantity + 1;
-      tempTotalPrice = totalPrice + configuredPrice;
       setQuantity(tempQuantity);
-      setTotalPrice(tempTotalPrice);
-    } else if (type === 'd' && quantity > 1) {
+      setTotalPrice(totalPrice + (totalAddOnPrices + sizePrice));
+    } else if (increaseOrDecrease === 'd' && quantity > 1) {
       tempQuantity = quantity - 1;
-      tempTotalPrice = totalPrice - configuredPrice;
+
       setQuantity(tempQuantity);
-      setTotalPrice(tempTotalPrice);
+      setTotalPrice(totalPrice - (totalAddOnPrices + sizePrice));
     }
   };
 
-  const setSizeAndSizePrice = (e, price) => {
-    let temp;
-    let total;
-    setSizePrice(price);
-
-    if (sizePrice === price) {
-      setSize(e);
-      setSizePrice(price);
-    } else if (sizePrice > price) {
-      temp = sizePrice - price;
-      total = totalPrice - temp;
-      setSize(e);
-      setTotalPrice(total);
-    } else if (sizePrice < price) {
-      temp = price - sizePrice;
-      total = totalPrice + temp;
-      setSize(e);
-      setTotalPrice(total);
-      setConfiguredPrice(total);
-    }
-    setEnableAddOns(false);
-  };
-
-  function selectAddOn(addOnName, addOnPrice) {
-    let temp = totalPrice;
-    var updatedAddOns = [];
+  const handleAddOnPriceToTotalPrice = (addOnName, addOnPrice) => {
     if (!addOnContainer.current.includes(addOnName)) {
       addOnContainer.current.push(addOnName);
-      temp = totalPrice + addOnPrice;
-      setTotalPrice(temp);
-      setConfiguredPrice(temp);
+      let addOnPriceTotal = addOnPrice * quantity;
+      setTotalPrice(totalPrice + addOnPriceTotal);
+      setTotalAddOnPrices(totalAddOnPrices + addOnPrice);
     } else {
-      updatedAddOns = addOnContainer.current.filter(function (
-        value,
-        index,
-        arr
-      ) {
-        return value !== addOnName;
-      });
+      let addOnsAfterRemove = addOnContainer.current.filter(
+        (e) => e !== addOnName
+      );
+      addOnContainer.current = [];
+      addOnContainer.current = Array.from(addOnsAfterRemove);
 
-      addOnContainer.current.length = 0;
-      addOnContainer = Array.from(updatedAddOns);
-
-      temp = totalPrice - addOnPrice;
-      setTotalPrice(temp);
-      setConfiguredPrice(temp);
+      let addOnPriceTotal = addOnPrice * quantity;
+      setTotalPrice(totalPrice - addOnPriceTotal);
+      setTotalAddOnPrices(totalAddOnPrices - addOnPrice);
     }
-  }
+  };
 
   useEffect(() => {
     dispatch(mealItem(match.params.id));
   }, [dispatch, match]);
 
-  const addToOrderHandler = () => {
-    history.push(`/order/${match.params.id}?qty=${quantity}&size=${size}`);
-  };
+  // const addToOrderHandler = () => {
+  //   history.push(`/order/${match.params.id}?qty=${quantity}&size=${size}`);
+  // };
 
   return (
     <section className='section bd-container' id='menu'>
-      <div class='inner'>
-        {loading ? (
-          <Loader></Loader>
-        ) : error ? (
-          <Message message={error} variant='danger'></Message>
-        ) : (
-          <div class='flex-container'>
-            <div class='flex-item-left'>
-              <img src={meal.image} alt='' />
-            </div>
-            <div class='flex-item-right'>
-              <div className='info-container'>
-                <div className='name'>{meal.name}</div>
-                <div className='description'>{meal.description}</div>
+      <Animated
+        animationIn='bounceInLeft'
+        animationOut='fadeOut'
+        isVisible={true}>
+        <div class='inner'>
+          {loading ? (
+            <Loader></Loader>
+          ) : error ? (
+            <Message message={error} variant='danger'></Message>
+          ) : (
+            <div class='flex-container'>
+              <div class='flex-item-left'>
+                <img src={meal.image} alt='' />
               </div>
-              <div>
-                <label className='size-label'>
-                  <input type='radio' name='editList' value='always' />x 4 |
-                  Small
-                </label>
-                <label className='size-label'>
-                  <input type='radio' name='editList' value='never' />x 6 |
-                  Medium
-                </label>
-                <label className='size-label'>
-                  <input type='radio' name='editList' value='costChange' />x 8 |
-                  Large
-                </label>
-              </div>
-              <div>
-                <div className='quantity-label'></div>
-                <div className='quantity-container'>
-                  <div className='decrease-quantity'>-</div>
-                  <div className='quantity'>3</div>
-                  <div className='increase-quantity'>+</div>
+              <div class='flex-item-right'>
+                <div className='info-container'>
+                  <div className='name'>{meal.name}</div>
+                  <div className='description'>{meal.description}</div>
                 </div>
-              </div>
-              {sizePrice > 0 ? (
-                <div className='addon-container'>
-                  <div className='add-on-row'>
-                    {meal.addons !== undefined ? (
-                      meal.addons.map((addon) => (
-                        <div className='add-on-column'>
-                          <div class='pretty p-default font-small'>
+
+                <div className='action-labels'>Select Size</div>
+                <div className='size-container-meal'>
+                  {meal.sizes !== undefined ? (
+                    map(meal.sizes, (e) => {
+                      return (
+                        <div className='size-container-meal-item'>
+                          <div
+                            class='pretty p-icon p-round'
+                            onClick={() =>
+                              handleSizePriceToTotalPrice(e.size, e.price)
+                            }>
                             <input
-                              type='checkbox'
-                              value={addon.addOnName}
-                              onChange={(e) =>
-                                selectAddOn(e.target.value, addon.addOnPrice)
-                              }
-                              disabled={enableAddOns}
+                              type='radio'
+                              name='icon_solid'
+                              value={e.price}
                             />
-                            <div class='state p-success'>
+                            <div class='state p-primary'>
+                              <i class='icon mdi mdi-check'></i>
                               <label>
-                                {addon.addOnName} | {addon.addOnPrice}
+                                {e.size} | {e.price * quantity}
                               </label>
                             </div>
                           </div>
                         </div>
-                      ))
-                    ) : (
-                      <Message message='An error occured. Please retry'></Message>
-                    )}
-                  </div>
+                      );
+                    })
+                  ) : (
+                    <></>
+                  )}
                 </div>
-              ) : (
-                <>Select size to add extras</>
-              )}
-              {sizePrice > 0 ? (
-                <div className='notes-container'>
+
+                <div className='action-labels'>Select Add-ons</div>
+                <div class='flex-container-addon'>
+                  {meal.addons !== undefined ? (
+                    map(meal.addons, (e) => {
+                      return (
+                        <div className='flex-left-addon'>
+                          <div
+                            class='pretty p-default p-fill'
+                            onClick={() =>
+                              handleAddOnPriceToTotalPrice(
+                                e.addOnName,
+                                e.addOnPrice
+                              )
+                            }>
+                            <input
+                              type='checkbox'
+                              value={e.addOnPrice}
+                              disabled={enableOptions}
+                            />
+                            <div class='state'>
+                              <label>
+                                {e.addOnName} | {e.addOnPrice * quantity}
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <></>
+                  )}
+                </div>
+
+                <div className='notes-textarea-container'>
                   <textarea
-                    placeholder='Additional Notes...'
-                    cols='30'
+                    name='notes'
+                    rows='4'
+                    cols='50'
+                    placeholder='Add notes here'
                     value={notes}
-                    onChange={(e) => setNotes(e.target.value)}
-                    rows='5'></textarea>
+                    disabled={enableOptions}></textarea>
                 </div>
-              ) : (
-                <>Select size to add notes</>
-              )}
-              {sizePrice > 0 ? (
-                <div className='add-to-cart-quantity-container'>
+
+                <div className='quantity-add-to-order-button-container'>
                   <div className='quantity-container'>
-                    <div class='num-block skin-2'>
-                      <div class='num-in'>
-                        <span
-                          class='minus dis'
-                          onClick={() =>
-                            setQuantityAndQuantityPrice('d')
-                          }></span>
-                        <input
-                          type='text'
-                          class='in-num default-font'
-                          value={quantity}
-                          readonly=''
-                        />
-                        <span
-                          class='plus'
-                          onClick={() =>
-                            setQuantityAndQuantityPrice('i')
-                          }></span>
-                      </div>
-                    </div>
+                    <input
+                      className='quantity-minus'
+                      type='button'
+                      value='-'
+                      onClick={(e) => handleQuantityPriceToTotalPrice('d')}
+                      disabled={enableOptions}
+                    />
+                    <div className='quantity-text'>{quantity}</div>
+                    <input
+                      className='quantity-add'
+                      type='button'
+                      value='+'
+                      onClick={(e) => handleQuantityPriceToTotalPrice('i')}
+                      disabled={enableOptions}
+                    />
                   </div>
-                  <div className='btn-container'>
-                    <Link
-                      onClick={addToOrderHandler}
-                      className='add__to__order__button '>
-                      Add to Order |{totalPrice}
-                    </Link>
-                  </div>
+                  <button
+                    className='add-to-order-button'
+                    disabled={enableOptions}>
+                    Add to Order
+                    <Animated
+                      animationIn='fadeInLeft'
+                      animationInDuration={500}
+                      animationOutDuration={100}
+                      isVisible={showAnimation}>
+                      {' '}
+                      | {totalPrice}
+                    </Animated>
+                  </button>
                 </div>
-              ) : (
-                <>Select Size to select quantity</>
-              )}
+              </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      </Animated>
     </section>
   );
 };

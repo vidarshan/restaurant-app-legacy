@@ -1,3 +1,5 @@
+@import '~pretty-checkbox/dist/pretty-checkbox.min.css';
+
 @font-face {
   font-family: 'Product Sans';
   src: url(./fonts/Product\ Sans\ Regular.ttf);
@@ -20,6 +22,7 @@
   --text-color: #707070;
   --text-color-light: #a6a6a6;
   --grey-color: #ccc;
+  --grey-hover-color: #a4a4a4;
   --body-color: #fbfefd;
   --container-color: #ffffff;
   --badge-color: #e14c38;
@@ -1124,17 +1127,26 @@ input:checked + .slider:before {
   flex-direction: row;
   font-size: 30px;
   text-align: center;
+  background: transparent;
+  box-shadow: 6px 6px 14px 0 rgba(0, 0, 0, 0.2),
+    -8px -8px 18px 0 rgba(255, 255, 255, 0.55);
+  border-radius: 1rem;
 }
 
 .flex-item-left {
-  background-color: #f1f1f1;
   padding: 10px;
+  background-color: #f1f1f1;
   flex: 50%;
+  align-items: center;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
 }
 
 .flex-item-right {
   padding-left: 10px;
   flex: 50%;
+  padding-right: 10px;
+  padding-bottom: 10px;
 }
 
 /* meal specification : one column-layout instead of two-column layout */
@@ -1226,15 +1238,6 @@ input:checked + .slider:before {
 
 /*-----------------------------------description styling*/
 
-.info-container {
-  border-bottom: 1px solid var(--grey-color);
-}
-.description {
-  font-size: var(--normal-font-size);
-  color: var(--title-color);
-  text-align: center;
-}
-
 .name {
   font-size: var(--h1-font-size);
   color: var(--title-color);
@@ -1303,17 +1306,23 @@ input:checked + .slider:before {
 .description {
   font-size: var(--normal-font-size);
   color: var(--text-color);
-  margin-top: 10px;
+  border-bottom: 2px solid var(--grey-color);
   padding: 0rem;
   justify-content: flex-start;
-  border-top: 1px solid var(--grey-color);
 }
 /*------------------------------add-to-order styling*/
 .add-to-order-button {
   background-color: var(--first-color);
-  border-radius: 0.5rem;
-  font-size: var(--h1-font-size);
+  border-radius: 4em;
+  font-size: var(--h3-font-size);
+  font-family: inherit;
+  display: flex;
+  flex-direction: row;
   color: var(--body-color);
+  border: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 5px;
 }
 
 .add-to-order-button:hover {
@@ -1523,4 +1532,182 @@ textarea {
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
   color: var(--first-color);
+}
+
+/*meal configuator styles*/
+/*size selector*/
+.size-container-meal {
+  display: flex;
+  flex-direction: row;
+  font-size: var(--normal-font-size);
+  text-align: center;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.size-container-meal-item {
+  padding: 5px;
+  flex: 50%;
+  background-color: var(--grey-color);
+  margin: 0.1rem;
+  border-radius: 4em;
+}
+
+/*add on selector*/
+.flex-container-addon {
+  display: grid;
+  font-size: var(--normal-font-size);
+  grid-template-columns: repeat(2, 1fr);
+  padding-left: 10px;
+  padding-right: 10px;
+  justify-content: space-around;
+}
+
+.flex-left-addon {
+  margin: 5px;
+  padding: 5px;
+  font-size: var(--normal-font-size);
+  text-align: left;
+  border-radius: 4em;
+  background-color: var(--grey-color);
+  text-align: center;
+}
+
+/*quantity selector*/
+.quantity-spinner-container {
+  display: inline-block;
+  padding: 10px 16px;
+  border: 1px solid #000;
+  margin: 20px 0 0 0;
+}
+
+.quantity-spinner-number {
+  width: 18px;
+}
+
+.quantity-spinner-minus,
+.quantity-spinner-plus {
+  cursor: pointer;
+  background-color: #327ed5;
+  color: #fff;
+  font-weight: bold;
+}
+
+@media (max-width: 800px) {
+  .size-container-meal {
+    flex-direction: column;
+  }
+  .addon-container-meal {
+    flex-direction: column;
+  }
+
+  .flex-container-addon {
+    flex-direction: column;
+  }
+  .flex-right-addon {
+    width: 100%;
+  }
+  .flex-left-addon {
+    width: 100%;
+  }
+}
+
+.quantity-add-to-order-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 0px;
+  background-color: red;
+}
+
+.quantity-holder-flex-item {
+  width: auto;
+}
+
+.add-to-cart-btn-flex-item {
+  width: auto;
+}
+
+.quantity-minus {
+  font-size: var(--h2-font-size);
+  padding-left: 10px;
+  padding-right: 10px;
+  border-top-left-radius: 4em;
+  background-color: var(--grey-color);
+  border-bottom-left-radius: 4em;
+  border: none;
+}
+
+.quantity-minus:hover {
+  background-color: var(--grey-hover-color);
+}
+
+.quantity-add:hover {
+  background-color: var(--grey-hover-color);
+}
+
+.quantity-add {
+  font-size: var(--h2-font-size);
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: var(--grey-color);
+  border-top-right-radius: 4em;
+  border-bottom-right-radius: 4em;
+  border: none;
+  /* padding-bottom: 5px;
+  padding-top: 5px; */
+}
+
+.quantity-text {
+  font-size: var(--h2-font-size);
+  justify-content: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 60px;
+
+  background-color: var(--grey-color);
+}
+
+.quantity-container {
+  font-size: var(--h2-font-size);
+  display: flex;
+  flex-wrap: wrap;
+  width: fit-content;
+  border-radius: 0.2rem;
+  border: none;
+  border-top: 1px solid var(--grey-color);
+  border-bottom: 1px solid var(--grey-color);
+  border: none;
+}
+
+.notes-textarea-container {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 15px;
+}
+
+.action-labels {
+  font-size: var(--normal-font-size);
+  padding-top: 5px;
+}
+
+.seperator {
+  border: 1px solid var(--grey-color);
+}
+
+@media (max-width: 992px) {
+  .quantity-add-to-order-container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.quantity-add-to-order-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 15px;
+  padding-right: 15px;
 }

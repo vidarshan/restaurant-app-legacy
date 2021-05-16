@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import './index.css';
 // import './meal.css';
 import './loading.scss';
+import './animate.css';
 
 import store from './store';
 

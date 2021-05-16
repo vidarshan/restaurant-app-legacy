@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Icon from '@mdi/react';
-import { mdiAccount } from '@mdi/js';
 import 'boxicons';
 import { logout } from '../actions/userActions';
 
@@ -48,12 +46,15 @@ const Header = () => {
                 </Link>
               </li>
               <li className='nav__item'>
+                <box-icon name='shopping-bag'></box-icon>
+              </li>
+              {/* <li className='nav__item'>
                 <box-icon
                   name='moon'
                   color='#a6a6a6'
                   className='change-theme'
                   id='theme-button'></box-icon>
-              </li>
+              </li> */}
               {userInfo ? (
                 <>
                   <li className='nav__item'>
@@ -63,9 +64,11 @@ const Header = () => {
                     </Link> */}
 
                     <div class='dropdown'>
-                      <div class='dropbtn'>{userInfo.name}</div>
+                      <div class='dropbtn'>
+                        <box-icon name='user'></box-icon>
+                      </div>
                       <div class='dropdown-content'>
-                        <a href='#'>
+                        <a href='/orders'>
                           {' '}
                           <box-icon
                             name='dish'
