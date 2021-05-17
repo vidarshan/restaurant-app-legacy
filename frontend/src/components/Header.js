@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import Badge from '../components/Badge';
 import 'boxicons';
 import { logout } from '../actions/userActions';
 
@@ -13,6 +14,17 @@ const Header = () => {
   const logoutHandler = () => {
     dispatch(logout());
   };
+
+  useEffect(() => {
+    const toggle = document.getElementById('nav-toggle');
+    let nav = document.getElementById('nav-menu');
+
+    if (toggle && nav) {
+      toggle.addEventListener('click', () => {
+        nav.classList.toggle('show-menu');
+      });
+    }
+  });
 
   return (
     <>
@@ -46,9 +58,10 @@ const Header = () => {
                 </Link>
               </li>
               <li className='nav__item'>
-                <Link to='/order' className='nav__link'>
+                <Link to='/order' className='nav__link badge-icon'>
                   <box-icon name='shopping-bag'></box-icon>
                 </Link>
+                <Badge count={1} variant='red' size='sm'></Badge>
               </li>
               {/* <li className='nav__item'>
                 <box-icon

@@ -1711,3 +1711,100 @@ textarea {
   padding-left: 15px;
   padding-right: 15px;
 }
+
+.badge-icon {
+  z-index: -1;
+}
+
+.badge-red-sm {
+  background: #f13535;
+  height: 1.4rem;
+  z-index: 0;
+  position: absolute;
+  top: 15px;
+  width: 1.4rem;
+  text-align: center;
+  line-height: 1.4rem;
+  margin-left: 18px;
+
+  font-size: 0.7rem;
+  border-radius: 50%;
+  color: white;
+}
+
+.badge-red-md {
+  background-color: #f13535;
+  color: var(--body-color);
+  padding: 2px;
+  border-radius: 1rem;
+}
+
+.badge-red-lg {
+  background-color: #f13535;
+  color: var(--body-color);
+  padding: 2px;
+  border-radius: 1rem;
+}
+
+.badge-green-sm {
+  background-color: #048654;
+  color: var(--body-color);
+  padding: 2px;
+  border-radius: 1rem;
+}
+
+.badge-green-md {
+  background-color: #048654;
+  color: var(--body-color);
+  padding: 2px;
+  border-radius: 1rem;
+}
+
+.badge-green-lg {
+  background-color: #048654;
+  color: var(--body-color);
+  padding: 2px;
+  border-radius: 1rem;
+}
+
+.badge-yellow-sm {
+  background-color: #e2961f;
+  color: var(--body-color);
+  padding: 2px;
+  border-radius: 1rem;
+}
+
+.badge-yellow-md {
+  background-color: #e2961f;
+  color: var(--body-color);
+  padding: 2px;
+  border-radius: 1rem;
+}
+
+.badge-yellow-lg {
+  background-color: #e2961f;
+  color: var(--body-color);
+  padding: 2px;
+  border-radius: 1rem;
+}
+
+.badge-blue-sm {
+  background-color: #3c3b6e;
+  color: var(--body-color);
+  padding: 2px;
+  border-radius: 1rem;
+}
+
+.badge-blue-md {
+  background-color: #3c3b6e;
+  color: var(--body-color);
+  padding: 2px;
+  border-radius: 1rem;
+}
+
+.badge-blue-lg {
+  background-color: #3c3b6e;
+  color: var(--body-color);
+  padding: 2px;
+  border-radius: 1rem;
+}

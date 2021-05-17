@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToOrder, removeFromOrder } from '../actions/orderActions';
+import { Link } from 'react-router-dom';
 
 const OrderScreen = ({ match, location, history }) => {
   const mealId = match.params.id;
@@ -14,11 +15,11 @@ const OrderScreen = ({ match, location, history }) => {
   const order = useSelector((state) => state.order);
   const { orderItems } = order;
 
-  // const removeFromOrderHandler = (id) => {
-  //   console.log(id);
-  //   console.log(orderItems);
-  //   dispatch(removeFromOrder(id));
-  // };
+  const removeFromOrderHandler = (id) => {
+    console.log(id);
+    console.log(orderItems);
+    dispatch(removeFromOrder(id));
+  };
 
   useEffect(() => {
     if (mealId) {
@@ -41,32 +42,12 @@ const OrderScreen = ({ match, location, history }) => {
                 <div className='order-list-text'>{o.name}</div>
                 <div className='order-list-text'>{o.qty}</div>
                 <div className='order-list-text'>{o.price}</div>
-                {/* <div className='quantity-container'>
-                  <div class='num-block skin-2'>
-                    <div class='num-in'>
-                      <span
-                        class='minus dis'
-                        //onClick={() => setQuantityAndQuantityPrice('d')}
-                      ></span>
-                      <input
-                        type='text'
-                        class='in-num default-font'
-                        value={qty}
-                        readonly=''
-                      />
-                      <span
-                        class='plus'
-                        // onClick={() => setQuantityAndQuantityPrice('i')}
-                      ></span>
-                    </div>
-                  </div>
-                </div> */}
 
-                {/* <Link
+                <Link
                   className='remove-from-order-button'
                   onClick={() => removeFromOrderHandler(o.meal)}>
-                  Remove
-                </Link> */}
+                  <box-icon name='trash' color='#ba2828'></box-icon>
+                </Link>
                 <div className='order-list-item'></div>
               </div>
             );
