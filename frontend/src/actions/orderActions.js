@@ -1,5 +1,9 @@
 import axios from 'axios';
-import { ORDER_ADD_ITEM, ORDER_REMOVE_ITEM } from '../constants/orderConstants';
+import {
+  ORDER_ADD_ITEM,
+  ORDER_REMOVE_ITEM,
+  ORDER_COUNT_ITEMS,
+} from '../constants/orderConstants';
 
 export const addToOrder =
   (id, qty, size, addons, notes) => async (dispatch, getState) => {
@@ -11,6 +15,7 @@ export const addToOrder =
         meal: data._id,
         name: data.name,
         image: data.image,
+        description: data.description,
         price: data.price,
         qty,
         size,
@@ -35,4 +40,10 @@ export const removeFromOrder = (id) => (dispatch, getState) => {
     'orderItems',
     JSON.stringify(getState().order.orderItems)
   );
+};
+
+export const countOrders = () => (dispatch) => {
+  dispatch({
+    type: ORDER_COUNT_ITEMS,
+  });
 };

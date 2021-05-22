@@ -23,7 +23,7 @@
   --text-color-light: #a6a6a6;
   --grey-color: #ccc;
   --grey-hover-color: #a4a4a4;
-  --body-color: #fbfefd;
+  --body-color: #f3f3f3;
   --container-color: #ffffff;
   --badge-color: #e14c38;
   --info-color: #3d7ea6;
@@ -55,6 +55,9 @@
   /*z-index*/
   --z-tooptip: 10;
   --z-fixed: 100;
+
+  /* container border radius */
+  --container-border-radius: 0.5rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -658,6 +661,11 @@ img {
     margin-right: auto;
   }
 
+  .bd-container-order {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .home__img {
     width: 500px;
   }
@@ -1149,6 +1157,37 @@ input:checked + .slider:before {
   padding-bottom: 10px;
 }
 
+/*-----------flex for order details component---------------*/
+/* .order-item-container {
+  display: flex;
+  flex-direction: row;
+  background-color: #ffffff;
+  border-radius: 0.8rem;
+  padding: 10px;
+  width: 300px;
+}
+
+.order-details {
+  width: 70%;
+}
+
+.order-item-unit-price-quanity {
+  font-size: 1rem;
+  color: var(--grey-hover-color);
+}
+
+.order-item-total-price {
+  font-size: 1.5rem;
+  color: #ff5331;
+  font-weight: 600;
+}
+
+.order-item-title {
+  flex-direction: column;
+  font-size: 1.3rem;
+  font-weight: 600;
+} */
+
 /* meal specification : one column-layout instead of two-column layout */
 @media (max-width: 800px) {
   .flex-container {
@@ -1170,7 +1209,6 @@ input:checked + .slider:before {
   display: flex;
   float: right;
   width: 50%;
-  background-color: red;
   flex-direction: row;
   justify-content: space-around;
 }
@@ -1369,21 +1407,62 @@ textarea {
   font-size: var(--normal-font-size);
 }
 
+.flex-order-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 5px;
+}
+
 .order-list-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  border-bottom: 1px solid var(--grey-color);
 }
 
-.order-list-text {
-  font-size: 18px;
+.order-list-item-name {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  text-align: left;
   justify-content: flex-start;
   margin: 10px;
   width: 30%;
 }
 
+.order-list-item-qty {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  justify-content: center;
+  width: 30%;
+}
+
+.order-list-item-price {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  text-align: left;
+  justify-content: flex-start;
+
+  width: 30%;
+}
+
 .order-list-item-image {
   padding: 10px;
+  display: flex;
+}
+
+.remove-from-order-button {
+  display: flex;
+  align-items: center;
+  background-color: var(--badge-color);
+  padding: 5px;
+  border-radius: 0.5rem;
+}
+
+.remove-order-link {
+  color: #fff;
 }
 
 .flex-container-login {
@@ -1807,4 +1886,186 @@ textarea {
   color: var(--body-color);
   padding: 2px;
   border-radius: 1rem;
+}
+
+.order-summary-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.order-summary-right {
+  display: flex;
+  width: auto;
+  height: auto;
+  align-items: center;
+}
+
+.proceed-to-checkout-button {
+  display: flex;
+  background-color: #ff5331;
+  color: white;
+  border-radius: 0.5rem;
+  padding: 10px;
+}
+
+.order-summary-items {
+  text-align: left;
+}
+
+.order-summary-total {
+  color: #ff5331;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.bd-container-order {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-auto-rows: minmax(auto, auto);
+  grid-gap: 1em;
+  max-width: 1260px;
+  width: calc(100% - 2rem);
+}
+
+.bd-container-order > div {
+  background-color: lightgray;
+  padding: 1em;
+}
+.bd-container-order > div:nth-child(odd) {
+  background-color: #ddd;
+}
+
+.box1 {
+  grid-column: 1/3;
+  grid-row: 1/3;
+}
+
+.order-item-grid {
+  display: grid;
+  grid-template-rows: repeat(1, 1fr);
+  grid-auto-rows: 120px;
+  grid-gap: 1rem;
+}
+
+.order-item-category {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.order-item {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  padding: 10px;
+  border-radius: 0.5rem;
+}
+
+.order-item-image {
+  background-color: #f4f3f3;
+  padding: 10px;
+}
+
+.title-description-addons-container {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  padding: 0px 10px;
+}
+
+.order-item-title {
+  font-size: 20px;
+  text-align: left;
+  font-weight: 600;
+  width: 100%;
+}
+
+.order-item-addOns {
+  display: flex;
+  flex-direction: row;
+  width: 40%;
+  justify-content: space-between;
+  text-align: center;
+}
+.addOn {
+  padding: 2px 5px;
+  border-radius: 0.3rem;
+  margin: 3px;
+  text-align: center;
+  background-color: greenyellow;
+}
+
+.total-price-unit-quantity-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 10%;
+  justify-content: center;
+  color: #ff5331;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.order-unit-price {
+  font-size: 16px;
+  color: var(--grey-hover-color);
+}
+
+.order-item-unit-quantity {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 10%;
+}
+
+.order-item-remove {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 10%;
+}
+
+.order-remove-btn-container {
+  background-color: var(--badge-color);
+  padding: 10px;
+  border-radius: 0.5rem;
+  height: 40px;
+}
+
+.order-item-first-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.order-item-second-row {
+  display: grid;
+
+  grid-gap: 3px;
+}
+
+.order-item-third-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.order-unit-quantity {
+  font-size: 18px;
+  color: var(--grey-hover-color);
+  background-color: var(--info-color);
+}
+
+.order-item-total {
+  font-size: 22px;
+  color: #ff5331;
+  font-weight: 600;
+  background-color: #048654;
+}
+
+.box2 {
+  grid-column: 3;
+  grid-row: 1/3;
 }

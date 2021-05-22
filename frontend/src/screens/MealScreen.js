@@ -6,6 +6,7 @@ import { addToOrder } from '../actions/orderActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { map } from '../lodash';
+// import { ORDER_COUNT_ITEMS } from '../constants/orderConstants';
 
 const MealScreen = ({ history, match }) => {
   let addOnContainer = useRef([]);
@@ -87,11 +88,21 @@ const MealScreen = ({ history, match }) => {
 
   useEffect(() => {
     dispatch(mealItem(match.params.id));
+
+    /*******************************
+     * *****************************
+     * *****************************
+     * *****************************
+     * *****************************
+     * refresh page is the potential solution.
+     * better if refresh and go to /order
+     */
   }, [dispatch, match]);
 
   const addToOrderHandler = () => {
     if (meal._id) {
       dispatch(addToOrder(meal._id, quantity, size, addOnContainer, notes));
+      // dispatch({ type: ORDER_COUNT_ITEMS });
     }
   };
 
