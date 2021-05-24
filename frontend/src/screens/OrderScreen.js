@@ -3,16 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToOrder, removeFromOrder } from '../actions/orderActions';
 import { Link } from 'react-router-dom';
 import Emoji from '../components/Emoji';
-import { map } from 'lodash';
+import { map, forEach } from 'lodash';
 
 const OrderScreen = ({ match, location, history }) => {
-  let addOnNames = useRef([{}]);
-
   var randomColor = require('randomcolor');
-  var color = randomColor({
-    count: 8,
-    hue: 'green',
-  });
 
   const mealId = match.params.id;
 
@@ -44,35 +38,39 @@ const OrderScreen = ({ match, location, history }) => {
           {map(orderItems, (o) => {
             return (
               <div className='order-item'>
-                <div className='order-item-image'>
-                  <img width='70' height='70' src={o.image} alt=' ' />
-                </div>
-                <div className='title-description-addons-container'>
-                  <div className='order-item-title'>{o.name}</div>
-                  <div className='order-item-description'>
-                    best Pizza that tastes like no other
+                <div className='responsive-image-title-description-addOns'>
+                  <div className='order-item-image'>
+                    <img src={o.image} alt=' ' />
                   </div>
-                  <div className='order-item-addOns'>
-                    <div className='addOn'>Pineapple</div>
-                    <div className='addOn'>Jalapeno</div>
-                    <div className='addOn'>Olives</div>
-                    <div className='addOn'>Tomato</div>
-                    <div className='addOn'>Cheese</div>
-                    <div className='addOn'>Mayo</div>
+                  <div className='title-description-addons-container'>
+                    <div className='order-item-title'>{o.name}</div>
+                    <div className='order-item-description'>
+                      best Pizza that tastes like no other
+                    </div>
+                    <div className='order-item-addOns'>
+                      {map(o.addons.current, (e) => {
+                        return <div className='addOn'>{e}</div>;
+                      })}
+                    </div>
                   </div>
                 </div>
-                <div className='order-item-unit-quantity'>
-                  <div className='order-quantity'>{o.qty}</div>
-                </div>
-                <div className='total-price-unit-quantity-container'>
-                  <div className='order-total-price'>{o.qty * o.price}</div>
-                </div>
-                <div className='order-item-remove'>
-                  <div className='order-remove-btn-container'>
-                    <box-icon
-                      size='20px'
-                      name='trash'
-                      color='#ffffff'></box-icon>
+                <div className='responsive-qty-total-remove'>
+                  <div className='order-item-unit-quantity'>
+                    <div className='order-quantity'>{o.qty} nos.</div>
+                  </div>
+                  <div className='total-price-unit-quantity-container'>
+                    <div className='order-total-price'>{o.qty * o.price}</div>
+                  </div>
+                  <div className='order-item-remove'>
+                    <div
+                      className='order-remove-btn-container'
+                      onClick={() => removeFromOrderHandler(o.meal)}>
+                      <box-icon
+                        size='20px'
+                        color='#e14c38'
+                        name='trash'></box-icon>
+                      <div className='order-remove-btn-txt'>Remove</div>
+                    </div>
                   </div>
                 </div>
               </div>
