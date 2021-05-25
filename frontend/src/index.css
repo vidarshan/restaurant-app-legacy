@@ -233,6 +233,22 @@ img {
   .add__to__order__button__text {
     font-size: var(--small-font-size);
   }
+
+  .empty-container {
+    display: flex;
+    height: 80vh !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--h2-font-size);
+    text-align: center;
+  }
+
+  .empty-container-image {
+    width: 100px;
+    height: 100px;
+    fill: #ff5331;
+  }
 }
 
 .nav__item {
@@ -806,7 +822,6 @@ img {
 .flex-container {
   display: flex;
   flex-direction: row;
-  background-color: red;
   font-size: 30px;
   text-align: center;
   background: transparent;
@@ -816,7 +831,6 @@ img {
 }
 
 .flex-item-left {
-  background-color: red;
   padding: 10px;
   background-color: #f1f1f1;
   flex: 50%;
@@ -1444,6 +1458,23 @@ textarea {
   color: #ff5331;
   font-size: 18px;
   font-weight: 600;
+}
+
+.empty-container {
+  display: flex;
+  height: 70vh;
+  /* background-color: #048654; */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--h2-font-size);
+  text-align: center;
+}
+
+.empty-container-image {
+  width: 100px;
+  height: 100px;
+  fill: #ff5331;
 }
 
 @media screen and (max-width: 1134px) {
