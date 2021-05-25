@@ -1,12 +1,18 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToOrder, removeFromOrder } from '../actions/orderActions';
-import { Link } from 'react-router-dom';
 import Emoji from '../components/Emoji';
-import { map, forEach } from 'lodash';
+import { map } from 'lodash';
 
 const OrderScreen = ({ match, location, history }) => {
-  var randomColor = require('randomcolor');
+  let discountAmount = 0.05;
+  let serviceChargeAmount = 0.03;
+
+  const [grossPrice, setGrossPrice] = useState(0);
+  const [items, setItems] = useState(0);
+  const [discount, setDiscount] = useState(0);
+  const [serviceCharge, setServiceCharge] = useState(0);
+  const [netPrice, setNetPrice] = useState(0);
 
   const mealId = match.params.id;
 
@@ -22,11 +28,40 @@ const OrderScreen = ({ match, location, history }) => {
     dispatch(removeFromOrder(id));
   };
 
+  const calculateFinalPrice = () => {
+    let calculatedGrossPrice = 0;
+    let calculatedDiscountPrice = 0;
+    let calculatedServiceCharge = 0;
+    let calculatedNetPrice = 0;
+    let calculatedItems = orderItems.length;
+
+    map(orderItems, (unitPrice) => {
+      calculatedGrossPrice = calculatedGrossPrice + unitPrice.price;
+    });
+
+    calculatedDiscountPrice = Math.round(calculatedGrossPrice * discountAmount);
+    calculatedServiceCharge = Math.round(
+      calculatedGrossPrice * serviceChargeAmount
+    );
+
+    calculatedNetPrice = Math.round(
+      calculatedGrossPrice + calculatedServiceCharge - calculatedDiscountPrice
+    );
+
+    setItems(calculatedItems);
+    setGrossPrice(calculatedGrossPrice);
+    setDiscount(calculatedDiscountPrice);
+    setServiceCharge(calculatedServiceCharge);
+    setNetPrice(calculatedNetPrice);
+  };
+
   useEffect(() => {
     if (mealId) {
       dispatch(addToOrder(mealId, qty, size));
     }
-  }, [dispatch, mealId, qty]);
+
+    calculateFinalPrice();
+  }, [dispatch, mealId, qty, orderItems]);
 
   return (
     <section className='section bd-container-order' id='menu'>
@@ -85,7 +120,7 @@ const OrderScreen = ({ match, location, history }) => {
               <div className='order-summary-total-title'>Gross Total</div>
             </div>
             <div className='order-summary-right'>
-              <div className='order-summary-total-price'>300.00</div>
+              <div className='order-summary-total-price'>{grossPrice}</div>
             </div>
           </div>
           <div className='order-summary-grid'>
@@ -93,7 +128,7 @@ const OrderScreen = ({ match, location, history }) => {
               <div className='order-summary-total-title'>Items</div>
             </div>
             <div className='order-summary-right'>
-              <div className='order-summary-total-price'>3</div>
+              <div className='order-summary-total-price'>{items}</div>
             </div>
           </div>
           <div className='order-summary-grid'>
@@ -103,7 +138,7 @@ const OrderScreen = ({ match, location, history }) => {
               </div>
             </div>
             <div className='order-summary-right'>
-              <div className='order-summary-total-price'>$3.00</div>
+              <div className='order-summary-total-price'>{serviceCharge}</div>
             </div>
           </div>
           <div className='order-summary-grid'>
@@ -111,7 +146,7 @@ const OrderScreen = ({ match, location, history }) => {
               <div className='order-summary-total-title'>Discount</div>
             </div>
             <div className='order-summary-right'>
-              <div className='order-summary-total-price'>$7.00</div>
+              <div className='order-summary-total-price'>{discount}</div>
             </div>
           </div>
           <div className='order-summary-grid'>
@@ -122,7 +157,7 @@ const OrderScreen = ({ match, location, history }) => {
             </div>
             <div className='order-summary-right'>
               <div className='order-summary-total-price accent-color'>
-                $30.00
+                {netPrice}
               </div>
             </div>
           </div>
