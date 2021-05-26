@@ -67,11 +67,7 @@ const OrderScreen = ({ match, location, history }) => {
   return (
     <>
       {orderItems.length > 0 ? (
-        <section
-          className='section bd-container-order'
-          style={{ backgroundColor: 'lightcoral' }}
-          id='menu'>
-          {' '}
+        <section className='section bd-container-order' id='menu'>
           <div class='order-list'>
             <div className='order-item-grid'>
               <div className='order-item-category'>
