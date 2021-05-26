@@ -12,16 +12,19 @@ const Footer = () => {
           <span className='footer__description'>Restaurant</span>
           <div>
             <a href='/#' className='footer__social'>
-              <box-icon
+              social meida icon
+              {/* <box-icon
                 name='facebook-circle'
                 type='logo'
-                color='#3492ff'></box-icon>
+                color='#3492ff'></box-icon> */}
             </a>
             <a href='/#' className='footer__social'>
-              <box-icon name='instagram' type='logo' color='#a66e00'></box-icon>
+              social meida icon
+              {/* <box-icon name='instagram' type='logo' color='#a66e00'></box-icon> */}
             </a>
             <a href='/#' className='footer__social'>
-              <box-icon name='twitter' type='logo' color='#4bc0ff'></box-icon>
+              social meida icon
+              {/* <box-icon name='twitter' type='logo' color='#4bc0ff'></box-icon> */}
             </a>
           </div>
         </div>

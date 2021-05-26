@@ -6,7 +6,11 @@
   "dependencies": {
     "axios": "^0.21.1",
     "boxicons": "^2.0.7",
+    "js-localstorage-change-detector": "^1.0.3",
     "lodash": "^4.17.21",
+    "node-sass": "^5.0.0",
+    "pretty-checkbox": "^3.0.3",
+    "randomcolor": "^0.6.2",
     "react": "^17.0.2",
     "react-animated-css": "^1.2.1",
     "react-animations": "^1.0.0",

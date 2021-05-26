@@ -1,4 +1,8 @@
-import { ORDER_ADD_ITEM, ORDER_REMOVE_ITEM } from '../constants/orderConstants';
+import {
+  ORDER_ADD_ITEM,
+  ORDER_COUNT_ITEMS,
+  ORDER_REMOVE_ITEM,
+} from '../constants/orderConstants';
 
 export const orderReducer = (state = { orderItems: [] }, action) => {
   switch (action.type) {
@@ -24,6 +28,21 @@ export const orderReducer = (state = { orderItems: [] }, action) => {
       return {
         ...state,
         orderItems: state.orderItems.filter((x) => x.meal !== action.payload),
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const orderCountReducer = (state = { orderCount: '' }, action) => {
+  switch (action.type) {
+    case ORDER_COUNT_ITEMS:
+      var numberofItems = JSON.parse(localStorage.getItem('orderItems'));
+
+      console.log(numberofItems.length);
+      return {
+        orderCount: numberofItems,
       };
     default:
       return state;

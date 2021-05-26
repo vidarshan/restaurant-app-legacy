@@ -1,18 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import Badge from '../components/Badge';
 import 'boxicons';
-import { logout } from '../actions/userActions';
+//import { logout } from '../actions/userActions';
+//import { countOrders } from '../actions/orderActions';
 
 const Header = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const ordercount = useSelector((state) => state.orderCount);
 
-  const logoutHandler = () => {
-    dispatch(logout());
-  };
+  const { userInfo } = userLogin;
+  const { orderCount } = ordercount;
+
+  // const logoutHandler = () => {
+  //   dispatch(logout());
+  // };
+
+  useEffect(() => {
+    const toggle = document.getElementById('nav-toggle');
+    let nav = document.getElementById('nav-menu');
+
+    if (toggle && nav) {
+      toggle.addEventListener('click', () => {
+        nav.classList.toggle('show-menu');
+      });
+    }
+
+    console.log(orderCount);
+  }, [orderCount]);
 
   return (
     <>
@@ -46,54 +64,18 @@ const Header = () => {
                 </Link>
               </li>
               <li className='nav__item'>
-                <box-icon name='shopping-bag'></box-icon>
+                <Link to='/order' className='nav__link badge-icon'>
+                  <box-icon name='shopping-bag'></box-icon>
+                </Link>
+                <Badge count={orderCount} variant='red' size='sm'></Badge>
               </li>
-              {/* <li className='nav__item'>
-                <box-icon
-                  name='moon'
-                  color='#a6a6a6'
-                  className='change-theme'
-                  id='theme-button'></box-icon>
-              </li> */}
-              {userInfo ? (
-                <>
-                  <li className='nav__item'>
-                    {/* <box-icon name='user-circle' type='solid'></box-icon> */}
-                    {/* <Link className='nav__link'>
-                      <box-icon name='user-circle' type='solid'></box-icon>
-                    </Link> */}
 
-                    <div class='dropdown'>
-                      <div class='dropbtn'>
-                        <box-icon name='user'></box-icon>
-                      </div>
-                      <div class='dropdown-content'>
-                        <a href='/orders'>
-                          {' '}
-                          <box-icon
-                            name='dish'
-                            type='solid'
-                            color='#a6a6a6'></box-icon>{' '}
-                          Orders
-                        </a>
-                        <Link to='/profile'>
-                          <box-icon
-                            name='user-circle'
-                            type='solid'
-                            color='#a6a6a6'></box-icon>
-                          Profile
-                        </Link>
-                        <Link onClick={logoutHandler}>
-                          {' '}
-                          <box-icon
-                            name='log-out'
-                            color='#a6a6a6'></box-icon>{' '}
-                          Logout
-                        </Link>
-                      </div>
-                    </div>
-                  </li>
-                </>
+              {userInfo ? (
+                <li className='nav__item'>
+                  <Link to='/profile' className='nav__link'>
+                    <box-icon name='user'></box-icon>
+                  </Link>
+                </li>
               ) : (
                 <li className='nav__item'>
                   <Link to='/login' className='nav__link'>

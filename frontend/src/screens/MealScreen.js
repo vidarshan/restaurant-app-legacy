@@ -2,9 +2,11 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Animated } from 'react-animated-css';
 import { mealItem } from '../actions/mealActions';
+import { addToOrder } from '../actions/orderActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { map } from '../lodash';
+// import { ORDER_COUNT_ITEMS } from '../constants/orderConstants';
 
 const MealScreen = ({ history, match }) => {
   let addOnContainer = useRef([]);
@@ -20,7 +22,7 @@ const MealScreen = ({ history, match }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [showAnimation, setShowAnimation] = useState(false);
 
-  const [notes] = useState('');
+  const [notes, setNotes] = useState('');
 
   const dispatch = useDispatch();
   const item = useSelector((state) => state.mealItem);
@@ -86,11 +88,23 @@ const MealScreen = ({ history, match }) => {
 
   useEffect(() => {
     dispatch(mealItem(match.params.id));
+
+    /*******************************
+     * *****************************
+     * *****************************
+     * *****************************
+     * *****************************
+     * refresh page is the potential solution.
+     * better if refresh and go to /order
+     */
   }, [dispatch, match]);
 
-  // const addToOrderHandler = () => {
-  //   history.push(`/order/${match.params.id}?qty=${quantity}&size=${size}`);
-  // };
+  const addToOrderHandler = () => {
+    if (meal._id) {
+      dispatch(addToOrder(meal._id, quantity, size, addOnContainer, notes));
+      // dispatch({ type: ORDER_COUNT_ITEMS });
+    }
+  };
 
   return (
     <section className='section bd-container' id='menu'>
@@ -119,7 +133,9 @@ const MealScreen = ({ history, match }) => {
                   {meal.sizes !== undefined ? (
                     map(meal.sizes, (e) => {
                       return (
-                        <div className='size-container-meal-item'>
+                        <div
+                          key={meal._id}
+                          className='size-container-meal-item'>
                           <div
                             class='pretty p-icon p-round'
                             onClick={() =>
@@ -185,6 +201,7 @@ const MealScreen = ({ history, match }) => {
                     cols='50'
                     placeholder='Add notes here'
                     value={notes}
+                    onChange={(e) => setNotes(e.target.value)}
                     disabled={enableOptions}></textarea>
                 </div>
 
@@ -208,7 +225,8 @@ const MealScreen = ({ history, match }) => {
                   </div>
                   <button
                     className='add-to-order-button'
-                    disabled={enableOptions}>
+                    //disabled={enableOptions}
+                    onClick={addToOrderHandler}>
                     Add to Order
                     <Animated
                       animationIn='fadeInLeft'
