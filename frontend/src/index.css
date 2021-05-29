@@ -13,53 +13,6 @@
   font-weight: 200;
 }
 
-:root {
-  /*variables*/
-  --header-height: 3rem;
-  --first-color: #ff5331;
-  --first-color-alt: #048654;
-  --title-color: #393939;
-  --text-color: #707070;
-  --text-color-light: #a6a6a6;
-  --grey-color: #ccc;
-  --grey-hover-color: #a4a4a4;
-  --body-color: #f3f3f3;
-  --container-color: #ffffff;
-  --badge-color: #e14c38;
-  --info-color: #3d7ea6;
-  --danger-color: #e14c38;
-  --success-color: #048654;
-
-  /*fonts*/
-  --body-font: 'Product Sans', sans-serif;
-  --biggest-font-size: 2.25rem;
-  --h1-font-size: 1.5rem;
-  --h2-font-size: 1.25rem;
-  --h3-font-size: 1rem;
-  --normal-font-size: 0.938rem;
-  --small-font-size: 0.813rem;
-  --smaller-font-size: 0.75rem;
-
-  /*font weight*/
-  --font-medium: 500;
-  --font-semi-bold: 600;
-
-  /*margins*/
-  --mb-1: 0.5rem;
-  --mb-2: 1rem;
-  --mb-3: 1.5rem;
-  --mb-4: 2rem;
-  --mb-5: 2.5rem;
-  --mb-6: 3rem;
-
-  /*z-index*/
-  --z-tooptip: 10;
-  --z-fixed: 100;
-
-  /* container border radius */
-  --container-border-radius: 0.5rem;
-}
-
 @media screen and (min-width: 768px) {
   :root {
     /*fonts*/
@@ -818,41 +771,7 @@ img {
   margin: 0.3rem;
 }
 
-/*flex for meal specification component*/
-.flex-container {
-  display: flex;
-  flex-direction: row;
-  font-size: 30px;
-  text-align: center;
-  background: transparent;
-  box-shadow: 6px 6px 14px 0 rgba(0, 0, 0, 0.2),
-    -8px -8px 18px 0 rgba(255, 255, 255, 0.55);
-  border-radius: 1rem;
-}
-
-.flex-item-left {
-  padding: 10px;
-  background-color: #f1f1f1;
-  flex: 50%;
-  align-items: center;
-  border-top-left-radius: 1rem;
-  border-bottom-left-radius: 1rem;
-}
-
-.flex-item-right {
-  padding-left: 10px;
-  flex: 50%;
-  padding-right: 10px;
-  padding-bottom: 10px;
-}
-
 /*description styling*/
-
-.name {
-  font-size: var(--h1-font-size);
-  color: var(--title-color);
-  text-align: center;
-}
 
 .size-label {
   border: 1px solid var(--grey-color);
@@ -1040,45 +959,6 @@ textarea {
 
 .signin-redirect {
   margin-top: 10px;
-  text-align: center;
-}
-
-/*meal configuator styles*/
-/*size selector*/
-.size-container-meal {
-  display: flex;
-  flex-direction: row;
-  font-size: var(--normal-font-size);
-  text-align: center;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-.size-container-meal-item {
-  padding: 5px;
-  flex: 50%;
-  background-color: var(--grey-color);
-  margin: 0.1rem;
-  border-radius: 4em;
-}
-
-/*add on selector*/
-.flex-container-addon {
-  display: grid;
-  font-size: var(--normal-font-size);
-  grid-template-columns: repeat(2, 1fr);
-  padding-left: 10px;
-  padding-right: 10px;
-  justify-content: space-around;
-}
-
-.flex-left-addon {
-  margin: 5px;
-  padding: 5px;
-  font-size: var(--normal-font-size);
-  text-align: left;
-  border-radius: 4em;
-  background-color: var(--grey-color);
   text-align: center;
 }
 
