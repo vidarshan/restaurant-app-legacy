@@ -1,0 +1,52 @@
+:root {
+  /*variables*/
+  --header-height: 3rem;
+  --first-color: #6b9500;
+  --first-color-alt: #048654;
+  --title-color: #393939;
+  --text-color: #707070;
+  --text-color-light: #a6a6a6;
+  --grey-color: #ccc;
+  --grey-hover-color: #a4a4a4;
+  --black-color: #000000;
+  --body-color: #f3f3f3;
+  --container-color: #ffffff;
+  --badge-color: #e14c38;
+  --info-color: #3d7ea6;
+  --danger-color: #e14c38;
+  --success-color: #048654;
+
+  /*fonts*/
+  --body-font: 'Product Sans', sans-serif;
+  --biggest-font-size: 2.25rem;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: 0.938rem;
+  --small-font-size: 0.813rem;
+  --smaller-font-size: 0.75rem;
+
+  /*font weight*/
+  --font-medium: 500;
+  --font-semi-bold: 600;
+
+  /*margins*/
+  --mb-1: 0.5rem;
+  --mb-2: 1rem;
+  --mb-3: 1.5rem;
+  --mb-4: 2rem;
+  --mb-5: 2.5rem;
+  --mb-6: 3rem;
+
+  /*z-index*/
+  --z-tooptip: 10;
+  --z-fixed: 100;
+
+  /* container : Standard */
+  --container-border-radius: 0.5rem;
+  --container-default-padding: 10px;
+
+  /*card : Standard*/
+  --card-border-radius: 0.5rem;
+  --card-default-padding: 10px;
+}

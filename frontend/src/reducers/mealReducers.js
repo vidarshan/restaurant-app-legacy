@@ -32,3 +32,16 @@ export const mealReducer = (state = { meal: {} }, action) => {
       return state;
   }
 };
+
+export const mealRandomReducer = (state = { meal: {} }, action) => {
+  switch (action.type) {
+    case MEAL_REQUEST:
+      return { loading: true, meal: {} };
+    case MEAL_SUCCESS:
+      return { loading: false, meal: action.payload };
+    case MEAL_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
