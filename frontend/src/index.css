@@ -117,18 +117,6 @@ img {
   margin-right: var(--mb-2);
 }
 
-.bd-container-login {
-  background-image: url(./login.jpg);
-  height: 100vh;
-  width: 100vw;
-  object-fit: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  max-width: 100%;
-  /* overflow-x: hidden; */
-}
-
 .bd-container-signup {
   background-image: url(./signup.jpg);
   height: 100vh;
@@ -625,11 +613,6 @@ img {
     margin-right: auto;
   }
 
-  .bd-container-login {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   .bd-container-order {
     margin-left: auto;
     margin-right: auto;
@@ -859,19 +842,6 @@ textarea {
   resize: none;
 }
 
-.flex-container-login {
-  background-color: #fff;
-  border-radius: 0.2rem;
-  display: flex;
-  flex-direction: column;
-  max-width: 400px;
-  padding: 10px;
-  position: relative;
-  top: 170px;
-  justify-content: center;
-  left: 800px;
-}
-
 .flex-container-profile {
   background-color: #fff;
   border-radius: 0.2rem;
@@ -915,51 +885,6 @@ textarea {
   height: 40px;
   margin: 0.2rem;
   padding: 0.5rem;
-}
-
-.email-login-input {
-  font-size: var(--normal-font-size);
-  font-family: var(--body-font);
-  border-radius: 0.2rem;
-  border: 2px solid black;
-  border: none;
-  height: 40px;
-  margin: 0.2rem;
-  padding: 0.5rem;
-}
-
-.password-login-input {
-  font-size: var(--normal-font-size);
-  font-family: var(--body-font);
-  border: 2px solid black;
-  border-radius: 0.2rem;
-  border: none;
-  height: 40px;
-  margin: 0.2rem;
-  padding: 0.5rem;
-}
-
-.login-button {
-  padding: 0.7rem;
-  font-size: var(--normal-font-size);
-  font-family: var(--body-font);
-  border: none;
-  border-radius: 0.2rem;
-  margin: 0.2rem;
-  color: white;
-  cursor: pointer;
-  background-color: var(--first-color);
-}
-
-.login-topic {
-  text-align: center;
-  padding: 1rem;
-  font-size: var(--h2-font-size);
-}
-
-.signin-redirect {
-  margin-top: 10px;
-  text-align: center;
 }
 
 /*quantity selector*/
