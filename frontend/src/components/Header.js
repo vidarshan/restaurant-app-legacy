@@ -55,7 +55,12 @@ const Header = () => {
               </li>
               <li className='nav__item'>
                 <Link to='/menu' className='nav__link'>
-                  Menu
+                  Meals
+                </Link>
+              </li>
+              <li className='nav__item'>
+                <Link to='/menu' className='nav__link'>
+                  Reserve
                 </Link>
               </li>
               <li className='nav__item'>

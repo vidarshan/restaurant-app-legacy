@@ -1,8 +1,13 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { mealListReducer, mealReducer } from './reducers/mealReducers';
+import {
+  mealListReducer,
+  mealReducer,
+  mealSortByPriceReducer,
+} from './reducers/mealReducers';
 import { orderReducer, orderCountReducer } from './reducers/orderReducer';
+import { categoryReducer } from './reducers/categoryReducers';
 import {
   userSignUpReducer,
   userLoginReducer,
@@ -12,6 +17,7 @@ import {
 
 const reducer = combineReducers({
   mealList: mealListReducer,
+  mealSortByPrice: mealSortByPriceReducer,
   mealItem: mealReducer,
   order: orderReducer,
   userSignup: userSignUpReducer,
@@ -19,6 +25,7 @@ const reducer = combineReducers({
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
   orderCount: orderCountReducer,
+  categories: categoryReducer,
 });
 
 const orderItemsFromStorage = localStorage.getItem('orderItems')

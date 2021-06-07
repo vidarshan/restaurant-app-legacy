@@ -7,6 +7,7 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 import mealsRoutes from './routes/mealsRoutes.js';
 import drinksRoutes from './routes/drinksRoutes.js';
+import categoriesRoutes from './routes/categoriesRoute.js';
 import userRoutes from './routes/userRoutes.js';
 
 dotenv.config();
@@ -23,6 +24,7 @@ app.use((req, res, next) => {
 
 app.use('/api/meals', mealsRoutes);
 app.use('/api/drinks', drinksRoutes);
+app.use('/api/categories', categoriesRoutes);
 app.use('/api/users', userRoutes);
 
 app.use(notFound);

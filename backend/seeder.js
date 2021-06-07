@@ -4,8 +4,10 @@ import colors from 'colors';
 import meals from './data/meals.js';
 import drinks from './data/drinks.js';
 import users from './data/users.js';
+import categories from './data/categories.js';
 import Meal from './models/MealsModel.js';
 import Drink from './models/DrinksModel.js';
+import Categories from './models/CategoriesModel.js';
 import User from './models/UserModel.js';
 import connectDB from './config/db.js';
 
@@ -17,10 +19,12 @@ const importData = async () => {
     await Meal.deleteMany();
     await Drink.deleteMany();
     await User.deleteMany();
+    await Categories.deleteMany();
 
     await Meal.insertMany(meals);
     await Drink.insertMany(drinks);
     await User.insertMany(users);
+    await Categories.insertMany(categories);
 
     console.log('Data Imported...'.green.bold);
   } catch (error) {
@@ -34,6 +38,7 @@ const destroyData = async () => {
     await Meal.deleteMany();
     await Drink.deleteMany();
     await User.deleteMany();
+    await Categories.deleteMany();
 
     console.log('Data Destroyed...'.green.bold);
   } catch (error) {
