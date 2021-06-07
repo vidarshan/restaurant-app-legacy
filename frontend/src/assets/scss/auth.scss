@@ -1,0 +1,187 @@
+@import './variables.scss';
+
+.login-flex {
+  background-image: url('../img/login.jpg');
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  height: 100vh;
+  width: 100vw;
+
+  .login-form-container {
+    .login-auth {
+      width: 400px;
+      height: 400px;
+      padding: 15px;
+
+      .login-topic {
+        text-align: center;
+        padding: 1rem;
+        font-size: 28px;
+        font-weight: 600;
+      }
+
+      .name-input {
+        font-size: var(--normal-font-size);
+        font-family: var(--body-font);
+        border-radius: var(--container-border-radius);
+        border: 2px solid var(--grey-hover-color);
+        text-align: center;
+        height: 40px;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      .email-input {
+        font-size: var(--normal-font-size);
+        font-family: var(--body-font);
+        border-radius: var(--container-border-radius);
+        border: 2px solid var(--grey-hover-color);
+        text-align: center;
+        height: 40px;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      .password-input {
+        font-size: var(--normal-font-size);
+        font-family: var(--body-font);
+        border: 2px solid var(--grey-hover-color);
+        border-radius: var(--container-border-radius);
+        text-align: center;
+        height: 40px;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      .login-button {
+        padding: 0.7rem;
+        font-size: var(--normal-font-size);
+        font-family: var(--body-font);
+        border: none;
+        border-radius: var(--container-border-radius);
+        background-color: var(--first-color);
+        width: 100%;
+        color: white;
+        cursor: pointer;
+      }
+
+      .login-button:hover {
+        background-color: var(--grey-hover-color);
+      }
+
+      .auth-redirect {
+        margin-top: 10px;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      .auth-redirect:hover {
+        color: var(--first-color);
+        font-size: var(--normal-font-size);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .login-flex {
+    background-image: none;
+
+    .login-form-container {
+      .login-auth {
+        width: 350px;
+        height: 350px;
+        padding: 15px;
+
+        .login-topic {
+          text-align: center;
+          padding: 1rem;
+          font-size: 28px;
+          font-weight: 600;
+          color: var(--topic-color);
+        }
+
+        .name-input {
+          font-size: var(--normal-font-size);
+          font-family: var(--body-font);
+          border-radius: var(--container-border-radius);
+          border: 2px solid var(--grey-hover-color);
+          text-align: center;
+          height: 40px;
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 10px;
+        }
+
+        .email-input {
+          font-size: var(--normal-font-size);
+          font-family: var(--body-font);
+          border-radius: var(--container-border-radius);
+          border: 2px solid var(--grey-hover-color);
+          text-align: center;
+          height: 40px;
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 10px;
+        }
+
+        .password-input {
+          font-size: var(--normal-font-size);
+          font-family: var(--body-font);
+          border: 2px solid var(--grey-hover-color);
+          border-radius: var(--container-border-radius);
+          text-align: center;
+          height: 40px;
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 10px;
+        }
+
+        .login-button {
+          padding: 0.7rem;
+          font-size: var(--normal-font-size);
+          font-family: var(--body-font);
+          border: none;
+          border-radius: var(--container-border-radius);
+          background-color: var(--first-color);
+          width: 100%;
+          color: white;
+          cursor: pointer;
+        }
+
+        .auth-redirect {
+          margin-top: 10px;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 325px) {
+  .login-flex {
+    background-image: none;
+
+    .login-form-container {
+      .login-topic {
+        color: var(--topic-color);
+      }
+
+      .login-auth {
+        margin-top: -180px;
+        width: 250px;
+        height: max-content;
+        padding: 15px;
+      }
+    }
+  }
+}
