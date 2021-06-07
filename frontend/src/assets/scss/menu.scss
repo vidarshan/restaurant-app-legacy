@@ -1,0 +1,238 @@
+@import './variables.scss';
+
+.show-filters-accordian {
+  display: flex;
+  width: auto;
+  justify-content: space-between;
+  height: 50px;
+  margin-bottom: var(--mb-3);
+  border-radius: var(--card-border-radius);
+  padding: 6px;
+
+  .search-meals-input {
+    font-size: var(--normal-font-size);
+    font-family: var(--body-font);
+    border-radius: var(--container-border-radius);
+    border: 2px solid var(--grey-hover-color);
+    padding: 10px;
+    width: 70%;
+    height: 38px;
+  }
+
+  .show-filters-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 30%;
+    margin-left: 10px;
+    background-color: var(--first-color);
+    border-radius: var(--card-border-radius);
+    color: var(--container-color);
+    padding: 6px;
+    text-align: center;
+  }
+}
+
+.all-filter-row {
+  background-color: var(--container-color);
+  border-radius: var(--card-border-radius);
+}
+
+.menu-filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+
+  .menu-filter-item {
+    background-color: var(--container-color);
+    padding: 6px;
+    transition: transform 0.9s;
+    width: fit-content;
+    text-align: center;
+    margin: 10px;
+    border-radius: var(--card-border-radius);
+  }
+
+  .menu-filter-item:hover {
+    -ms-transform: scale(1.1); /* IE 9 */
+    -webkit-transform: scale(1.1); /* Safari 3-8 */
+    transform: scale(1.1);
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+      rgba(17, 17, 26, 0.05) 0px 8px 32px;
+  }
+
+  .show-filter-button {
+    display: flex;
+    flex-direction: column;
+    width: 200px !important;
+    justify-content: center;
+    background-color: var(--container-color);
+    padding: 6px;
+    text-align: center;
+    margin: 10px;
+    border-radius: var(--card-border-radius);
+  }
+
+  .filter-dropdown {
+    width: 100%;
+    height: 100%;
+    border: none;
+    font-size: var(--small-font-size);
+  }
+
+  .filter-dropdown:focus {
+    border: none;
+  }
+}
+
+.dropdown-filter-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 30px;
+  padding: 10px;
+  border-radius: var(--card-border-radius);
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  select {
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    padding: 0 1em 0 0;
+    margin: 0;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
+    z-index: 1;
+
+    &::-ms-expand {
+      display: none;
+    }
+
+    outline: none;
+  }
+
+  .select {
+    display: grid;
+    grid-template-areas: 'select';
+    align-items: center;
+    position: relative;
+
+    select,
+    &::after {
+      grid-area: select;
+    }
+
+    min-width: 15ch;
+    max-width: 30ch;
+
+    border-radius: 0.25em;
+    padding: 0.25em 0.5em;
+
+    cursor: pointer;
+    line-height: 1.1;
+
+    background-color: #fff;
+    background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+
+    &:not(.select--multiple)::after {
+      content: '';
+      justify-self: end;
+      width: 0.8em;
+      height: 0.5em;
+      background-color: var(--select-arrow);
+      clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+    }
+  }
+
+  .select:hover {
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+      rgba(17, 17, 26, 0.05) 0px 8px 32px;
+  }
+
+  select:focus + .focus {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    border: 2px solid var(--select-focus);
+    border-radius: inherit;
+  }
+
+  select[multiple] {
+    padding-right: 0;
+    height: 6rem;
+
+    option {
+      white-space: normal;
+      outline-color: var(--select-focus);
+    }
+  }
+
+  .select--disabled {
+    cursor: not-allowed;
+    background-color: #eee;
+    background-image: linear-gradient(to top, #ddd, #eee 33%);
+  }
+
+  label {
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+
+  .select + label {
+    margin-top: 2rem;
+  }
+}
+
+.filter-button {
+  background-color: var(--first-color);
+  padding: 8px;
+  border-radius: var(--card-border-radius);
+  width: 300px;
+  text-align: center;
+  color: var(--container-color);
+}
+
+.clear-button {
+  background-color: var(--grey-hover-color);
+  padding: 8px;
+  border-radius: var(--card-border-radius);
+  width: 300px;
+  text-align: center;
+  color: var(--container-color);
+}
+
+.menu__price {
+  padding: 4px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--grey-color);
+
+  .menu__price__large__font {
+    color: var(--first-color);
+    font-size: var(--h2-font-size);
+  }
+}
+
+.vegan-badge {
+  position: absolute;
+  top: -2px;
+  right: -8px;
+  padding: 5px 10px;
+  border-radius: 4rem;
+  color: white;
+}
+
+// .menu-img {
+//   background-color: red;
+// }

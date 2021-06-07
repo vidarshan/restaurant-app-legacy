@@ -6,15 +6,19 @@ import 'boxicons';
 const Meal = ({ meal }) => {
   return (
     <div className='menu__content'>
-      <div className='badge'>{meal.price}</div>
-      <img src={meal.image} alt='' className='meal__img' />
+      <div className='vegan-badge'>
+        <box-icon
+          name='food-tag'
+          color={meal.vegan ? '#048654' : '#e14c38'}></box-icon>
+      </div>
+      <img src={meal.image} alt='' className='menu-img' />
       <h3 className='menu__name'>{meal.name}</h3>
       <span className='menu__detail'>{meal.description}</span>
 
-      <span className='menu__ratingAndReview__container'>
-        <Rating value={meal.rating}></Rating>
-        <span className='menu__numReviews'> {meal.numReviews}</span>
-      </span>
+      <div className='menu__price'>
+        Starting from
+        <div className='menu__price__large__font'>${meal.price}</div>
+      </div>
 
       <Link className='menu__button' to={`/meal/${meal._id}`}>
         <p className='menu__button__text'>Add to Order</p>

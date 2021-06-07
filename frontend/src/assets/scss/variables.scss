@@ -38,6 +38,10 @@
   --mb-4: 2rem;
   --mb-5: 2.5rem;
   --mb-6: 3rem;
+  --mb-7: 3.5rem;
+  --mb-8: 4rem;
+  --mb-9: 4.5rem;
+  --mb-10: 5rem;
 
   /*z-index*/
   --z-tooptip: 10;
@@ -50,4 +54,9 @@
   /*card : Standard*/
   --card-border-radius: 0.5rem;
   --card-default-padding: 10px;
+
+  /*dropdown-select*/
+  --select-border: #777;
+  --select-focus: blue;
+  --select-arrow: var(--select-border);
 }

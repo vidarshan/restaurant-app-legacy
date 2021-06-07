@@ -14,6 +14,7 @@ const LoginScreen = ({ location, history }) => {
   const [password, setPassword] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
 
+
   const redirect = location.search ? location.search.split('=')[1] : '/menu';
   const dispatch = useDispatch();
 

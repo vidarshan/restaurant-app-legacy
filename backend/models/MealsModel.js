@@ -40,6 +40,10 @@ const mealSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    vegan: {
+      type: Boolean,
+      required: true,
+    },
     orders: {
       type: Number,
       required: true,
