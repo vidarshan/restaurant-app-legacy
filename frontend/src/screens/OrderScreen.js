@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToOrder, removeFromOrder } from '../actions/orderActions';
 import EmptyContainer from '../components/EmptyContainer';
@@ -29,7 +29,7 @@ const OrderScreen = ({ match, location, history }) => {
     dispatch(removeFromOrder(id));
   };
 
-  const calculateFinalPrice = () => {
+  const calculateFinalPrice = useCallback(() => {
     let calculatedGrossPrice = 0;
     let calculatedDiscountPrice = 0;
     let calculatedServiceCharge = 0;
@@ -54,7 +54,10 @@ const OrderScreen = ({ match, location, history }) => {
     setDiscount(calculatedDiscountPrice);
     setServiceCharge(calculatedServiceCharge);
     setNetPrice(calculatedNetPrice);
-  };
+  }, [discountAmount, orderItems, serviceChargeAmount]);
+
+  // const calculateFinalPrice = () => {
+  // };
 
   useEffect(() => {
     if (mealId) {
@@ -62,7 +65,7 @@ const OrderScreen = ({ match, location, history }) => {
     }
 
     calculateFinalPrice();
-  }, [dispatch, mealId, qty, orderItems]);
+  }, [dispatch, mealId, qty, orderItems, calculateFinalPrice]);
 
   return (
     <>

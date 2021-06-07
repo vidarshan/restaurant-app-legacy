@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Animated } from 'react-animated-css';
 import { mealItem } from '../actions/mealActions';
 import { addToOrder } from '../actions/orderActions';
 
@@ -10,9 +9,8 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import Recommendations from '../components/Recommendations';
 import { map } from '../lodash';
-// import { ORDER_COUNT_ITEMS } from '../constants/orderConstants';
 
-const MealScreen = ({ history, match }) => {
+const MealScreen = ({ match }) => {
   let addOnContainer = useRef([]);
 
   //eslint-disable-next-line
@@ -24,7 +22,6 @@ const MealScreen = ({ history, match }) => {
   const [enableOptions, setEnableOptions] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [showAnimation, setShowAnimation] = useState(false);
 
   const [notes, setNotes] = useState('');
 
@@ -52,7 +49,6 @@ const MealScreen = ({ history, match }) => {
     setSize(selectedSize);
     setSizePrice(selectedSizePrice);
 
-    setShowAnimation(true);
     setEnableOptions(false);
   };
 
@@ -121,13 +117,14 @@ const MealScreen = ({ history, match }) => {
           <div class='flex-container'>
             <div class='flex-item-left'>
               <img className='meal-image' src={meal.image} alt='' />
+              <div className='name'>{meal.name}</div>
+              <div className='description'>{meal.description}</div>
             </div>
             <div class='flex-item-right'>
               <div className='info-container'>
-                <div className='name'>{meal.name}</div>
-                <div className='description'>{meal.description}</div>
+                {/* <div className='name'>{meal.name}</div> */}
+                {/* <div className='description'>{meal.description}</div> */}
               </div>
-
               <div className='action-labels'>Select Size</div>
               <div className='size-container-meal'>
                 {meal.sizes !== undefined ? (
@@ -158,7 +155,6 @@ const MealScreen = ({ history, match }) => {
                   <></>
                 )}
               </div>
-
               <div className='action-labels'>Select Add-ons</div>
               <div class='flex-container-addon'>
                 {meal.addons !== undefined ? (
@@ -191,7 +187,6 @@ const MealScreen = ({ history, match }) => {
                   <></>
                 )}
               </div>
-
               <div className='notes-textarea-container'>
                 <textarea
                   name='notes'
@@ -210,7 +205,6 @@ const MealScreen = ({ history, match }) => {
                     type='button'
                     value='-'
                     onClick={(e) => handleQuantityPriceToTotalPrice('d')}
-                    disabled={enableOptions}
                   />
                   <div className='quantity-text'>{quantity}</div>
                   <input
@@ -218,29 +212,22 @@ const MealScreen = ({ history, match }) => {
                     type='button'
                     value='+'
                     onClick={(e) => handleQuantityPriceToTotalPrice('i')}
-                    disabled={enableOptions}
                   />
                 </div>
-                <button
-                  className='add-to-order-button'
-                  onClick={addToOrderHandler}>
+                <div className='order-btn' onClick={addToOrderHandler}>
                   Add to Order | {totalPrice}
-                </button>
+                </div>
               </div>
             </div>
           </div>
-        )}
+        )}{' '}
       </div>
-      <div className='recommended-meals'>
-        <Recommendations
-          heading='You may also like'
-          emoji={'❤️'}
-          items={3}></Recommendations>
-      </div>
-      <div className='you-may-like-meals'>
+      <div className='meal-suggestions'>
+        {' '}
         <Recommendations
           heading='This weeks hottest'
           emoji={'🔥'}
+          orientation='horizontal'
           items={4}></Recommendations>
       </div>
     </section>

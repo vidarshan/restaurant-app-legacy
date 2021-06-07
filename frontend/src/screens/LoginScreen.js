@@ -7,6 +7,7 @@ import Message from '../components/Message';
 const LoginScreen = ({ location, history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isAdmin] = useState(false);
 
   const redirect = location.search ? location.search.split('=')[1] : '/menu';
   const dispatch = useDispatch();
