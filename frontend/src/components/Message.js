@@ -1,12 +1,11 @@
 import React from 'react';
+import { Alert } from 'react-bootstrap';
 
 const Message = ({ id, variant, message, size }) => {
   return (
-    <>
-      <div className={`custom-alert-${variant}-${size}`} key={id}>
-        {message}
-      </div>
-    </>
+    <Alert className={`custom-alert-${variant}-${size}`} key={id}>
+      {message}
+    </Alert>
   );
 };
 

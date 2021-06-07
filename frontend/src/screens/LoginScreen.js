@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import '../assets/scss/auth.scss';
-
-import { signup, login } from '../actions/userActions';
+import { login } from '../actions/userActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 
 const LoginScreen = ({ location, history }) => {
-  const [isLogin, setIsLogin] = useState(true);
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isAdmin, setIsAdmin] = useState(false);
-
+  const [isAdmin] = useState(false);
 
   const redirect = location.search ? location.search.split('=')[1] : '/menu';
   const dispatch = useDispatch();
@@ -25,104 +19,52 @@ const LoginScreen = ({ location, history }) => {
     dispatch(login(email, password));
   };
 
-  const signupHandler = () => {
-    dispatch(signup(name, email, password, isAdmin));
-  };
-
   useEffect(() => {
     if (userInfo) {
       history.push(redirect);
     }
-
-    setTimeout(() => {
-      console.log('timeout');
-    }, 3000);
   }, [history, location, userInfo, redirect]);
 
   return (
-    <section className='section login-flex'>
-      {loading ? (
-        <Loader size='small'></Loader>
-      ) : (
-        <div className='login-form-container'>
-          <div className='login-auth'>
+    <section className='section bd-container-login'>
+      <div className='flex-container-login'>
+        {loading ? (
+          <Loader size='small'></Loader>
+        ) : (
+          <>
+            <div className='login-topic'>Login to Green Kitchen</div>
             {error ? (
               <Message variant='danger' size='small' message={error}></Message>
             ) : (
               <></>
             )}
-            {isLogin ? (
-              <>
-                <div className='login-topic'>
-                  {isLogin ? 'Log in ' : 'Sign up '}to Green Kitchen
-                </div>
-                <input
-                  type='text'
-                  name='email'
-                  placeholder='Your email'
-                  className='email-input'
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                  type='password'
-                  name='password'
-                  placeholder='Your password'
-                  className='password-input'
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <input
-                  className='login-button'
-                  type='button'
-                  value='Login'
-                  onClick={loginHandler}
-                />
-                <div
-                  className='auth-redirect'
-                  onClick={() => setIsLogin(false)}>
-                  Don't have an account? Sign up
-                </div>
-              </>
-            ) : (
-              <>
-                <div className='login-topic'>Sign up to Green Kitchen</div>
+            <input
+              type='text'
+              name='email'
+              id=''
+              className='email-login-input'
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
-                <input
-                  type='text'
-                  name='name'
-                  placeholder='Your name'
-                  className='name-input'
-                  onChange={(e) => setName(e.target.value)}
-                />
-
-                <input
-                  type='email'
-                  name='email'
-                  placeholder='Your Email'
-                  className='email-input'
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-
-                <input
-                  type='password'
-                  name='password'
-                  className='password-input'
-                  placeholder='Your password'
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <input
-                  className='login-button'
-                  type='button'
-                  value={isLogin ? 'Log In' : 'Sign Up'}
-                  onClick={signupHandler}
-                />
-                <div className='auth-redirect' onClick={() => setIsLogin(true)}>
-                  Have an account? Log In
-                </div>
-              </>
-            )}
-          </div>
-        </div>
-      )}
+            <input
+              type='password'
+              name='password'
+              className='password-login-input'
+              id=''
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <input
+              className='login-button'
+              type='button'
+              value='Login'
+              onClick={loginHandler}
+            />
+            <div className='signin-redirect'>
+              Don't have an account? <a href='/'>Sign in</a>
+            </div>
+          </>
+        )}
+      </div>
     </section>
   );
 };
