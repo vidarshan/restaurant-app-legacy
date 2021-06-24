@@ -40,7 +40,7 @@ const destroyData = async () => {
     await User.deleteMany();
     await Categories.deleteMany();
 
-    console.log('Data Destroyed...'.green.bold);
+    console.log('Data Destroyed...'.red.bold);
   } catch (error) {
     console.error(`${error}`.red.bold);
     process.exit(1);

@@ -3,29 +3,20 @@ import {
   MEAL_LIST_REQUEST,
   MEAL_LIST_SUCCESS,
   MEAL_LIST_FAIL,
+  MEAL_RECOMMENDATIONS_REQUEST,
+  MEAL_RECOMMENDATIONS_SUCCESS,
+  MEAL_RECOMMENDATIONS_FAIL,
   MEAL_REQUEST,
   MEAL_SUCCESS,
   MEAL_FAIL,
-  MEAL_SORT_BY_PRICE_REQUEST,
-  MEAL_SORT_BY_PRICE_SUCCESS,
-  MEAL_SORT_BY_PRICE_FAIL,
 } from '../constants/mealConstants';
-import { sortBy, orderBy, filter } from '../lodash';
 
 export const listMeals = () => async (dispatch) => {
   try {
     dispatch({ type: MEAL_LIST_REQUEST });
 
     let { data } = await axios.get('/api/meals');
-    // else if (sortingType.toLowerCase() === 'popularity') {
-    //   results = orderBy(meals, ['timestamps'], ['desc']);
-    // } else if (sortingType.toLowerCase() === 'vegan') {
-    //   if (sortingOrder) {
-    //     results = filter(meals, ['vegan', true]);
-    //   } else {
-    //     results = filter(meals, ['vegan', false]);
-    //   }
-    // }
+
     dispatch({ type: MEAL_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -56,18 +47,16 @@ export const mealItem = (id) => async (dispatch) => {
   }
 };
 
-export const mealSortByPrice = (sortingOrder) => async (dispatch) => {
+export const mealRecommendation = (id) => async (dispatch) => {
   try {
-    dispatch({ type: MEAL_SORT_BY_PRICE_REQUEST });
+    dispatch({ type: MEAL_RECOMMENDATIONS_REQUEST });
 
-    let { data } = await axios.get(`/api/meals`);
+    const { data } = await axios.get(`/api/meals/most`);
 
-    let sortedData = orderBy(data, ['price'], [sortingOrder]);
-
-    dispatch({ type: MEAL_SORT_BY_PRICE_SUCCESS, payload: sortedData });
+    dispatch({ type: MEAL_RECOMMENDATIONS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
-      type: MEAL_SORT_BY_PRICE_FAIL,
+      type: MEAL_RECOMMENDATIONS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

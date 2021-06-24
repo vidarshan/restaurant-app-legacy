@@ -1,5 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import Meal from '../models/MealsModel.js';
+import orderBy from 'lodash.orderby';
+import take from 'lodash.take';
 
 /*
  * @DESCRIPTION : Get all meals
@@ -27,4 +29,16 @@ const getMealsById = asyncHandler(async (req, res) => {
   }
 });
 
-export { getMeals, getMealsById };
+/**
+ * @DESCRIPTION : Get most ordered meals
+ * @ROUTE       :GET /api/meals/most
+ * @ACCESS      :Public Access
+ */
+const getMealsByOrders = asyncHandler(async (req, res) => {
+  const meals = await Meal.find({});
+
+  let sortedbyMostOrders = take(orderBy(meals, ['orders'], ['desc']), 6);
+  res.json(sortedbyMostOrders);
+});
+
+export { getMeals, getMealsById, getMealsByOrders };

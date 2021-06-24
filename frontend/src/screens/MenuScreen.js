@@ -65,6 +65,8 @@ const MenuScreen = ({ match }) => {
     console.log('type : ' + sortingType);
 
     if (searchString.length > 0) {
+      // setFilterMeals('All');: convert to a useref()
+
       map(meals, (s) => {
         let target = s.name;
         if (target.includes(searchString)) {
@@ -124,72 +126,26 @@ const MenuScreen = ({ match }) => {
               placeholder='Search for what you are craving...'
               className='search-meals-input'
             />
-            <div
-              className='show-filters-button'
-              onClick={() => {
-                showFilters ? setShowfilters(false) : setShowfilters(true);
-              }}>
-              <box-icon
-                type='solid'
-                color='#ffffff'
-                size='20px'
-                name={showFilters ? 'hide' : 'filter-alt'}></box-icon>
-              Show Filters
+          </div>
+
+          <div className='category-filter-row'>
+            <div className='menu-filter'>
+              {map(categories, (category) => {
+                return (
+                  <div
+                    className='menu-filter-item'
+                    onClick={() => setFilterMeals(category.name)}>
+                    {category.name}
+                  </div>
+                );
+              })}
             </div>
           </div>
-          {showFilters ? (
-            <div className='all-filter-row'>
-              <div className='category-filter-row'>
-                <div className='menu-filter'>
-                  {map(categories, (category) => {
-                    return (
-                      <div
-                        className='menu-filter-item'
-                        onClick={() => setFilterMeals(category.name)}>
-                        {category.name}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-              {/* <div className='dropdown-filter-row'>
-                {map(filters, (filter) => {
-                  return (
-                    <div class='select'>
-                      <select
-                        id='standard-select'
-                        onChange={(e) =>
-                          displayMeals(e.target.value, filter.name)
-                        }>
-                        <option value='' disabled>
-                          {filter.name}
-                        </option>
-                        {map(filter.choices, (choice) => {
-                          return <option value={choice}>{choice}</option>;
-                        })}
-                      </select>
-                    </div>
-                  );
-                })}
-                <div className='filter-button'>Filter</div>
-                <div className='clear-button'>Clear</div>
-              </div> */}
-            </div>
-          ) : (
-            <></>
-          )}
 
           <div className='bd-grid'>
             {map(displayMeals(), (meal) => {
               return <Meal meal={meal}></Meal>;
             })}
-            {/* {filterMeals === 'All' && searchString === ''
-              ? map(meals, (meal) => {
-                  return <Meal meal={meal}></Meal>;
-                })
-              : map(filter(meals, { foodType: filterMeals }), (meal) => {
-                  return <Meal meal={meal}></Meal>;
-                })} */}
           </div>
         </>
       )}

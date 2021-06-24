@@ -3,9 +3,8 @@
 .show-filters-accordian {
   display: flex;
   width: auto;
-  justify-content: space-between;
+  justify-content: center;
   height: 50px;
-  margin-bottom: var(--mb-3);
   border-radius: var(--card-border-radius);
   padding: 6px;
 
@@ -18,19 +17,6 @@
     width: 70%;
     height: 38px;
   }
-
-  .show-filters-button {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 30%;
-    margin-left: 10px;
-    background-color: var(--first-color);
-    border-radius: var(--card-border-radius);
-    color: var(--container-color);
-    padding: 6px;
-    text-align: center;
-  }
 }
 
 .all-filter-row {
@@ -41,16 +27,16 @@
 .menu-filter {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 10px;
 
   .menu-filter-item {
     background-color: var(--container-color);
-    padding: 6px;
+    padding: 10px 25px;
     transition: transform 0.9s;
-    width: fit-content;
     text-align: center;
     margin: 10px;
+    font-size: 16px;
     border-radius: var(--card-border-radius);
   }
 
@@ -58,8 +44,7 @@
     -ms-transform: scale(1.1); /* IE 9 */
     -webkit-transform: scale(1.1); /* Safari 3-8 */
     transform: scale(1.1);
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
-      rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    box-shadow: var(--card-box-shadow);
   }
 
   .show-filter-button {
@@ -154,8 +139,7 @@
   }
 
   .select:hover {
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
-      rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    box-shadow: var(--card-box-shadow);
   }
 
   select:focus + .focus {
@@ -212,16 +196,19 @@
   color: var(--container-color);
 }
 
-.menu__price {
-  padding: 4px;
-  display: flex;
-  justify-content: space-between;
-  color: var(--grey-color);
-
-  .menu__price__large__font {
-    color: var(--first-color);
-    font-size: var(--h2-font-size);
-  }
+.menu__price__large__font {
+  position: absolute;
+  height: 50px;
+  padding-top: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
+  width: 50px;
+  background-color: var(--first-color);
+  color: var(--container-color);
+  font-size: var(--medium-font-size);
+  border: 3px solid var(--container-color);
+  border-radius: 50%;
 }
 
 .vegan-badge {
