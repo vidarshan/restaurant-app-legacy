@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import {
   mealListReducer,
   mealReducer,
-  mealSortByPriceReducer,
+  mealRecommendationReducer,
 } from './reducers/mealReducers';
 import { orderReducer, orderCountReducer } from './reducers/orderReducer';
 import { categoryReducer } from './reducers/categoryReducers';
@@ -17,8 +17,8 @@ import {
 
 const reducer = combineReducers({
   mealList: mealListReducer,
-  mealSortByPrice: mealSortByPriceReducer,
   mealItem: mealReducer,
+  mealRecommendation: mealRecommendationReducer,
   order: orderReducer,
   userSignup: userSignUpReducer,
   userLogin: userLoginReducer,

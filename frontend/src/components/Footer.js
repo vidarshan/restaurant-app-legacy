@@ -7,24 +7,21 @@ const Footer = () => {
       <div className='footer__container bd-grid'>
         <div className='footer__content'>
           <a href='/#' className='footer__logo'>
-            Tasty Food
+            Hot N' Crusty
           </a>
           <span className='footer__description'>Restaurant</span>
           <div>
             <a href='/#' className='footer__social'>
-              social meida icon
-              {/* <box-icon
+              <box-icon
                 name='facebook-circle'
                 type='logo'
-                color='#3492ff'></box-icon> */}
+                color='#3492ff'></box-icon>
             </a>
             <a href='/#' className='footer__social'>
-              social meida icon
-              {/* <box-icon name='instagram' type='logo' color='#a66e00'></box-icon> */}
+              <box-icon name='instagram' type='logo' color='#a66e00'></box-icon>
             </a>
             <a href='/#' className='footer__social'>
-              social meida icon
-              {/* <box-icon name='twitter' type='logo' color='#4bc0ff'></box-icon> */}
+              <box-icon name='twitter' type='logo' color='#4bc0ff'></box-icon>
             </a>
           </div>
         </div>
@@ -39,17 +36,12 @@ const Footer = () => {
             </li>
             <li>
               <a href='/#' className='footer__link'>
-                Pricing
+                Order Food
               </a>
             </li>
             <li>
               <a href='/#' className='footer__link'>
-                Fast food
-              </a>
-            </li>
-            <li>
-              <a href='/#' className='footer__link'>
-                Reserve your spot
+                Reserve
               </a>
             </li>
           </ul>
@@ -58,11 +50,6 @@ const Footer = () => {
         <div className='footer__content'>
           <h3 className='footer__title'>Information</h3>
           <ul>
-            <li>
-              <a href='/#' className='footer__link'>
-                Event
-              </a>
-            </li>
             <li>
               <a href='/#' className='footer__link'>
                 Contact us
@@ -84,15 +71,15 @@ const Footer = () => {
         <div className='footer__content'>
           <h3 className='footer__title'>Adress</h3>
           <ul>
-            <li>Lima - Peru</li>
-            <li>Jr Union #999</li>
-            <li>999 - 888 - 777</li>
-            <li>tastyfood@email.com</li>
+            <li>100B Horton Place</li>
+            <li>Colombo 07 - Sri Lanka 🇱🇰</li>
+            <li>011 - 288- 9374</li>
+            <li>hotncrusty@email.com</li>
           </ul>
         </div>
       </div>
 
-      <p className='footer__copy'>&#169; 2020 Bedimcode. All right reserved</p>
+      <p className='footer__copy'>&#169; 2021 vidarshanr</p>
     </footer>
   );
 };

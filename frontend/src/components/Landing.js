@@ -1,41 +1,66 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Meal from '../components/Meal';
+import Category from '../components/Category';
 import { Link } from 'react-router-dom';
+import { mealRecommendation } from '../actions/mealActions';
+import { listCategories } from '../actions/categoryActions';
+import { map } from '../lodash';
 
 const Landing = () => {
+  const dispatch = useDispatch();
+
+  const { meals, loading, error } = useSelector(
+    (state) => state.mealRecommendation
+  );
+
+  const { categories } = useSelector((state) => state.categories);
+
+  useEffect(() => {
+    dispatch(mealRecommendation());
+    dispatch(listCategories());
+  }, [dispatch]);
+
   return (
     <main className='l-main'>
       <section class='home' id='home'>
         <div class='home__container bd-container bd-grid'>
           <div class='home__data'>
-            <h1 class='home__title'>Tasty food</h1>
+            <h1 class='home__title'>Hot n Crusty</h1>
             <h2 class='home__subtitle'>
-              Try the best food of <br></br> the week.
+              The best meals in town <br></br> prepared just for you.
             </h2>
-            <a href='#' class='button'>
-              View Menu
-            </a>
+
+            <Link className='icon-btn' to='/menu'>
+              <div className='text'>View Menu</div>
+              <div className='icon'>
+                <box-icon name='right-arrow-alt' color='#707070'></box-icon>
+              </div>
+            </Link>
           </div>
           <img src='/images/home.png' class='home__img' alt='' />
         </div>
       </section>
 
-      {/* About Section */}
-      <section class='about section bd-container' id='about'>
-        <div class='about__container bd-grid'>
-          <div class='about__data'>
-            <span class='section-subtitle about__initial'>About Us</span>
-            <h2 class='section-title'>
-              We cook the best <br></br> tasty food
-            </h2>
-            <p class='about__description'>
-              We cook the best food in the entire city, with excellent customer
-              service, the best meals and at the best price, visit us.
-            </p>
-            <a href='#' class='button'>
-              Explore history
-            </a>
-          </div>
-          <img src='/images/about.jpg' alt='' class='about__img' />
+      {/* category section */}
+      <section class='menu section bd-container' id='menu'>
+        <span class='section-subtitle'>Categories</span>
+        <h2 class='section-title'>Variations you may Like</h2>
+        <div class='category__container bd-grid'>
+          {map(categories, (category) => {
+            return <Category category={category}></Category>;
+          })}
+        </div>
+      </section>
+
+      {/*menu section*/}
+      <section class='menu section bd-container' id='menu'>
+        <span class='section-subtitle'>Special</span>
+        <h2 class='section-title'>Most Ordered Meals</h2>
+        <div class='menu__container bd-grid'>
+          {map(meals, (meal) => {
+            return <Meal meal={meal}></Meal>;
+          })}
         </div>
       </section>
 
@@ -395,63 +420,23 @@ const Landing = () => {
         </div>
       </section>
 
-      {/*menu section*/}
-      <section class='menu section bd-container' id='menu'>
-        <span class='section-subtitle'>Special</span>
-        <h2 class='section-title'>Menu of the week</h2>
-
-        <div class='menu__container bd-grid'>
-          <div class='menu__content'>
-            <img src='/images/plate1.png' alt='' />
-            <h3 class='menu__name'>Barbecue salad</h3>
-            <span class='menu__detail'>Delicious dish</span>
-            <span class='menu__preci'>$12.00</span>
-            <a href='#' class='button menu__button'>
-              <i class='bx bx-cart-alt'></i>
-            </a>
-          </div>
-          <div class='menu__content'>
-            <img src='/images/plate2.png' alt='' />
-            <h3 class='menu__name'>Salad with fish</h3>
-            <span class='menu__detail'>Delicious dish</span>
-            <span class='menu__preci'>$22.00</span>
-            <a href='#' class='button menu__button'>
-              <i class='bx bx-cart-alt'></i>
-            </a>
-          </div>
-          <div class='menu__content'>
-            <img src='/images/plate3.png' alt='' />
-            <h3 class='menu__name'>Spinach Salad salad</h3>
-            <span class='menu__detail'>Delicious dish</span>
-            <span class='menu__preci'>$9.50</span>
-            <a href='#' class='button menu__button'>
-              <i class='bx bx-cart-alt'></i>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* app section */}
-      <section class='app section bd-container' id='app'>
-        <div class='app__container bd-grid'>
-          <div class='app__data'>
-            <span class='section-subtitle app__initial'>App</span>
-            <h2 class='section-title app__initial'>App is avilable</h2>
-            <p class='app__description'>
-              Find our application and download it, you can make reservations,
-              food orders, see your deliveries on the way and much more.
+      {/* About Section */}
+      <section class='about section bd-container' id='about'>
+        <div class='about__container bd-grid'>
+          <div class='about__data'>
+            <span class='section-subtitle about__initial'>About Us</span>
+            <h2 class='section-title'>
+              We cook the best <br></br> tasty food
+            </h2>
+            <p class='about__description'>
+              We cook the best food in the entire city, with excellent customer
+              service, the best meals and at the best price, visit us.
             </p>
-            <div class='app__stores'>
-              <a href='#'>
-                <img src='/images/app1.png' alt='' class='app__store' />
-              </a>
-              <a href='#'>
-                <img src='/images/app2.png' alt='' class='app__store' />
-              </a>
-            </div>
+            <a href='#' class='button'>
+              Explore history
+            </a>
           </div>
-
-          <img src='/images/movil-app.png' alt='' />
+          <img src='/images/about.jpg' alt='' class='about__img' />
         </div>
       </section>
 

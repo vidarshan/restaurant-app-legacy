@@ -43,6 +43,18 @@
   --mb-9: 4.5rem;
   --mb-10: 5rem;
 
+  /*paddings*/
+  --pb-1: 0.5rem;
+  --pb-2: 1rem;
+  --pb-3: 1.5rem;
+  --pb-4: 2rem;
+  --pb-5: 2.5rem;
+  --pb-6: 3rem;
+  --pb-7: 3.5rem;
+  --pb-8: 4rem;
+  --pb-9: 4.5rem;
+  --pb-10: 5rem;
+
   /*z-index*/
   --z-tooptip: 10;
   --z-fixed: 100;
@@ -59,4 +71,8 @@
   --select-border: #777;
   --select-focus: blue;
   --select-arrow: var(--select-border);
+
+  /*box shadow*/
+  --card-box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.05) 0px 8px 32px;
 }

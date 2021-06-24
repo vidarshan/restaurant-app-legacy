@@ -55,3 +55,29 @@ $duration: 1.5s;
     transform: rotate(450deg);
   }
 }
+
+.icon-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-radius: var(--card-border-radius);
+  background-color: var(--first-color);
+  color: var(--container-color);
+  padding: 5px;
+  width: 160px;
+  line-height: 27px;
+  cursor: pointer;
+
+  .text {
+    padding-top: 4px;
+    padding-left: 5px;
+  }
+
+  .icon {
+    background-color: white;
+    padding-top: 7px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: var(--card-border-radius);
+  }
+}

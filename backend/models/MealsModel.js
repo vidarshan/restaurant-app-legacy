@@ -67,7 +67,7 @@ const mealSchema = mongoose.Schema(
       type: Array,
       required: false,
     },
-    numReviews: {
+    ordersThisWeek: {
       type: Number,
       required: true,
       default: 0,

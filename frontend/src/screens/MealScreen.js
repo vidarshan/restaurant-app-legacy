@@ -89,6 +89,21 @@ const MealScreen = ({ match }) => {
   useEffect(() => {
     dispatch(mealItem(match.params.id));
 
+    var acc = document.getElementsByClassName('accordion');
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener('click', function () {
+        this.classList.toggle('active');
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+        }
+      });
+    }
+
     /*******************************
      * *****************************
      * *****************************
@@ -121,32 +136,27 @@ const MealScreen = ({ match }) => {
               <div className='description'>{meal.description}</div>
             </div>
             <div class='flex-item-right'>
-              <div className='info-container'>
-                {/* <div className='name'>{meal.name}</div> */}
-                {/* <div className='description'>{meal.description}</div> */}
-              </div>
+              <div className='info-container'></div>
               <div className='action-labels'>Select Size</div>
-              <div className='size-container-meal'>
+              <div className='size-container'>
                 {meal.sizes !== undefined ? (
                   map(meal.sizes, (e) => {
                     return (
-                      <div key={meal._id} className='size-container-meal-item'>
-                        <div
-                          class='pretty p-icon p-round'
-                          onClick={() =>
-                            handleSizePriceToTotalPrice(e.size, e.price)
-                          }>
+                      <div className='size-info-container'>
+                        <div className='size-radio-btn'>
                           <input
                             type='radio'
-                            name='icon_solid'
+                            name='radio'
+                            className='size-radio'
                             value={e.price}
+                            onClick={() =>
+                              handleSizePriceToTotalPrice(e.size, e.price)
+                            }
                           />
-                          <div class='state p-primary'>
-                            <i class='icon mdi mdi-check'></i>
-                            <label>
-                              {e.size} | {e.price * quantity}
-                            </label>
-                          </div>
+                        </div>
+                        <div className='size-name'>{e.size}</div>
+                        <div className='size-total-price'>
+                          ${e.price * quantity}
                         </div>
                       </div>
                     );
@@ -156,29 +166,28 @@ const MealScreen = ({ match }) => {
                 )}
               </div>
               <div className='action-labels'>Select Add-ons</div>
-              <div class='flex-container-addon'>
+              <div class='addon-container'>
                 {meal.addons !== undefined ? (
                   map(meal.addons, (e) => {
                     return (
-                      <div className='flex-left-addon'>
-                        <div
-                          class='pretty p-default p-fill'
-                          onClick={() =>
-                            handleAddOnPriceToTotalPrice(
-                              e.addOnName,
-                              e.addOnPrice
-                            )
-                          }>
+                      <div className='addon-info-container'>
+                        <div className='addon-radio-btn'>
                           <input
                             type='checkbox'
+                            value={e.price}
                             value={e.addOnPrice}
                             disabled={enableOptions}
+                            onClick={() =>
+                              handleAddOnPriceToTotalPrice(
+                                e.addOnName,
+                                e.addOnPrice
+                              )
+                            }
                           />
-                          <div class='state'>
-                            <label>
-                              {e.addOnName} | {e.addOnPrice * quantity}
-                            </label>
-                          </div>
+                        </div>
+                        <div className='addon-name'> {e.addOnName}</div>
+                        <div className='addon-total-price'>
+                          ${e.addOnPrice * quantity}
                         </div>
                       </div>
                     );
@@ -190,7 +199,7 @@ const MealScreen = ({ match }) => {
               <div className='notes-textarea-container'>
                 <textarea
                   name='notes'
-                  rows='4'
+                  rows='2'
                   cols='50'
                   placeholder='Add notes here'
                   value={notes}
@@ -215,7 +224,15 @@ const MealScreen = ({ match }) => {
                   />
                 </div>
                 <div className='order-btn' onClick={addToOrderHandler}>
-                  Add to Order | {totalPrice}
+                  <div className='text-price-container'>
+                    Add to Order
+                    {/* <br></br>
+                    {totalPrice} */}
+                  </div>
+                  <div className='total-price-order'>${totalPrice}</div>
+                  <div className='arrow-container'>
+                    <box-icon name='right-arrow-alt' color='#707070'></box-icon>
+                  </div>
                 </div>
               </div>
             </div>
