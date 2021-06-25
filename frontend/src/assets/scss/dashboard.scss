@@ -1,0 +1,232 @@
+.bd-container-dashboard {
+  align-items: center;
+  width: calc(100% - 2rem);
+  margin-left: auto;
+  max-width: 960px;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  .dashboard__cards {
+    width: max-content;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    &--orders {
+      margin: 5px;
+      display: flex;
+      flex-direction: column;
+      color: rgba(6, 180, 82, 0.8);
+      background-color: rgba(6, 180, 82, 0.3);
+      justify-content: center;
+      align-items: center;
+      height: 150px;
+      width: 150px;
+      border-radius: var(--card-border-radius);
+
+      .card-stat {
+        color: rgba(6, 180, 82, 0.8);
+        font-size: var(--h1-font-size);
+      }
+    }
+
+    &--users {
+      margin: 5px;
+      display: flex;
+      flex-direction: column;
+      color: rgba(185, 25, 37, 0.8);
+      background-color: rgba(185, 25, 37, 0.3);
+      justify-content: center;
+      align-items: center;
+      height: 150px;
+      width: 150px;
+      border-radius: var(--card-border-radius);
+
+      .card-stat {
+        color: rgba(185, 25, 37, 0.8);
+        font-size: var(--h1-font-size);
+      }
+    }
+
+    &--meals {
+      margin: 5px;
+      display: flex;
+      flex-direction: column;
+      color: rgba(0, 154, 215, 0.8);
+      background-color: rgba(0, 154, 215, 0.3);
+      justify-content: center;
+      align-items: center;
+      height: 150px;
+      width: 150px;
+      border-radius: var(--card-border-radius);
+
+      .card-stat {
+        color: rgba(0, 154, 215, 0.8);
+        font-size: var(--h1-font-size);
+      }
+    }
+
+    &--categories {
+      margin: 5px;
+      display: flex;
+      flex-direction: column;
+      color: rgba(255, 108, 0, 0.8);
+      background-color: rgba(255, 108, 0, 0.3);
+      justify-content: center;
+      align-items: center;
+      height: 150px;
+      width: 150px;
+      border-radius: var(--card-border-radius);
+
+      .card-stat {
+        color: rgba(255, 108, 0, 0.8);
+        font-size: var(--h1-font-size);
+      }
+    }
+
+    &--reservations {
+      margin: 5px;
+      display: flex;
+      flex-direction: column;
+      color: rgba(162, 180, 19, 0.8);
+      background-color: rgba(162, 180, 19, 0.3);
+      justify-content: center;
+      align-items: center;
+      height: 150px;
+      width: 150px;
+      border-radius: var(--card-border-radius);
+
+      .card-stat {
+        color: rgba(162, 180, 19, 0.8);
+        font-size: var(--h1-font-size);
+      }
+    }
+
+    &--visits {
+      margin: 5px;
+      display: flex;
+      flex-direction: column;
+      color: rgba(100, 79, 181, 0.8);
+      background-color: rgba(100, 79, 181, 0.3);
+      justify-content: center;
+      align-items: center;
+      height: 150px;
+      width: 150px;
+      border-radius: var(--card-border-radius);
+
+      .card-stat {
+        color: rgba(100, 79, 181, 0.8);
+        font-size: var(--h1-font-size);
+      }
+    }
+  }
+
+  .dashboard__notifications {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 5px;
+    height: 300px;
+    overflow-y: scroll;
+
+    &--list {
+      padding: 10px;
+
+      .order-notification {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: auto;
+        height: 40px;
+        margin: 5px;
+        padding: 8px;
+        color: rgba(6, 180, 82, 0.8);
+        background-color: rgba(6, 180, 82, 0.3);
+        border-radius: var(--card-border-radius);
+      }
+
+      .user-notification {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: auto;
+        height: 40px;
+        margin: 5px;
+        padding: 8px;
+        color: rgba(185, 25, 37, 0.8);
+        background-color: rgba(185, 25, 37, 0.3);
+        border-radius: var(--card-border-radius);
+      }
+
+      .meal-notification {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: auto;
+        height: 40px;
+        margin: 5px;
+        padding: 8px;
+        color: rgba(0, 154, 215, 0.8);
+        background-color: rgba(0, 154, 215, 0.3);
+        border-radius: var(--card-border-radius);
+      }
+
+      .category-notification {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: auto;
+        height: 40px;
+        margin: 5px;
+        padding: 8px;
+        color: rgba(255, 108, 0, 0.8);
+        background-color: rgba(255, 108, 0, 0.3);
+        border-radius: var(--card-border-radius);
+      }
+    }
+  }
+
+  .dashboard__quick-actions {
+    margin-top: 15px;
+    grid-row: 2 / -1;
+    grid-column: 1 / -1;
+
+    .stop-orders {
+      margin: 5px;
+      padding: 12px;
+      height: 50px;
+      border-radius: var(--card-border-radius);
+      color: rgba(185, 25, 37, 0.8);
+      background-color: rgba(185, 25, 37, 0.3);
+    }
+
+    .cancel-reservations {
+      margin: 5px;
+      padding: 12px;
+      height: 50px;
+      border-radius: var(--card-border-radius);
+      color: rgba(162, 180, 19, 0.8);
+      background-color: rgba(162, 180, 19, 0.3);
+    }
+
+    .add-new-meal {
+      margin: 5px;
+      padding: 12px;
+      height: 50px;
+      border-radius: var(--card-border-radius);
+      color: rgba(0, 154, 215, 0.8);
+      background-color: rgba(0, 154, 215, 0.3);
+    }
+    .add-new-category {
+      margin: 5px;
+      padding: 12px;
+      height: 50px;
+      border-radius: var(--card-border-radius);
+      color: rgba(255, 108, 0, 0.8);
+      background-color: rgba(255, 108, 0, 0.3);
+    }
+  }
+}
