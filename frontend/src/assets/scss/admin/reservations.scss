@@ -1,0 +1,23 @@
+.bd-container-reservations {
+  width: calc(100% - 2rem);
+  margin-left: auto;
+  max-width: 960px;
+  margin-right: auto;
+
+  table,
+  td,
+  th {
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th,
+  td {
+    padding: 15px;
+  }
+}
