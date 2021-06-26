@@ -11,6 +11,12 @@ import OrderScreen from './screens/OrderScreen';
 import LoginScreen from './screens/LoginScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import AdminDashboardScreen from './screens/admin/AdminDashboardScreen';
+import AdminReservationScreen from './screens/admin/AdminReservationScreen';
+import AdminUserScreen from './screens/admin/AdminUserScreen';
+import AdminOrderScreen from './screens/admin/AdminOrderScreen';
+import AdminMealScreen from './screens/admin/AdminMealScreen';
+import AdminCategoryScreen from './screens/admin/AdminCategoryScreen';
 
 const App = () => {
   return (
@@ -23,6 +29,14 @@ const App = () => {
       <Route path='/meal/:id' component={MealScreen}></Route>
       <Route path='/order/:id?' component={OrderScreen}></Route>
       <Route path='/profile' component={ProfileScreen}></Route>
+      <Route path='/admin/dashboard' component={AdminDashboardScreen}></Route>
+      <Route
+        path='/admin/reservations'
+        component={AdminReservationScreen}></Route>
+      <Route path='/admin/meals' component={AdminMealScreen}></Route>
+      <Route path='/admin/orders' component={AdminOrderScreen}></Route>
+      <Route path='/admin/users' component={AdminUserScreen}></Route>
+      <Route path='/admin/categories' component={AdminCategoryScreen}></Route>
       <Route path='/about' component={AboutScreen}></Route>
       <Footer></Footer>
     </Router>
