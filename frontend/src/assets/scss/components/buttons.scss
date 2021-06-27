@@ -1,0 +1,41 @@
+@import '../variables.scss';
+
+.button-primary {
+  border: none;
+  display: block;
+  background-color: var(--first-color);
+  border-radius: var(--card-border-radius);
+  height: 2.5rem;
+  margin: 5px;
+  width: 100%;
+  font-family: inherit;
+  font-size: var(--normal-font-size);
+
+  &:focus {
+    border: none;
+  }
+
+  &:hover {
+    background-color: var(--grey-hover-color);
+  }
+}
+
+.button-danger {
+  border: none;
+  display: inline-block;
+  background-color: var(--danger-color);
+  border-radius: var(--card-border-radius);
+  height: 2.5rem;
+  margin: 5px;
+  font-family: inherit;
+  width: 100%;
+  font-size: var(--normal-font-size);
+
+  &:focus {
+    border: none;
+  }
+
+  &:hover {
+    background-color: var(--grey-hover-color);
+  }
+}

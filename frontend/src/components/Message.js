@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../assets/scss/components/alerts.scss';
+
 const Message = ({ id, variant, message, size }) => {
   return (
     <>
