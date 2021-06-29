@@ -1,5 +1,4 @@
 import React from 'react';
-import Rating from './Rating';
 import { Link } from 'react-router-dom';
 import 'boxicons';
 
@@ -18,7 +17,7 @@ const Meal = ({ meal }) => {
       <h3 className='menu__name'>
         {name.length > 16 ? name.slice(0, 18).concat('...') : name}
       </h3>
-      {console.log('name : ' + name + ' length ' + name.length)}
+
       <span className='menu__detail'>
         {description.length > 16
           ? description.slice(0, 24).concat('...')

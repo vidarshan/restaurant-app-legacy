@@ -12,16 +12,13 @@ const Footer = () => {
           <span className='footer__description'>Restaurant</span>
           <div>
             <a href='/#' className='footer__social'>
-              <box-icon
-                name='facebook-circle'
-                type='logo'
-                color='#3492ff'></box-icon>
+              <box-icon type='logo' name='facebook'></box-icon>
             </a>
             <a href='/#' className='footer__social'>
-              <box-icon name='instagram' type='logo' color='#a66e00'></box-icon>
+              {/* <box-icon name='instagram-alt' type='logo'></box-icon> */}
             </a>
             <a href='/#' className='footer__social'>
-              <box-icon name='twitter' type='logo' color='#4bc0ff'></box-icon>
+              {/* <box-icon name='twitter' type='logo' color='#4bc0ff'></box-icon> */}
             </a>
           </div>
         </div>

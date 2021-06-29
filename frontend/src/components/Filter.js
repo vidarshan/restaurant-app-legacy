@@ -2,9 +2,9 @@ import React from 'react';
 
 const Filter = () => {
   return (
-    <div class='grid-container'>
-      <div class='one'>One</div>
-      <div class='two'>Two</div>
+    <div className='grid-container'>
+      <div className='one'>One</div>
+      <div className='two'>Two</div>
     </div>
   );
 };

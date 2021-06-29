@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { mealRecommendation } from '../actions/mealActions';
-import { map, take } from '../lodash';
+import { map } from '../lodash';
 
 import '../assets/scss/recommendations.scss';
 
 const Recommendations = ({ heading, emoji, items, orientation }) => {
   const dispatch = useDispatch();
 
-  const { meals, loading, error } = useSelector(
-    (state) => state.mealRecommendation
-  );
+  const { meals } = useSelector((state) => state.mealRecommendation);
 
   useEffect(() => {
     dispatch(mealRecommendation());
@@ -22,9 +20,9 @@ const Recommendations = ({ heading, emoji, items, orientation }) => {
         {heading} {emoji}
       </div>
       <div className='recommendations-items'>
-        {map(meals, (meal) => {
+        {map(meals, (meal, key) => {
           return (
-            <>
+            <div key={key}>
               <div
                 className={
                   orientation === 'vertical' ? 'card full-width' : 'card'
@@ -44,7 +42,7 @@ const Recommendations = ({ heading, emoji, items, orientation }) => {
                   <img src={meal.image} alt='' />
                 </div>
               </div>
-            </>
+            </div>
           );
         })}
       </div>

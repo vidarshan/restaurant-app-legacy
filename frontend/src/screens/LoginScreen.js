@@ -12,7 +12,7 @@ const LoginScreen = ({ location, history }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin] = useState(false);
 
   const redirect = location.search ? location.search.split('=')[1] : '/menu';
   const dispatch = useDispatch();
@@ -32,10 +32,6 @@ const LoginScreen = ({ location, history }) => {
     if (userInfo) {
       history.push(redirect);
     }
-
-    setTimeout(() => {
-      console.log('timeout');
-    }, 3000);
   }, [history, location, userInfo, redirect]);
 
   return (

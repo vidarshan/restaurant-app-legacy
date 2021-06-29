@@ -19,7 +19,6 @@ const SignUpScreen = ({ location, history }) => {
   const [isAdmin] = useState(false); //check this
 
   useEffect(() => {
-    console.log(userInfo);
     if (userInfo) {
       history.push(redirect);
     }

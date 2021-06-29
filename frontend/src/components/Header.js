@@ -20,8 +20,6 @@ const Header = () => {
   // };
 
   const activateTheme = () => {
-    console.log('theme');
-
     const themeButton = document.getElementById('theme-button');
 
     const darkTheme = 'dark-theme';
@@ -62,8 +60,6 @@ const Header = () => {
         nav.classList.toggle('show-menu');
       });
     }
-
-    console.log(orderCount);
   }, [orderCount]);
 
   return (
