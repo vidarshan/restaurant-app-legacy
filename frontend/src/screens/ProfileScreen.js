@@ -64,106 +64,60 @@ const ProfileScreen = ({ history }) => {
             variant='success'
             size='small'></Message>
         )}
-        <input
-          type='text'
-          name='name'
-          value={name}
-          className='text-input'
-          onChange={(e) => setName(e.target.value)}
-        />
 
-        <input
-          type='email'
-          name='email'
-          id=''
-          value={email}
-          className='email-input'
-          onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <input
-          type='password'
-          name='password'
-          className='password-input'
-          id=''
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-        <input
-          type='password'
-          name='confirmPassword'
-          className='password-input'
-          id=''
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-
-        <div className='action-buttons'>
+        <div className='input-flex'>
           <input
-            className='button-primary'
-            type='button'
-            value='Update Profile'
-            onClick={profileHandler}
+            type='text'
+            name='name'
+            value={name}
+            className='text-input'
+            onChange={(e) => setName(e.target.value)}
           />
+
           <input
-            className='button-danger'
-            type='button'
-            value='Delete Profile'
+            type='email'
+            name='email'
+            id=''
+            value={email}
+            className='email-input'
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-      </div>
-      <div className='flex__container--activity'>
-        <div className='heading'>
-          <p className='heading-2'>Your Activity</p>
+        <div className='input-flex'>
+          <input
+            type='password'
+            name='password'
+            className='password-input'
+            id=''
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          <input
+            type='password'
+            name='confirmPassword'
+            className='password-input'
+            id=''
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
         </div>
-        <div className='activity__card'>
-          <div className='details'>
-            <div className='title'>Order</div>
-            <div className='content'>1 x Cheese Steak</div>
-            <div className='content'>2 x Whooper</div>
-            <div className='price'>$23.44</div>
-          </div>
-          <div className='actions'>
-            <input className='button-primary' type='button' value='Reorder' />
-            <input className='button-danger' type='button' value='Clear' />
-          </div>
-        </div>{' '}
-        <div className='activity__card'>
-          <div className='details'>
-            <div className='title'>Order</div>
-            <div className='content'>1 x Cheese Steak</div>
-            <div className='content'>2 x Whooper</div>
-            <div className='price'>$23.44</div>
-          </div>
-          <div className='actions'>
-            <input className='button-primary' type='button' value='Reorder' />
-            <input className='button-danger' type='button' value='Clear' />
-          </div>
-        </div>{' '}
-        <div className='activity__card'>
-          <div className='details'>
-            <div className='title'>Order</div>
-            <div className='content'>1 x Cheese Steak</div>
-            <div className='content'>2 x Whooper</div>
-            <div className='price'>$23.44</div>
-          </div>
-          <div className='actions'>
-            <input className='button-primary' type='button' value='Reorder' />
-            <input className='button-danger' type='button' value='Clear' />
-          </div>
-        </div>
-        <div className='activity__card'>
-          <div className='details'>
-            <div className='title'>Order</div>
-            <div className='content'>1 x Cheese Steak</div>
-            <div className='content'>2 x Whooper</div>
-            <div className='price'>$23.44</div>
-          </div>
-          <div className='actions'>
-            <input className='button-primary' type='button' value='Reorder' />
-            <input className='button-danger' type='button' value='Clear' />
+
+        <div className='input-flex'>
+          <div className='action-buttons'>
+            <input
+              className='button-primary'
+              type='button'
+              value='Update Profile'
+              onClick={profileHandler}
+            />
+            <input
+              className='button-danger'
+              type='button'
+              value='Delete Profile'
+            />
           </div>
         </div>
       </div>
+      <div className='flex__container--activity'></div>
     </section>
   );
 };
