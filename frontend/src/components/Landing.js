@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Meal from '../components/Meal';
 import Category from '../components/Category';
@@ -24,7 +24,7 @@ const Landing = () => {
       <section className='home' id='home'>
         <div className='home__container bd-container bd-grid'>
           <div className='home__data'>
-            <h1 className='home__title'>Hot n Crusty</h1>
+            <h1 className='home__title'>Hot N Crusty</h1>
             <h2 className='home__subtitle'>
               The best meals in town <br></br> prepared just for you.
             </h2>
