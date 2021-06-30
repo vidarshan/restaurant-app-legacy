@@ -25,24 +25,18 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, { cors: { origin: '*' } });
 
-let interval;
-
 app.use(express.json());
 
 function watching() {
   User.watch().on('change', (change) => {
-    console.log(
-      '---------------------------Changes occurred on database---------------------------'
-    );
+    console.log('Changes Detected'.blue);
     io.to(change._id).emit('changes', change.fullDocument);
-    console.log(change);
   });
 }
 
 io.on('connection', (socket) => {
-  console.log('user connected');
+  console.log('Client Connected'.magenta);
   socket.on('joinRoom', (data) => {
-    console.log('user joined room');
     socket.join(data.myID);
   });
 });
@@ -65,16 +59,10 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 5000;
 const MODE = process.env.NODE_ENV;
 
-// app.listen(
-//   PORT,
-//   console.log(`Server running in ${MODE} on port ${PORT}`.yellow.underline.bold)
-// );
-
-// httpServer.listen(5000);
-
-app.set('port', process.env.PORT || 5000);
+app.set('port', PORT || 5000);
 
 httpServer.listen(app.get('port'), function () {
-  var port = httpServer.address().port;
-  console.log('App now running on port', port);
+  console.log(
+    `Server running on port ${PORT} in ${MODE} mode`.yellow.underline
+  );
 });
