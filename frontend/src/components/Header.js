@@ -20,9 +20,8 @@ const Header = () => {
   // };
 
   const activateTheme = () => {
-    console.log('theme');
-
     const themeButton = document.getElementById('theme-button');
+
     const darkTheme = 'dark-theme';
     const iconTheme = 'bx-sun';
 
@@ -33,12 +32,13 @@ const Header = () => {
       document.body.classList.contains(darkTheme) ? 'dark' : 'light';
 
     const getCurrentIcon = () =>
-      document.body.classList.contains(iconTheme) ? 'bx-moon' : 'bx-sun';
+      document.body.classList.contains(iconTheme) ? 'moon' : 'sun';
 
     if (selectedTheme) {
       document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](
         darkTheme
       );
+
       themeButton.classList[selectedIcon === 'bx-moon' ? 'add' : 'remove'](
         iconTheme
       );
@@ -60,8 +60,6 @@ const Header = () => {
         nav.classList.toggle('show-menu');
       });
     }
-
-    console.log(orderCount);
   }, [orderCount]);
 
   return (
@@ -100,7 +98,7 @@ const Header = () => {
                 className='nav__item'
                 id='theme-button'
                 onClick={() => activateTheme()}>
-                Dark
+                <box-icon name='moon'></box-icon>
               </li>
 
               <li className='nav__item'>

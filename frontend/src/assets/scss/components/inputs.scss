@@ -1,0 +1,53 @@
+@import '../variables.scss';
+
+.text-input {
+  font-size: var(--normal-font-size);
+  font-family: var(--body-font);
+  border-radius: var(--card-border-radius);
+  border: 2px solid var(--text-color);
+  color: var(--text-color);
+  background-color: var(--container-color);
+  height: 2.5rem;
+  width: 100%;
+  margin: 5px;
+  padding: 0.5rem;
+
+  &:active {
+    border: none;
+  }
+  &:focus {
+    border: none;
+  }
+}
+.email-input {
+  font-size: var(--normal-font-size);
+  font-family: var(--body-font);
+  border-radius: var(--card-border-radius);
+  border: 2px solid var(--text-color);
+  color: var(--text-color);
+  background-color: var(--container-color);
+  height: 2.5rem;
+  width: 100%;
+  margin: 5px;
+  padding: 0.5rem;
+
+  &:focus {
+    border: none;
+  }
+}
+.password-input {
+  font-size: var(--normal-font-size);
+  font-family: var(--body-font);
+  border-radius: var(--card-border-radius);
+  border: 2px solid var(--text-color);
+  color: var(--text-color);
+  background-color: var(--container-color);
+  height: 2.5rem;
+  width: 100%;
+  margin: 5px;
+  padding: 0.5rem;
+
+  &:focus {
+    border: none;
+  }
+}

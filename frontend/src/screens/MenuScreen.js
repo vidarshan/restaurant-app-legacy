@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { listMeals } from '../actions/mealActions';
 import { listCategories } from '../actions/categoryActions';
@@ -12,9 +12,7 @@ import { map, filter, orderBy } from '../lodash';
 
 const MenuScreen = ({ match }) => {
   const dispatch = useDispatch();
-  const sample = useRef([]);
   const [filterMeals, setFilterMeals] = useState('All');
-  const [showFilters, setShowfilters] = useState(false);
   const [searchString, setSearchString] = useState('');
   const mealList = useSelector((state) => state.mealList);
   const categoryList = useSelector((state) => state.categories);
@@ -23,46 +21,8 @@ const MenuScreen = ({ match }) => {
 
   const { categories } = categoryList;
 
-  const sortMeals = (criteria, filterName) => {
-    if (
-      filterName.toLowerCase() === 'price' &&
-      criteria === 'Lowest to Highest'
-    ) {
-      dispatch(listMeals('price', 'asc'));
-    } else if (
-      filterName.toLowerCase() === 'price' &&
-      criteria === 'Highest to Lowest'
-    ) {
-      dispatch(listMeals('price', 'desc'));
-    } else if (
-      filterName.toLowerCase() === 'popularity' &&
-      criteria === 'Most Ordered'
-    ) {
-      dispatch(listMeals('orders', 'desc'));
-    } else if (
-      filterName.toLowerCase() === 'popularity' &&
-      criteria === 'Latest'
-    ) {
-      dispatch(listMeals('timestamps', 'desc'));
-    } else if (
-      filterName.toLowerCase() === 'vegetarian' &&
-      criteria === 'Vegetarian'
-    ) {
-      dispatch(listMeals('vegan', true));
-    } else if (
-      filterName.toLowerCase() === 'vegetarian' &&
-      criteria === 'Non-vegetarian'
-    ) {
-      dispatch(listMeals('vegan', false));
-    }
-
-    console.log(filterName.toLowerCase(), criteria);
-  };
-
   const displayMeals = (sortingOrder, sortingType) => {
     let results = [];
-    console.log('order : ' + sortingOrder);
-    console.log('type : ' + sortingType);
 
     if (searchString.length > 0) {
       // setFilterMeals('All');: convert to a useref()
@@ -91,22 +51,13 @@ const MenuScreen = ({ match }) => {
       }
     }
 
-    console.log('ret ' + results);
     return results;
   };
-
-  const searchMeals = (keyword) => {};
-
-  const filters = [
-    { name: 'Price', choices: ['Lowest to Highest', 'Highest to Lowest'] },
-    { name: 'Vegetarian', choices: ['Vegetarian', 'Non-vegetarian'] },
-    { name: 'Popularity', choices: ['Most Ordered', 'Latest'] },
-  ];
 
   useEffect(() => {
     dispatch(listMeals());
     dispatch(listCategories());
-  }, []);
+  }, [dispatch]);
 
   return (
     <section className='section bd-container' id='menu'>
@@ -130,9 +81,10 @@ const MenuScreen = ({ match }) => {
 
           <div className='category-filter-row'>
             <div className='menu-filter'>
-              {map(categories, (category) => {
+              {map(categories, (category, key) => {
                 return (
                   <div
+                    key={key}
                     className='menu-filter-item'
                     onClick={() => setFilterMeals(category.name)}>
                     {category.name}
@@ -143,8 +95,8 @@ const MenuScreen = ({ match }) => {
           </div>
 
           <div className='bd-grid'>
-            {map(displayMeals(), (meal) => {
-              return <Meal meal={meal}></Meal>;
+            {map(displayMeals(), (meal, key) => {
+              return <Meal key={key} meal={meal}></Meal>;
             })}
           </div>
         </>

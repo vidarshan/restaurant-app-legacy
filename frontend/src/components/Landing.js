@@ -10,9 +10,7 @@ import { map } from '../lodash';
 const Landing = () => {
   const dispatch = useDispatch();
 
-  const { meals, loading, error } = useSelector(
-    (state) => state.mealRecommendation
-  );
+  const { meals } = useSelector((state) => state.mealRecommendation);
 
   const { categories } = useSelector((state) => state.categories);
 
@@ -23,11 +21,11 @@ const Landing = () => {
 
   return (
     <main className='l-main'>
-      <section class='home' id='home'>
-        <div class='home__container bd-container bd-grid'>
-          <div class='home__data'>
-            <h1 class='home__title'>Hot n Crusty</h1>
-            <h2 class='home__subtitle'>
+      <section className='home' id='home'>
+        <div className='home__container bd-container bd-grid'>
+          <div className='home__data'>
+            <h1 className='home__title'>Hot n Crusty</h1>
+            <h2 className='home__subtitle'>
               The best meals in town <br></br> prepared just for you.
             </h2>
 
@@ -38,40 +36,40 @@ const Landing = () => {
               </div>
             </Link>
           </div>
-          <img src='/images/home.png' class='home__img' alt='' />
+          <img src='/images/home.png' className='home__img' alt='' />
         </div>
       </section>
 
       {/* category section */}
-      <section class='menu section bd-container' id='menu'>
-        <span class='section-subtitle'>Categories</span>
-        <h2 class='section-title'>Variations you may Like</h2>
-        <div class='category__container bd-grid'>
+      <section className='menu section bd-container' id='menu'>
+        <span className='section-subtitle'>Categories</span>
+        <h2 className='section-title'>Variations you may Like</h2>
+        <div className='category__container bd-grid'>
           {map(categories, (category) => {
-            return <Category category={category}></Category>;
+            return <Category key={category._id} category={category}></Category>;
           })}
         </div>
       </section>
 
       {/*menu section*/}
-      <section class='menu section bd-container' id='menu'>
-        <span class='section-subtitle'>Special</span>
-        <h2 class='section-title'>Most Ordered Meals</h2>
-        <div class='menu__container bd-grid'>
+      <section className='menu section bd-container' id='menu'>
+        <span className='section-subtitle'>Special</span>
+        <h2 className='section-title'>Most Ordered Meals</h2>
+        <div className='menu__container bd-grid'>
           {map(meals, (meal) => {
-            return <Meal meal={meal}></Meal>;
+            return <Meal key={meal._id} meal={meal}></Meal>;
           })}
         </div>
       </section>
 
       {/**Services section */}
-      <section class='services section bd-container' id='services'>
-        <span class='section-subtitle'>Offering</span>
-        <h2 class='section-title'>Our amazing services</h2>
+      <section className='services section bd-container' id='services'>
+        <span className='section-subtitle'>Offering</span>
+        <h2 className='section-title'>Our amazing services</h2>
 
-        <div class='services__container  bd-grid'>
-          <div class='services__content'>
-            <svg class='services__img' xmlns='http://www.w3.org/2000/svg'>
+        <div className='services__container  bd-grid'>
+          <div className='services__content'>
+            <svg className='services__img' xmlns='http://www.w3.org/2000/svg'>
               <path
                 d='M45.3205 21.5702L44.6357 19.3163C43.7659 16.756 40.9852 15.3857 38.4249 
                 16.2556C36.9847 16.7449 35.8536 17.876 35.3643 19.3163L34.6795 21.5702C34.1032 
@@ -152,16 +150,16 @@ const Landing = () => {
                 46.6405 18.816 45.964 18.3989 45.5466Z'
               />
             </svg>
-            <h3 class='services__title'>Excellent food</h3>
-            <p class='services__description'>
+            <h3 className='services__title'>Excellent food</h3>
+            <p className='services__description'>
               We offer our clients excellent quality services for many years,
               with the best and delicious food in the city.
             </p>
           </div>
 
-          <div class='services__content'>
-            <svg class='services__img' xmlns='http://www.w3.org/2000/svg'>
-              <g clip-path='url(#clip0)'>
+          <div className='services__content'>
+            <svg className='services__img' xmlns='http://www.w3.org/2000/svg'>
+              <g clipPath='url(#clip0)'>
                 <path
                   d='M55.82 22.0395C55.5475 21.5164 54.9027 21.3132 54.3795 21.5855L54.3794 
                 21.5857L49.4885 24.1283H49.481L32.1524 33.1455L38.0258 14.5397C38.0258 14.5323 
@@ -346,16 +344,16 @@ const Landing = () => {
                 </clipPath>
               </defs>
             </svg>
-            <h3 class='services__title'>Fast food</h3>
-            <p class='services__description'>
+            <h3 className='services__title'>Fast food</h3>
+            <p className='services__description'>
               We offer our clients excellent quality services for many years,
               with the best and delicious food in the city.
             </p>
           </div>
 
-          <div class='services__content'>
-            <svg class='services__img' xmlns='http://www.w3.org/2000/svg'>
-              <g clip-path='url(#clip0)'>
+          <div className='services__content'>
+            <svg className='services__img' xmlns='http://www.w3.org/2000/svg'>
+              <g clipPath='url(#clip0)'>
                 <path
                   d='M19.1978 49.6016C17.4308 49.6016 15.9981 51.0342 15.9981 52.8012C15.9981 54.5682 17.4308 
                 56.0008 19.1978 56.0008C20.9648 56.0008 22.3974 54.5682 22.3974 52.8012C22.3974 51.0342 20.9648 
@@ -411,8 +409,8 @@ const Landing = () => {
                 </clipPath>
               </defs>
             </svg>
-            <h3 class='services__title'>Delivery</h3>
-            <p class='services__description'>
+            <h3 className='services__title'>Delivery</h3>
+            <p className='services__description'>
               We offer our clients excellent quality services for many years,
               with the best and delicious food in the city.
             </p>
@@ -421,39 +419,41 @@ const Landing = () => {
       </section>
 
       {/* About Section */}
-      <section class='about section bd-container' id='about'>
-        <div class='about__container bd-grid'>
-          <div class='about__data'>
-            <span class='section-subtitle about__initial'>About Us</span>
-            <h2 class='section-title'>
+      <section className='about section bd-container' id='about'>
+        <div className='about__container bd-grid'>
+          <div className='about__data'>
+            <span className='section-subtitle about__initial'>About Us</span>
+            <h2 className='section-title'>
               We cook the best <br></br> tasty food
             </h2>
-            <p class='about__description'>
+            <p className='about__description'>
               We cook the best food in the entire city, with excellent customer
               service, the best meals and at the best price, visit us.
             </p>
-            <a href='#' class='button'>
+            <a href='#!' className='button'>
               Explore history
             </a>
           </div>
-          <img src='/images/about.jpg' alt='' class='about__img' />
+          <img src='/images/about.jpg' alt='' className='about__img' />
         </div>
       </section>
 
       {/* contact us */}
-      <section class='contact section bd-container' id='contact'>
-        <div class='contact__container bd-grid'>
-          <div class='contact__data'>
-            <span class='section-subtitle contact__initial'>Let's talk</span>
-            <h2 class='section-title contact__initial'>Contact us</h2>
-            <p class='contact__description'>
+      <section className='contact section bd-container' id='contact'>
+        <div className='contact__container bd-grid'>
+          <div className='contact__data'>
+            <span className='section-subtitle contact__initial'>
+              Let's talk
+            </span>
+            <h2 className='section-title contact__initial'>Contact us</h2>
+            <p className='contact__description'>
               If you want to reserve a table in our restaurant, contact us and
               we will attend you quickly, with our 24/7 chat service.
             </p>
           </div>
 
-          <div class='contact__button'>
-            <a href='#' class='button'>
+          <div className='contact__button'>
+            <a href='#!' className='button'>
               Contact us now
             </a>
           </div>

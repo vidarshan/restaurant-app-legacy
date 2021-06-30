@@ -40,7 +40,6 @@ export const orderCountReducer = (state = { orderCount: '' }, action) => {
     case ORDER_COUNT_ITEMS:
       var numberofItems = JSON.parse(localStorage.getItem('orderItems'));
 
-      console.log(numberofItems.length);
       return {
         orderCount: numberofItems,
       };

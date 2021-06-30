@@ -4,6 +4,11 @@ import { getUserDetails, updateUserProfile } from '../actions/userActions';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
+import '../assets/scss/profile.scss';
+import '../assets/scss/components/inputs.scss';
+import '../assets/scss/components/buttons.scss';
+import '../assets/scss/components/headings.scss';
+
 const ProfileScreen = ({ history }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -26,7 +31,6 @@ const ProfileScreen = ({ history }) => {
     if (!userInfo) {
       history.push('/login');
     } else {
-      console.log(user.name);
       if (!user.name) {
         dispatch(getUserDetails('profile'));
       } else {
@@ -45,23 +49,27 @@ const ProfileScreen = ({ history }) => {
   };
 
   return (
-    <section className='section bd-container' id='menu'>
-      <div className='flex-container-profile'>
-        <div class='flex-item-left'>
-          {error && <Message message={error}></Message>}
-          {loading && <Loader size='small'></Loader>}
-          {success && (
-            <Message
-              message='Profile Updated'
-              variant='success'
-              size='small'></Message>
-          )}
+    <section className='section bd-container-profile' id='menu'>
+      <div className='flex__container--profile'>
+        <div className='heading'>
+          <p className='heading-2'>Your Profile</p>
+        </div>
+
+        {error && <Message message={error}></Message>}
+        {loading && <Loader size='small'></Loader>}
+        {success && (
+          <Message
+            message='Profile Updated'
+            variant='success'
+            size='small'></Message>
+        )}
+
+        <div className='input-flex'>
           <input
             type='text'
             name='name'
-            id=''
             value={name}
-            className='name-signup-input'
+            className='text-input'
             onChange={(e) => setName(e.target.value)}
           />
 
@@ -70,14 +78,15 @@ const ProfileScreen = ({ history }) => {
             name='email'
             id=''
             value={email}
-            className='email-signup-input'
+            className='email-input'
             onChange={(e) => setEmail(e.target.value)}
           />
-
+        </div>
+        <div className='input-flex'>
           <input
             type='password'
             name='password'
-            className='password-signup-input'
+            className='password-input'
             id=''
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -85,19 +94,29 @@ const ProfileScreen = ({ history }) => {
           <input
             type='password'
             name='confirmPassword'
-            className='password-signup-input'
+            className='password-input'
             id=''
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
+        </div>
 
-          <input
-            className='login-button'
-            type='button'
-            value='Login'
-            onClick={profileHandler}
-          />
+        <div className='input-flex'>
+          <div className='action-buttons'>
+            <input
+              className='button-primary'
+              type='button'
+              value='Update Profile'
+              onClick={profileHandler}
+            />
+            <input
+              className='button-danger'
+              type='button'
+              value='Delete Profile'
+            />
+          </div>
         </div>
       </div>
+      <div className='flex__container--activity'></div>
     </section>
   );
 };

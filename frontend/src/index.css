@@ -713,59 +713,6 @@ img {
 
 /*alerts*/
 
-.custom-alert-danger-full {
-  background-color: var(--danger-color);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  color: var(--container-color);
-  margin: 0.3rem;
-  text-align: center;
-}
-
-.custom-alert-info-full {
-  background-color: var(--info-color);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  color: var(--container-color);
-  margin: 0.3rem;
-  text-align: center;
-}
-
-.custom-alert-success-full {
-  background-color: var(--success-color);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  color: var(--container-color);
-  margin: 0.3rem;
-  text-align: center;
-}
-
-.custom-alert-danger-small {
-  background-color: var(--danger-color);
-  padding: 0.5rem;
-  border-radius: 0.2rem;
-  color: var(--container-color);
-  margin: 0.3rem;
-  text-align: center;
-  opacity: 0.5;
-}
-
-.custom-alert-info-small {
-  background-color: var(--info-color);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  color: var(--container-color);
-  margin: 0.3rem;
-}
-
-.custom-alert-success-small {
-  background-color: var(--success-color);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  color: var(--container-color);
-  margin: 0.3rem;
-}
-
 /*description styling*/
 
 /*quantity selector styling*/
@@ -844,51 +791,6 @@ textarea {
   font-size: 16px;
   font-family: inherit;
   resize: none;
-}
-
-.flex-container-profile {
-  background-color: #fff;
-  border-radius: 0.2rem;
-  display: flex;
-  flex-direction: column;
-  max-width: 400px;
-  padding: 10px;
-  position: relative;
-
-  justify-content: center;
-}
-
-.name-signup-input {
-  font-size: var(--normal-font-size);
-  font-family: var(--body-font);
-  border-radius: 0.2rem;
-  border: none;
-  height: 40px;
-  margin: 0.2rem;
-  border: 2px solid black;
-  padding: 0.5rem;
-}
-
-.email-signup-input {
-  font-size: var(--normal-font-size);
-  font-family: var(--body-font);
-  border-radius: 0.2rem;
-  border: 2px solid black;
-  border: none;
-  height: 40px;
-  margin: 0.2rem;
-  padding: 0.5rem;
-}
-
-.password-signup-input {
-  font-size: var(--normal-font-size);
-  font-family: var(--body-font);
-  border: 2px solid black;
-  border-radius: 0.2rem;
-  border: none;
-  height: 40px;
-  margin: 0.2rem;
-  padding: 0.5rem;
 }
 
 /*quantity selector*/

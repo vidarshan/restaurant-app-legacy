@@ -129,20 +129,20 @@ const MealScreen = ({ match }) => {
         ) : error ? (
           <Message message={error} variant='danger'></Message>
         ) : (
-          <div class='flex-container'>
-            <div class='flex-item-left'>
+          <div className='flex-container'>
+            <div className='flex-item-left'>
               <img className='meal-image' src={meal.image} alt='' />
               <div className='name'>{meal.name}</div>
               <div className='description'>{meal.description}</div>
             </div>
-            <div class='flex-item-right'>
+            <div className='flex-item-right'>
               <div className='info-container'></div>
               <div className='action-labels'>Select Size</div>
               <div className='size-container'>
                 {meal.sizes !== undefined ? (
-                  map(meal.sizes, (e) => {
+                  map(meal.sizes, (e, key) => {
                     return (
-                      <div className='size-info-container'>
+                      <div className='size-info-container' key={key}>
                         <div className='size-radio-btn'>
                           <input
                             type='radio'
@@ -166,16 +166,16 @@ const MealScreen = ({ match }) => {
                 )}
               </div>
               <div className='action-labels'>Select Add-ons</div>
-              <div class='addon-container'>
+              <div className='addon-container'>
                 {meal.addons !== undefined ? (
-                  map(meal.addons, (e) => {
+                  map(meal.addons, (e, i) => {
                     return (
-                      <div className='addon-info-container'>
+                      <div className='addon-info-container' key={i}>
                         <div className='addon-radio-btn'>
                           <input
                             type='checkbox'
                             value={e.price}
-                            value={e.addOnPrice}
+                            // value={e.addOnPrice}
                             disabled={enableOptions}
                             onClick={() =>
                               handleAddOnPriceToTotalPrice(

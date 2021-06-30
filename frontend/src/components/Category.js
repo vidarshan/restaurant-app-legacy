@@ -6,7 +6,7 @@ const Category = ({ category }) => {
     <div className='category-card'>
       <div className='category-name'>{category.name}</div>
       <div className='category-image'>
-        <img src={category.image} alt='' srcset='' />
+        <img src={category.image} alt='' />
       </div>
     </div>
   );
