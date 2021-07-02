@@ -102,18 +102,21 @@ const Header = () => {
               </li>
 
               <li className='nav__item'>
-                <Link to='/order' className='nav__link badge-icon'>
-                  <div className='shopping-bag-container'>
-                    <box-icon name='shopping-bag'></box-icon>
-                  </div>
+                <Link to='/order' className='nav__link'>
+                  <box-icon name='shopping-bag'></box-icon>
                 </Link>
-                <Badge count={orderCount} variant='red' size='sm'></Badge>
+
+                <Badge
+                  className='badge-position'
+                  count={orderCount}
+                  variant='red'
+                  size='sm'></Badge>
               </li>
 
               {userInfo ? (
                 <li className='nav__item'>
                   <Link to='/profile' className='nav__link'>
-                    <box-icon name='user'></box-icon>
+                    <box-icon name='user' type='solid'></box-icon>
                   </Link>
                 </li>
               ) : (

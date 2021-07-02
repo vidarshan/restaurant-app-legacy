@@ -194,11 +194,19 @@ img {
 
 .nav__item {
   margin-bottom: var(--mb-2);
+  fill: var(--text-color);
+}
+
+.nav__item:nth-child(4) {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .nav__link,
 .nav__logo,
 .nav__toggle {
+  fill: var(--text-color);
   color: var(--text-color);
   font-weight: var(--font-medium);
 }
@@ -207,8 +215,13 @@ img {
   color: var(--first-color);
 }
 
-.nav__link {
+.nav__link,
+.nav__item {
   transition: 0.3s;
+}
+
+.nav__item:hover {
+  fill: var(--first-color);
 }
 
 .nav__link:hover {
@@ -580,6 +593,7 @@ img {
   .nav__item {
     margin-left: var(--mb-5);
     margin-bottom: 0;
+    fill: var(--text-color);
   }
 
   .nav__toggle {
