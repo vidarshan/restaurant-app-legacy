@@ -1,0 +1,94 @@
+@import './variables.scss';
+
+.order {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+  width: auto;
+  &__card {
+    background-color: var(--container-color);
+    border-radius: var(--card-border-radius);
+    padding: 1rem;
+    display: flex;
+
+    &--addons {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      .addOn {
+        padding: 0.2rem;
+        margin-top: 0.2rem;
+        margin-bottom: 0.2rem;
+        margin-right: 0.2rem;
+        border-radius: var(--card-border-radius);
+        background-color: var(--body-color);
+      }
+    }
+
+    &--info {
+      margin-left: 0.6rem;
+      width: 100%;
+
+      .name-qty-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .price-remove-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    &--title {
+      font-size: 1.5rem;
+    }
+
+    &--remove {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      height: 2rem;
+      width: 2rem;
+      background-color: var(--danger-color);
+      fill: var(--container-color);
+      cursor: pointer;
+    }
+
+    &--image {
+      height: 6rem;
+      width: 40%;
+    }
+  }
+}
+
+.summary {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: var(--container-color);
+  border-radius: var(--card-border-radius);
+
+  &--info {
+    margin: 1rem;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid var(--grey-color);
+    justify-content: space-between;
+  }
+
+  &--checkout {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    align-items: center;
+    margin: 1rem auto;
+    width: calc(100% / 4);
+  }
+}
