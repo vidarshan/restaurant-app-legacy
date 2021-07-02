@@ -3,13 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserDetails, updateUserProfile } from '../actions/userActions';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import socketIOClient from 'socket.io-client';
 
 import '../assets/scss/profile.scss';
 import '../assets/scss/components/inputs.scss';
 import '../assets/scss/components/buttons.scss';
 import '../assets/scss/components/headings.scss';
+const ENDPOINT = 'http://127.0.0.1:5000';
 
 const ProfileScreen = ({ history }) => {
+  const [response, setResponse] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -38,6 +41,14 @@ const ProfileScreen = ({ history }) => {
         setEmail(user.email);
       }
     }
+
+    const socket = socketIOClient(ENDPOINT);
+    console.log(socket);
+    console.log(ENDPOINT);
+    socket.on('FromAPI', (data) => {
+      setResponse(data);
+      console.log(data);
+    });
   }, [history, userInfo, dispatch, user]);
 
   const profileHandler = () => {
