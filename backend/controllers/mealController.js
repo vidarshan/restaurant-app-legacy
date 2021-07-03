@@ -59,4 +59,113 @@ const getMealsByOrders = asyncHandler(async (req, res) => {
   res.json(sortedbyMostOrders);
 });
 
-export { getMeals, getMealsById, getMealsByCategories, getMealsByOrders };
+/**
+ * @DESCRIPTION : Add a new meal
+ * @ROUTE       : POST /api/meals
+ * @ACCESS      : Private-Admin
+ */
+const addMeal = asyncHandler(async (req, res) => {
+  let {
+    name,
+    price,
+    foodType,
+    image,
+    vegan,
+    orders,
+    rating,
+    reviews,
+    description,
+    variations,
+    sizes,
+    addons,
+    ordersThisWeek,
+  } = req.body;
+
+  const meal = new Meal({
+    name,
+    price,
+    foodType,
+    image,
+    vegan,
+    orders,
+    rating,
+    reviews,
+    description,
+    variations,
+    sizes,
+    addons,
+    ordersThisWeek,
+  });
+
+  const createdMeal = await meal.save();
+  res.status(201).json(createdMeal);
+});
+
+/**
+ * @desc         Update a product
+ * @route        PUT /api/meals
+ *@access        Private-admin
+ */
+const updateMeal = asyncHandler(async (req, res) => {
+  let {
+    name,
+    price,
+    foodType,
+    image,
+    vegan,
+    orders,
+    rating,
+    reviews,
+    description,
+    variations,
+    sizes,
+    addons,
+    ordersThisWeek,
+  } = req.body;
+
+  const meal = await Meal.findById(req.params.id);
+
+  if (meal) {
+    (meal.name = name),
+      (meal.price = price),
+      (meal.foodType = foodType),
+      (meal.image = image),
+      (meal.vegan = vegan),
+      (meal.orders = orders),
+      (meal.rating = rating),
+      (meal.reviews = reviews),
+      (meal.description = description),
+      (meal.variations = variations),
+      (meal.sizes = sizes),
+      (meal.addons = addons),
+      (meal.ordersThisWeek = ordersThisWeek);
+
+    const updatedMeal = await meal.save();
+    res.status(201).json(updatedMeal);
+  } else {
+    res.status(404);
+    throw new Error('Meal not found');
+  }
+});
+
+const deleteMeal = asyncHandler(async (req, res) => {
+  const meal = await Meal.findById(req.params.id);
+
+  if (meal) {
+    await meal.remove();
+    res.json({ message: 'Meal Removed' });
+  } else {
+    res.status(404);
+    throw new Error('Meal not found');
+  }
+});
+
+export {
+  getMeals,
+  getMealsById,
+  getMealsByCategories,
+  getMealsByOrders,
+  addMeal,
+  updateMeal,
+  deleteMeal,
+};
