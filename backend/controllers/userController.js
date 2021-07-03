@@ -113,4 +113,51 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser, registerUser, getUserProfile, updateUserProfile };
+/**
+ * @DESCRIPTION Get all users
+ * @ROUTE GET /api/users
+ * @ACCESS Private-Admin
+ */
+const getAllUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({});
+  res.json(users);
+});
+
+/**
+ * @DESCRIPTION Make a user an admin
+ * @ROUTE PUT /api/users/:id
+ * @ACCESS Private
+ */
+const makeAdmin = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    (user.name = user.name), (user.email = user.email), (user.isAdmin = true);
+
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+
+    const updatedUser = await user.save();
+
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+      token: generateToken(updatedUser._id),
+    });
+  } else {
+    res.status(404);
+    throw new Error('User not found.');
+  }
+});
+
+export {
+  authUser,
+  registerUser,
+  getUserProfile,
+  updateUserProfile,
+  makeAdmin,
+  getAllUsers,
+};
