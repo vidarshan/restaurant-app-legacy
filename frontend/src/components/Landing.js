@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Meal from '../components/Meal';
 import Category from '../components/Category';
@@ -9,6 +10,8 @@ import { map } from '../lodash';
 
 const Landing = () => {
   const dispatch = useDispatch();
+
+  const history = useHistory();
 
   const { meals } = useSelector((state) => state.mealRecommendation);
 
@@ -24,7 +27,7 @@ const Landing = () => {
       <section className='home' id='home'>
         <div className='home__container bd-container bd-grid'>
           <div className='home__data'>
-            <h1 className='home__title'>Hot N Crusty</h1>
+            <h1 className='home__title'>Chillie</h1>
             <h2 className='home__subtitle'>
               The best meals in town <br></br> prepared just for you.
             </h2>
@@ -46,7 +49,11 @@ const Landing = () => {
         <h2 className='section-title'>Variations you may Like</h2>
         <div className='category__container bd-grid'>
           {map(categories, (category) => {
-            return <Category key={category._id} category={category}></Category>;
+            return (
+              <div onClick={() => history.push(`/menu/${category.name}`)}>
+                <Category key={category._id} category={category}></Category>
+              </div>
+            );
           })}
         </div>
       </section>

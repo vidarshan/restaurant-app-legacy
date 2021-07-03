@@ -11,13 +11,17 @@ import {
   MEAL_FAIL,
 } from '../constants/mealConstants';
 
-export const listMeals = () => async (dispatch) => {
+export const listMeals = (category) => async (dispatch) => {
   try {
     dispatch({ type: MEAL_LIST_REQUEST });
 
-    let { data } = await axios.get('/api/meals');
-
-    dispatch({ type: MEAL_LIST_SUCCESS, payload: data });
+    if (category) {
+      let { data } = await axios.get(`/api/meals/category/${category}`);
+      dispatch({ type: MEAL_LIST_SUCCESS, payload: data });
+    } else {
+      let { data } = await axios.get(`/api/meals`);
+      dispatch({ type: MEAL_LIST_SUCCESS, payload: data });
+    }
   } catch (error) {
     dispatch({
       type: MEAL_LIST_FAIL,

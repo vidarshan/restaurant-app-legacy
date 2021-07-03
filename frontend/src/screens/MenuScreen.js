@@ -5,12 +5,13 @@ import { listCategories } from '../actions/categoryActions';
 
 import '../assets/scss/menu.scss';
 import Meal from '../components/Meal';
+import Category from '../components/Category';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 
 import { map, filter, orderBy } from '../lodash';
 
-const MenuScreen = ({ match }) => {
+const MenuScreen = ({ match, history }) => {
   const dispatch = useDispatch();
   const [filterMeals, setFilterMeals] = useState('All');
   const [searchString, setSearchString] = useState('');
@@ -20,6 +21,21 @@ const MenuScreen = ({ match }) => {
   let { meals, loading, error } = mealList;
 
   const { categories } = categoryList;
+
+  const checkParams = () => {
+    var str = history.location.pathname,
+      delimiter = '/',
+      start = 2,
+      tokens = str.split(delimiter).slice(start),
+      result = tokens.join(delimiter);
+
+    return result;
+  };
+
+  const redirectToCategories = (name) => {
+    history.push(`/menu/${name}`);
+    dispatch(listMeals(name));
+  };
 
   const displayMeals = (sortingOrder, sortingType) => {
     let results = [];
@@ -55,7 +71,12 @@ const MenuScreen = ({ match }) => {
   };
 
   useEffect(() => {
-    dispatch(listMeals());
+    if (checkParams().length > 1) {
+      dispatch(listMeals(checkParams()));
+    } else {
+      dispatch(listMeals());
+    }
+
     dispatch(listCategories());
   }, [dispatch]);
 
@@ -78,20 +99,14 @@ const MenuScreen = ({ match }) => {
               className='search-meals-input'
             />
           </div>
-
-          <div className='category-filter-row'>
-            <div className='menu-filter'>
-              {map(categories, (category, key) => {
-                return (
-                  <div
-                    key={key}
-                    className='menu-filter-item'
-                    onClick={() => setFilterMeals(category.name)}>
-                    {category.name}
-                  </div>
-                );
-              })}
-            </div>
+          <div className='category__container bd-grid'>
+            {map(categories, (category, key) => {
+              return (
+                <div onClick={() => redirectToCategories(category.name)}>
+                  <Category key={key} category={category}></Category>
+                </div>
+              );
+            })}
           </div>
 
           <div className='bd-grid'>
