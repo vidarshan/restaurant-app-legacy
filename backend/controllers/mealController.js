@@ -3,20 +3,20 @@ import Meal from '../models/MealsModel.js';
 import orderBy from 'lodash.orderby';
 import take from 'lodash.take';
 
-/*
- * @DESCRIPTION : Get all meals
- * @ROUTE       : GET /api/meals/
- * @ACCESS      :Public Access
+/**
+ * @Description : Get all meals
+ * @Route       : GET /api/meals
+ * @Access      : Public Access
  */
 const getMeals = asyncHandler(async (req, res) => {
   const meals = await Meal.find({});
   res.json(meals);
 });
 
-/*
- * @DESCRIPTION : Get a meal by id
- * @ROUTE       :GET /api/meals/:id
- * @ACCESS      :Public Access
+/**
+ * @Description : Get a Meal by ID
+ * @Route       : GET /api/meals/:id
+ * @Access      : Public Access
  */
 const getMealsById = asyncHandler(async (req, res) => {
   const meal = await Meal.findById(req.params.id);
@@ -30,9 +30,9 @@ const getMealsById = asyncHandler(async (req, res) => {
 });
 
 /**
- * @DESCRIPTION : Get meals by category
- * @ROUTE       : GET /api/meals/:category
- * @ACCESS      : Public Access
+ * @Description : Get meals under a category
+ * @Route       : GET /api/meals/category/:name
+ * @Access      : Public Access
  */
 const getMealsByCategories = asyncHandler(async (req, res) => {
   const meals = await Meal.find({
@@ -48,9 +48,9 @@ const getMealsByCategories = asyncHandler(async (req, res) => {
 });
 
 /**
- * @DESCRIPTION : Get most ordered meals
- * @ROUTE       :GET /api/meals/most
- * @ACCESS      :Public Access
+ * @Description : Get most ordered meals
+ * @Route       : GET /api/meals/most
+ * @Access      : Public Access
  */
 const getMealsByOrders = asyncHandler(async (req, res) => {
   const meals = await Meal.find({});
@@ -60,9 +60,9 @@ const getMealsByOrders = asyncHandler(async (req, res) => {
 });
 
 /**
- * @DESCRIPTION : Add a new meal
- * @ROUTE       : POST /api/meals
- * @ACCESS      : Private-Admin
+ * @Description : Add a new meal
+ * @Route       : POST /api/meals
+ * @Access      : Private-Admin
  */
 const addMeal = asyncHandler(async (req, res) => {
   let {
@@ -102,9 +102,9 @@ const addMeal = asyncHandler(async (req, res) => {
 });
 
 /**
- * @desc         Update a product
- * @route        PUT /api/meals
- *@access        Private-admin
+ * @Description : Update a meal
+ * @Route       : PUT /api/meals/:id
+ * @Access      : Private-Admin
  */
 const updateMeal = asyncHandler(async (req, res) => {
   let {
@@ -148,6 +148,11 @@ const updateMeal = asyncHandler(async (req, res) => {
   }
 });
 
+/**
+ * @Description : Delete a meal
+ * @Route       : DELETE /api/meals/:id
+ * @Access      : Private-Admin
+ */
 const deleteMeal = asyncHandler(async (req, res) => {
   const meal = await Meal.findById(req.params.id);
 
