@@ -13,7 +13,7 @@ let meals = [
       { addOnName: '🥢Utensils', addOnPrice: 0.25 },
     ],
     price: 3.5,
-    foodType: 'Burger🍔',
+    foodType: 'Burger',
     image: '/images/burger1.png',
     vegan: false,
     orders: 8,
@@ -35,7 +35,7 @@ let meals = [
       { addOnName: '🥢Utensils', addOnPrice: 0.25 },
     ],
     price: 4.5,
-    foodType: 'Sandwitch🥪',
+    foodType: 'Sandwitch',
     image: '/images/sandwitch1.png',
     vegan: false,
     orders: 3,
@@ -57,7 +57,7 @@ let meals = [
       { addOnName: '🥢Utensils', addOnPrice: 0.25 },
     ],
     price: 5.0,
-    foodType: 'Burger🍔',
+    foodType: 'Burger',
     image: '/images/burger2.png',
     vegan: false,
     orders: 7,
@@ -79,7 +79,7 @@ let meals = [
       { addOnName: '🥢Utensils', addOnPrice: 0.25 },
     ],
     price: 4.0,
-    foodType: 'Burger🍔',
+    foodType: 'Burger',
     image: '/images/burger3.png',
     vegan: false,
     orders: 1,
@@ -101,7 +101,7 @@ let meals = [
       { addOnName: '🥢Utensils', addOnPrice: 0.25 },
     ],
     price: 10.0,
-    foodType: 'Burger🍔',
+    foodType: 'Burger',
     image: '/images/burger4.png',
     vegan: false,
     orders: 7,
@@ -123,7 +123,7 @@ let meals = [
       { addOnName: '🥢Utensils', addOnPrice: 0.25 },
     ],
     price: 12.0,
-    foodType: 'Burger🍔',
+    foodType: 'Burger',
     image: '/images/burger5.png',
     vegan: false,
     orders: 8,
@@ -145,7 +145,7 @@ let meals = [
       { addOnName: '🥢Utensils', addOnPrice: 0.25 },
     ],
     price: 15.0,
-    foodType: 'Burger🍔',
+    foodType: 'Burger',
     image: '/images/burger6.png',
     vegan: false,
     orders: 2,
@@ -167,7 +167,7 @@ let meals = [
       { addOnName: '🥢Utensils', addOnPrice: 0.25 },
     ],
     price: 17.0,
-    foodType: 'Burger🍔',
+    foodType: 'Burger',
     image: '/images/burger7.png',
     vegan: false,
     orders: 7,
@@ -189,7 +189,7 @@ let meals = [
       { addOnName: '🥢Utensils', addOnPrice: 0.25 },
     ],
     price: 8.5,
-    foodType: 'Burger🍔',
+    foodType: 'Burger',
     image: '/images/burger1.png',
     vegan: false,
     orders: 5,
@@ -211,7 +211,7 @@ let meals = [
       { addOnName: '🥢Utensils', addOnPrice: 0.25 },
     ],
     price: 9.5,
-    foodType: 'Burger🍔',
+    foodType: 'Burger',
     image: '/images/burger8.png',
     vegan: false,
     orders: 7,
@@ -233,7 +233,7 @@ let meals = [
       { addOnName: '🥢Utensils', addOnPrice: 0.25 },
     ],
     price: 3.5,
-    foodType: 'Burger🍔',
+    foodType: 'Burger',
     image: '/images/burger2.png',
     vegan: false,
     orders: 7,
@@ -255,7 +255,7 @@ let meals = [
       { addOnName: '🥢Utensils', addOnPrice: 0.25 },
     ],
     price: 10.5,
-    foodType: 'Burger🍔',
+    foodType: 'Burger',
     image: '/images/burger9.png',
     vegan: false,
     orders: 7,
@@ -277,7 +277,7 @@ let meals = [
       { addOnName: '🥢Utensils', addOnPrice: 0.25 },
     ],
     price: 9.5,
-    foodType: 'Burger🍔',
+    foodType: 'Burger',
     image: '/images/burger10.png',
     vegan: false,
     orders: 1,
@@ -299,7 +299,7 @@ let meals = [
       { addOnName: '🥢Utensils', addOnPrice: 0.25 },
     ],
     price: 7.0,
-    foodType: 'Burger🍔',
+    foodType: 'Burger',
     image: '/images/burger11.png',
     vegan: false,
     orders: 3,
@@ -321,7 +321,7 @@ let meals = [
       { addOnName: '🥢Utensils', addOnPrice: 0.25 },
     ],
     price: 7.0,
-    foodType: 'Burger🍔',
+    foodType: 'Burger',
     image: '/images/burger3.png',
     vegan: false,
     orders: 7,
@@ -342,7 +342,7 @@ let meals = [
       { addOnName: '🧀Cheese', addOnPrice: 1.5 },
       { addOnName: '🥢Utensils', addOnPrice: 0.25 },
     ],
-    foodType: 'Burger🍔',
+    foodType: 'Burger',
     price: 4.5,
     image: '/images/burger12.png',
     vegan: false,
@@ -365,7 +365,7 @@ let meals = [
       { addOnName: '🥢Utensils', addOnPrice: 0.25 },
     ],
     price: 3.25,
-    foodType: 'Burger🍔',
+    foodType: 'Burger',
     image: '/images/burger13.png',
     vegan: false,
     orders: 7,
@@ -387,7 +387,7 @@ let meals = [
       { addOnName: '🥢Utensils', addOnPrice: 0.25 },
     ],
     price: 5.25,
-    foodType: 'Burger🍔',
+    foodType: 'Burger',
     image: '/images/burger14.png',
     vegan: false,
     orders: 7,
@@ -409,7 +409,7 @@ let meals = [
       { addOnName: '🥢Utensils', addOnPrice: 0.25 },
     ],
     price: 6.75,
-    foodType: 'Burger🍔',
+    foodType: 'Burger',
     image: '/images/burger15.png',
     vegan: false,
     orders: 7,
@@ -431,7 +431,7 @@ let meals = [
       { addOnName: '🥢Utensils', addOnPrice: 0.25 },
     ],
     price: 3.5,
-    foodType: 'Burger🍔',
+    foodType: 'Burger',
     image: '/images/burger16.png',
     vegan: false,
     orders: 7,
@@ -453,7 +453,7 @@ let meals = [
       { addOnName: '🥢Utensils', addOnPrice: 0.25 },
     ],
     price: 7.5,
-    foodType: 'Burger🍔',
+    foodType: 'Burger',
     image: '/images/burger7.png',
     vegan: false,
     orders: 7,
@@ -475,7 +475,7 @@ let meals = [
       { addOnName: '🥢Utensils', addOnPrice: 0.25 },
     ],
     price: 4.0,
-    foodType: 'Burger🍔',
+    foodType: 'Burger',
     image: '/images/burger11.png',
     vegan: false,
     orders: 7,
@@ -485,7 +485,7 @@ let meals = [
   },
   {
     name: 'Chicken Burrito',
-    foodType: 'Burrito🌯',
+    foodType: 'Burrito',
     sizes: [
       { size: '1 Pcs.', content: 1, price: 1.0 },
       { size: '2 Pcs.', content: 2, price: 2.0 },
@@ -507,7 +507,7 @@ let meals = [
   },
   {
     name: 'Steak Burrito',
-    foodType: 'Burrito🌯',
+    foodType: 'Burrito',
     sizes: [
       { size: '1 Pcs.', content: 1, price: 1.0 },
       { size: '2 Pcs.', content: 2, price: 2.0 },
@@ -529,7 +529,7 @@ let meals = [
   },
   {
     name: 'Carnitas Burrito',
-    foodType: 'Burrito🌯',
+    foodType: 'Burrito',
     sizes: [
       { size: '1 Pcs.', content: 1, price: 1.0 },
       { size: '2 Pcs.', content: 2, price: 2.0 },
@@ -551,7 +551,7 @@ let meals = [
   },
   {
     name: 'Barbacoa Burrito',
-    foodType: 'Burrito🌯',
+    foodType: 'Burrito',
     price: 9.0,
     image: '/images/burrito4.png',
     vegan: false,
@@ -562,7 +562,7 @@ let meals = [
   },
   {
     name: 'Chorizo Burrito',
-    foodType: 'Burrito🌯',
+    foodType: 'Burrito',
     sizes: [
       { size: '1 Pcs.', content: 1, price: 1.0 },
       { size: '2 Pcs.', content: 2, price: 2.0 },
@@ -584,7 +584,7 @@ let meals = [
   },
   {
     name: 'Chicken Corn Tortilla Taco',
-    foodType: 'Taco🌮',
+    foodType: 'Taco',
     sizes: [
       { size: '3 Pcs.', content: 3, price: 2.0 },
       { size: '5 Pcs.', content: 5, price: 3.0 },
@@ -606,7 +606,7 @@ let meals = [
   },
   {
     name: 'Chicken Flour Tortilla Taco',
-    foodType: 'Taco🌮',
+    foodType: 'Taco',
     sizes: [
       { size: '3 Pcs.', content: 3, price: 2.0 },
       { size: '5 Pcs.', content: 5, price: 3.0 },
@@ -628,7 +628,7 @@ let meals = [
   },
   {
     name: 'Steak Corn Tortilla Taco',
-    foodType: 'Taco🌮',
+    foodType: 'Taco',
     sizes: [
       { size: '3 Pcs.', content: 3, price: 2.0 },
       { size: '5 Pcs.', content: 5, price: 3.0 },
@@ -650,7 +650,7 @@ let meals = [
   },
   {
     name: 'Steak Flour Tortilla Taco',
-    foodType: 'Taco🌮',
+    foodType: 'Taco',
     sizes: [
       { size: '3 Pcs.', content: 3, price: 2.0 },
       { size: '5 Pcs.', content: 5, price: 3.0 },
@@ -672,7 +672,7 @@ let meals = [
   },
   {
     name: 'Carnitas Corn Tortilla Taco',
-    foodType: 'Taco🌮',
+    foodType: 'Taco',
     sizes: [
       { size: '3 Pcs.', content: 3, price: 2.0 },
       { size: '5 Pcs.', content: 5, price: 3.0 },
@@ -694,7 +694,7 @@ let meals = [
   },
   {
     name: 'Original Recipe Chicken Drumstick',
-    foodType: 'Chicken🍗',
+    foodType: 'Chicken',
     sizes: [
       { size: '3 Pcs.', content: 3, price: 2.0 },
       { size: '5 Pcs.', content: 5, price: 3.0 },
@@ -716,7 +716,7 @@ let meals = [
   },
   {
     name: 'Original Recipe Chicken Thigh',
-    foodType: 'Chicken🍗',
+    foodType: 'Chicken',
     sizes: [
       { size: '3 Pcs.', content: 3, price: 2.0 },
       { size: '5 Pcs.', content: 5, price: 3.0 },
@@ -738,7 +738,7 @@ let meals = [
   },
   {
     name: 'Original Recipe Chicken Whole Wing',
-    foodType: 'Chicken🍗',
+    foodType: 'Chicken',
     sizes: [
       { size: '3 Pcs.', content: 3, price: 2.0 },
       { size: '5 Pcs.', content: 5, price: 3.0 },
@@ -760,7 +760,7 @@ let meals = [
   },
   {
     name: 'Extra Crispy Chicken',
-    foodType: 'Chicken🍗',
+    foodType: 'Chicken',
     sizes: [
       { size: '3 Pcs.', content: 3, price: 2.0 },
       { size: '5 Pcs.', content: 5, price: 3.0 },
@@ -782,7 +782,7 @@ let meals = [
   },
   {
     name: 'Pepperoni and Sausage',
-    foodType: 'Pizza🍕',
+    foodType: 'Pizza',
     sizes: [
       { size: 'Small', content: 4, price: 5.0 },
       { size: 'Medium', content: 6, price: 7.0 },
@@ -806,7 +806,7 @@ let meals = [
   },
   {
     name: 'Garden Fresh',
-    foodType: 'Pizza🍕',
+    foodType: 'Pizza',
     sizes: [
       { size: 'Small', content: 4, price: 5.0 },
       { size: 'Medium', content: 6, price: 7.0 },
@@ -830,7 +830,7 @@ let meals = [
   },
   {
     name: 'Spinach and Feta',
-    foodType: 'Pizza🍕',
+    foodType: 'Pizza',
     sizes: [
       { size: 'Small', content: 4, price: 5.0 },
       { size: 'Medium', content: 6, price: 7.0 },
@@ -854,7 +854,7 @@ let meals = [
   },
   {
     name: 'Philly Cheese Steak',
-    foodType: 'Pizza🍕',
+    foodType: 'Pizza',
     sizes: [
       { size: 'Small', content: 4, price: 5.0 },
       { size: 'Medium', content: 6, price: 7.0 },

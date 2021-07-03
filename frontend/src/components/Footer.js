@@ -7,7 +7,7 @@ const Footer = () => {
       <div className='footer__container bd-grid'>
         <div className='footer__content'>
           <a href='/#' className='footer__logo'>
-            Hot N' Crusty
+            Chillie
           </a>
           <span className='footer__description'>Restaurant</span>
           <div>

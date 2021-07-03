@@ -13,6 +13,8 @@ const Header = () => {
   const ordercount = useSelector((state) => state.orderCount);
 
   const { userInfo } = userLogin;
+
+  console.log(userInfo);
   const { orderCount } = ordercount;
 
   // const logoutHandler = () => {
@@ -73,60 +75,99 @@ const Header = () => {
 
       <header className='l-header scroll-header' id='header'>
         <nav className='nav bd-container'>
-          <Link to='/' className='nav__logo'>
-            Tasty
-          </Link>
+          {!userInfo || !userInfo.isAdmin ? (
+            <Link to='/' className='nav__logo'>
+              Chillie
+            </Link>
+          ) : (
+            <Link to='#' className='nav__logo'>
+              Admin Panel
+            </Link>
+          )}
+
           <div className='nav__menu' id='nav-menu'>
-            <ul className='nav__list'>
-              <li className='nav__item'>
-                <Link to='/' className='nav__link'>
-                  Home
-                </Link>
-              </li>
-              <li className='nav__item'>
-                <Link to='/menu' className='nav__link'>
-                  Meals
-                </Link>
-              </li>
-              <li className='nav__item'>
-                <Link to='/menu' className='nav__link'>
-                  Reserve
-                </Link>
-              </li>
+            {!userInfo || !userInfo.isAdmin ? (
+              <ul className='nav__list'>
+                <li className='nav__item'>
+                  <Link to='/menu' className='nav__link'>
+                    Meals
+                  </Link>
+                </li>
+                <li className='nav__item'>
+                  <Link to='/menu' className='nav__link'>
+                    Reserve
+                  </Link>
+                </li>
 
-              <li
-                className='nav__item'
-                id='theme-button'
-                onClick={() => activateTheme()}>
-                <box-icon name='moon'></box-icon>
-              </li>
+                <li
+                  className='nav__item'
+                  id='theme-button'
+                  onClick={() => activateTheme()}>
+                  <box-icon name='moon'></box-icon>
+                </li>
 
-              <li className='nav__item'>
-                <Link to='/order' className='nav__link'>
-                  <box-icon name='shopping-bag'></box-icon>
-                </Link>
+                <li className='nav__item'>
+                  <Link to='/order' className='nav__link'>
+                    <box-icon name='shopping-bag'></box-icon>
+                  </Link>
 
-                <Badge
-                  className='badge-position'
-                  count={orderCount}
-                  variant='red'
-                  size='sm'></Badge>
-              </li>
+                  <Badge
+                    className='badge-position'
+                    count={orderCount}
+                    variant='red'
+                    size='sm'></Badge>
+                </li>
 
-              {userInfo ? (
+                {userInfo ? (
+                  <li className='nav__item'>
+                    <Link to='/profile' className='nav__link'>
+                      <box-icon name='user' type='solid'></box-icon>
+                    </Link>
+                  </li>
+                ) : (
+                  <li className='nav__item'>
+                    <Link to='/login' className='nav__link'>
+                      <box-icon name='log-in' color='#a6a6a6'></box-icon>
+                    </Link>
+                  </li>
+                )}
+              </ul>
+            ) : (
+              <ul className='nav__list'>
+                <li className='nav__item'>
+                  <Link to='/admin/orders' className='nav__link'>
+                    Orders
+                  </Link>
+                </li>
+                <li className='nav__item'>
+                  <Link to='/admin/meals' className='nav__link'>
+                    Meals
+                  </Link>
+                </li>
+                <li className='nav__item'>
+                  <Link to='/admin/categories' className='nav__link'>
+                    Categories
+                  </Link>
+                </li>
+                <li className='nav__item'>
+                  <Link to='/admin/users' className='nav__link'>
+                    Users
+                  </Link>
+                </li>
+                <li
+                  className='nav__item'
+                  id='theme-button'
+                  onClick={() => activateTheme()}>
+                  <box-icon name='moon'></box-icon>
+                </li>
+
                 <li className='nav__item'>
                   <Link to='/profile' className='nav__link'>
                     <box-icon name='user' type='solid'></box-icon>
                   </Link>
                 </li>
-              ) : (
-                <li className='nav__item'>
-                  <Link to='/login' className='nav__link'>
-                    <box-icon name='log-in' color='#a6a6a6'></box-icon>
-                  </Link>
-                </li>
-              )}
-            </ul>
+              </ul>
+            )}
           </div>
 
           <div className='nav__toggle' id='nav-toggle'>
