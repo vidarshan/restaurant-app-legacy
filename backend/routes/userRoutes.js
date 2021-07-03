@@ -7,12 +7,12 @@ import {
   getAllUsers,
   makeAdmin,
 } from '../controllers/userController.js';
-import { protect } from '../middleware/authMiddleware.js';
+import { protect, admin } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
 router.route('/').get(getAllUsers).post(registerUser);
-router.route('/:id').put(makeAdmin);
+router.route('/:id').put(protect, admin, makeAdmin);
 router.post('/login', authUser);
 router
   .route('/profile')

@@ -30,14 +30,13 @@ const protect = asyncHandler(async (req, res, next) => {
 });
 
 //grant access to specific roles
-const authorize = (...roles) => {
-  return (req, res, next) => {
-    if (!roles.includes(req.user.role)) {
-      res.status(403);
-      throw new Error('Not authorized for current user role');
-    }
+const admin = (req, res, next) => {
+  if (req.user && req.user.isAdmin) {
     next();
-  };
+  } else {
+    res.status(401);
+    throw new Error('Not Authorized as an admin');
+  }
 };
 
-export { protect, authorize };
+export { protect, admin };
