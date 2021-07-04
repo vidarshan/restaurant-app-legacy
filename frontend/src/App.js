@@ -15,7 +15,7 @@ import AdminDashboardScreen from './screens/admin/AdminDashboardScreen';
 import AdminReservationScreen from './screens/admin/AdminReservationScreen';
 import AdminUserScreen from './screens/admin/AdminUserScreen';
 import AdminOrderScreen from './screens/admin/AdminOrderScreen';
-import AdminMealScreen from './screens/admin/AdminMealScreen';
+import AdminMenuScreen from './screens/admin/AdminMenuScreen';
 import AdminCategoryScreen from './screens/admin/AdminCategoryScreen';
 
 const App = () => {
@@ -33,7 +33,7 @@ const App = () => {
       <Route
         path='/admin/reservations'
         component={AdminReservationScreen}></Route>
-      <Route path='/admin/meals' component={AdminMealScreen}></Route>
+      <Route path='/admin/meals' component={AdminMenuScreen}></Route>
       <Route path='/admin/orders' component={AdminOrderScreen}></Route>
       <Route path='/admin/users' component={AdminUserScreen}></Route>
       <Route path='/admin/categories' component={AdminCategoryScreen}></Route>

@@ -16,8 +16,23 @@
     width: 100%;
   }
 
+  tr {
+    img {
+      width: 5rem;
+    }
+  }
+
   th,
   td {
     padding: 15px;
+    text-align: left;
+
+    .action-icon-edit {
+      fill: var(--success-color);
+    }
+
+    .action-icon-delete {
+      fill: var(--badge-color);
+    }
   }
 }
