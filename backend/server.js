@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import morgan from 'morgan';
 import colors from 'colors';
 import cors from 'cors';
 import { createServer } from 'http';
@@ -21,6 +22,8 @@ dotenv.config();
 connectDB();
 
 const app = express();
+
+app.use(morgan('tiny'));
 
 const httpServer = createServer(app);
 const io = new Server(httpServer, { cors: { origin: '*' } });
