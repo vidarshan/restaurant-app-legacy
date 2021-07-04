@@ -1,11 +1,10 @@
 import asyncHandler from 'express-async-handler';
-import generateToken from '../utils/generateToken.js';
 import Categories from '../models/CategoriesModel.js';
 
 /**
- * @DESCRIPTION Get all categories
- * @ROUTE GET /api/categories
- * @ACCESS Public
+ * @Description : Get all categories
+ * @Route       : GET /api/categories
+ * @Access      : Public
  */
 const getCategories = asyncHandler(async (req, res) => {
   const categories = await Categories.find({});
@@ -14,9 +13,9 @@ const getCategories = asyncHandler(async (req, res) => {
 });
 
 /**
- * @DESCRIPTION : Add a new category
- * @ROUTE       : POST /api/categories
- * @ACCESS      : Private-Admin
+ * @Description : Add a new category
+ * @Route       : POST /api/categories
+ * @Access      : Private-Admin
  */
 const addCategory = asyncHandler(async (req, res) => {
   let { name, image } = req.body;
@@ -31,9 +30,9 @@ const addCategory = asyncHandler(async (req, res) => {
 });
 
 /**
- * @desc         Update a product
- * @route        PUT /api/meals
- *@access        Private-admin
+ * @Description : Update a product
+ * @Route       : PUT /api/categories/:id
+ * @Access      : Private-admin
  */
 const updateCategory = asyncHandler(async (req, res) => {
   let { name, image } = req.body;
@@ -51,6 +50,11 @@ const updateCategory = asyncHandler(async (req, res) => {
   }
 });
 
+/**
+ * @Description : Delete a category
+ * @Route       : DELETE /api/categories/:id
+ * @Access      : Private-admin
+ */
 const deleteCategory = asyncHandler(async (req, res) => {
   const category = await Categories.findById(req.params.id);
 

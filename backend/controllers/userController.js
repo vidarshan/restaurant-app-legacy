@@ -2,10 +2,10 @@ import asyncHandler from 'express-async-handler';
 import generateToken from '../utils/generateToken.js';
 import User from '../models/UserModel.js';
 
-/*
- * Auth user and get a token
- * POST /api/users/login
- * Public
+/**
+ * @Description : Auth user and get a tokenUpdate a meal
+ * @Route       : POST /api/users/login
+ * @Access      : Public
  */
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -26,10 +26,10 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-/*
- * Register a user
- * POST /api/users/
- * Public
+/**
+ * @Description : Register a user
+ * @Route       : POST /api/users/
+ * @Access      : Public
  */
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
@@ -61,10 +61,10 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-/*
- * Get user profile
- * POST /api/users/profile
- * Private
+/**
+ * @Description : Get user profile
+ * @Route       : POST /api/users/profile
+ * @Access      : Private
  */
 const getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
@@ -83,12 +83,14 @@ const getUserProfile = asyncHandler(async (req, res) => {
 });
 
 /**
- * @DESCRIPTION Update user profile
- * @ROUTE PUT /api/users/profile
- * @ACCESS Private
+ * @Description : Update user profile
+ * @Route       : PUT /api/users/profile
+ * @Access      : Private
  */
 const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
+
+  console.log(req.user._id);
 
   if (user) {
     (user.name = req.body.name || user.name),
@@ -114,9 +116,27 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 });
 
 /**
- * @DESCRIPTION Get all users
- * @ROUTE GET /api/users
- * @ACCESS Private-Admin
+ * @Description : Delete user profile
+ * @Route       : DELETE /api/users/profile
+ * @Access      : Private
+ */
+const deleteUserProfile = asyncHandler(async (req, res) => {
+  console.log(req.user._id);
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    await user.remove();
+    res.json({ message: 'Profile Removed' });
+  } else {
+    res.status(404);
+    throw new Error('Error deleting profile');
+  }
+});
+
+/**
+ * @Description : Get all users
+ * @Route       : GET /api/users
+ * @Access      : Private-Admin
  */
 const getAllUsers = asyncHandler(async (req, res) => {
   const users = await User.find({});
@@ -124,9 +144,9 @@ const getAllUsers = asyncHandler(async (req, res) => {
 });
 
 /**
- * @DESCRIPTION Make a user an admin
- * @ROUTE PUT /api/users/:id
- * @ACCESS Private
+ * @Description : Make a user an admin
+ * @Route       : PUT /api/users/:id
+ * @Access      : Private
  */
 const makeAdmin = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
@@ -153,11 +173,30 @@ const makeAdmin = asyncHandler(async (req, res) => {
   }
 });
 
+/**
+ * @Description : Delete a user
+ * @Route       : DELETE /api/users/:id
+ * @Access      : Private-Admin
+ */
+const deleteUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    await user.remove();
+    res.json({ message: 'User Removed' });
+  } else {
+    res.status(404);
+    throw new Error('User not found');
+  }
+});
+
 export {
   authUser,
   registerUser,
   getUserProfile,
   updateUserProfile,
+  deleteUserProfile,
   makeAdmin,
   getAllUsers,
+  deleteUser,
 };
