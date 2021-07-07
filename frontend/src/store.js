@@ -11,8 +11,11 @@ import { categoryReducer } from './reducers/categoryReducers';
 import {
   userSignUpReducer,
   userLoginReducer,
+  userListReducer,
   userDetailsReducer,
   userUpdateProfileReducer,
+  changeUserLevelReducer,
+  deleteUserReducer,
 } from './reducers/userReducers';
 
 const reducer = combineReducers({
@@ -22,8 +25,11 @@ const reducer = combineReducers({
   order: orderReducer,
   userSignup: userSignUpReducer,
   userLogin: userLoginReducer,
+  userList: userListReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
+  deleteUser: deleteUserReducer,
+  changeUserLevel: changeUserLevelReducer,
   orderCount: orderCountReducer,
   categories: categoryReducer,
 });

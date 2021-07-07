@@ -13,7 +13,7 @@ import { map, filter, orderBy } from '../lodash';
 
 const MenuScreen = ({ match, history }) => {
   const dispatch = useDispatch();
-  const [filterMeals, setFilterMeals] = useState('All');
+  const [filterMeals] = useState('All');
   const [searchString, setSearchString] = useState('');
   const mealList = useSelector((state) => state.mealList);
   const categoryList = useSelector((state) => state.categories);

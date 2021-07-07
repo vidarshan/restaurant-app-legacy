@@ -152,7 +152,9 @@ const makeAdmin = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
 
   if (user) {
-    (user.name = user.name), (user.email = user.email), (user.isAdmin = true);
+    (user.name = user.name),
+      (user.email = user.email),
+      user.isAdmin ? (user.isAdmin = false) : (user.isAdmin = true);
 
     if (req.body.password) {
       user.password = req.body.password;

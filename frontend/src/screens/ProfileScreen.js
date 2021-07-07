@@ -12,7 +12,7 @@ import '../assets/scss/components/headings.scss';
 const ENDPOINT = 'http://127.0.0.1:5000';
 
 const ProfileScreen = ({ history }) => {
-  const [response, setResponse] = useState('');
+  const [setResponse] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -49,7 +49,7 @@ const ProfileScreen = ({ history }) => {
       setResponse(data);
       console.log(data);
     });
-  }, [history, userInfo, dispatch, user]);
+  }, [history, userInfo, dispatch, user, setResponse]);
 
   const profileHandler = () => {
     if (password !== confirmPassword) {

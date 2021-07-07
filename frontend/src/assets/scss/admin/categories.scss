@@ -4,6 +4,18 @@
   max-width: 960px;
   margin-right: auto;
 
+  .category-form {
+    background-color: var(--container-color);
+    border-radius: var(--card-border-radius);
+  }
+
+  @media screen and (max-width: 620px) {
+    .bd-container-categories {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
   table,
   td,
   th {
@@ -19,5 +31,19 @@
   th,
   td {
     padding: 15px;
+  }
+
+  tr {
+    img {
+      width: 5rem;
+    }
+
+    .action-icon-edit {
+      fill: var(--success-color);
+    }
+
+    .action-icon-delete {
+      fill: var(--badge-color);
+    }
   }
 }

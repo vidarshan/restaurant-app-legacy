@@ -16,6 +16,51 @@
     width: 100%;
   }
 
+  tr {
+    img {
+      width: 5rem;
+    }
+
+    th:nth-child(3) {
+      text-align: center;
+    }
+
+    th:nth-child(4) {
+      text-align: center;
+    }
+
+    td:nth-child(3) {
+      text-align: center;
+
+      .make-admin-button {
+        cursor: pointer;
+        fill: var(--info-color);
+      }
+
+      .make-admin-button:hover {
+        fill: var(--text-color);
+      }
+
+      .remove-admin-button {
+        cursor: pointer;
+        fill: var(--first-color);
+      }
+
+      .remove-admin-button:hover {
+        fill: var(--text-color);
+      }
+    }
+
+    td:nth-child(4) {
+      text-align: center;
+      fill: var(--danger-color);
+
+      .action-icon-delete:hover {
+        fill: var(--text-color);
+      }
+    }
+  }
+
   th,
   td {
     padding: 15px;
