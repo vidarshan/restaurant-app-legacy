@@ -20,6 +20,9 @@ router
   .get(protect, getUserProfile)
   .put(protect, updateUserProfile)
   .delete(protect, deleteUserProfile);
-router.route('/:id').put(protect, makeAdmin).delete(protect, admin, deleteUser);
+router
+  .route('/:id')
+  .put(protect, admin, makeAdmin)
+  .delete(protect, admin, deleteUser);
 
 export default router;

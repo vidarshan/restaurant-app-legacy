@@ -17,6 +17,13 @@ import {
   USER_LIST_REQUEST,
   USER_LIST_SUCCESS,
   USER_LIST_FAIL,
+  CHANGE_USER_LEVEL_REQUEST,
+  CHANGE_USER_LEVEL_SUCCESS,
+  CHANGE_USER_LEVEL_FAIL,
+  DELETE_USER_REQUEST,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_FAIL,
+  DELETE_USER_RESET,
 } from '../constants/userConstants';
 
 export const signup = (name, email, password, isAdmin) => async (dispatch) => {
@@ -169,6 +176,62 @@ export const listUsers = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const changeUserLevel = (userId) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: CHANGE_USER_LEVEL_REQUEST });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    let { data } = await axios.put(`/api/users/${userId}`, config);
+    console.log(data);
+    dispatch({ type: CHANGE_USER_LEVEL_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: CHANGE_USER_LEVEL_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const deleteUser = (userId) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: DELETE_USER_REQUEST });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.delete(`/api/users/${userId}`, config);
+
+    dispatch({ type: DELETE_USER_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: DELETE_USER_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

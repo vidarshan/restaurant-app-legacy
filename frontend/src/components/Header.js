@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Badge from '../components/Badge';
 import 'boxicons';
-//import { logout } from '../actions/userActions';
+import { logout } from '../actions/userActions';
 //import { countOrders } from '../actions/orderActions';
 
 const Header = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
   const ordercount = useSelector((state) => state.orderCount);
@@ -17,9 +17,9 @@ const Header = () => {
   console.log(userInfo);
   const { orderCount } = ordercount;
 
-  // const logoutHandler = () => {
-  //   dispatch(logout());
-  // };
+  const logoutHandler = () => {
+    dispatch(logout());
+  };
 
   const activateTheme = () => {
     const themeButton = document.getElementById('theme-button');
@@ -164,6 +164,12 @@ const Header = () => {
                 <li className='nav__item'>
                   <Link to='/profile' className='nav__link'>
                     <box-icon name='user' type='solid'></box-icon>
+                  </Link>
+                </li>
+
+                <li className='nav__item' onClick={() => logoutHandler()}>
+                  <Link className='nav__link'>
+                    <box-icon name='log-out-circle' rotate='180'></box-icon>
                   </Link>
                 </li>
               </ul>

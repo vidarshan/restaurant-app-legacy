@@ -26,4 +26,21 @@
   td {
     padding: 15px;
   }
+  .make-admin-button {
+    padding: 0.5rem;
+    border-radius: var(--card-border-radius);
+    background-color: var(--first-color);
+    color: var(--text-color);
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .remove-admin-button {
+    padding: 0.5rem;
+    background-color: var(--danger-color);
+    border-radius: var(--card-border-radius);
+    color: var(--text-color);
+    text-align: center;
+    cursor: pointer;
+  }
 }
