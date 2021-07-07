@@ -187,20 +187,18 @@ export const listUsers = () => async (dispatch) => {
 export const changeUserLevel = (userId) => async (dispatch, getState) => {
   try {
     dispatch({ type: CHANGE_USER_LEVEL_REQUEST });
-
     const {
       userLogin: { userInfo },
     } = getState();
-
     const config = {
       headers: {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
 
-    let { data } = await axios.put(`/api/users/${userId}`, config);
-    console.log(data);
-    dispatch({ type: CHANGE_USER_LEVEL_SUCCESS, payload: data });
+    await axios.put(`/api/users/${userId}`, {}, config);
+
+    dispatch({ type: CHANGE_USER_LEVEL_SUCCESS });
   } catch (error) {
     dispatch({
       type: CHANGE_USER_LEVEL_FAIL,

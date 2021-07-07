@@ -17,13 +17,13 @@ const AdminUserScreen = () => {
   const deletedUser = useSelector((state) => state.deleteUser);
 
   const { users, loading, error } = userList;
-  const { loading: changeUserLevelLoading, error: changeUserLevelError } =
-    changeLevel;
-  let { success: successdelete } = deletedUser;
+  const { success: successchangelevel } = changeLevel;
+
+  const { success: successdelete } = deletedUser;
 
   useEffect(() => {
     dispatch(listUsers());
-  }, [successdelete, dispatch]);
+  }, [successdelete, successchangelevel, dispatch]);
 
   const deleteUserHandler = (id) => {
     if (window.confirm('Delete User ?')) {
@@ -49,8 +49,8 @@ const AdminUserScreen = () => {
             <tr>
               <th>Username</th>
               <th>Email</th>
-              <th>Admin</th>
-              <th></th>
+              <th>Admin/ Not Admin</th>
+              <th>Delete User</th>
             </tr>
             {map(users, (user) => {
               return (
@@ -62,10 +62,14 @@ const AdminUserScreen = () => {
                       <div
                         className='make-admin-button'
                         onClick={() => changeUserLevelHandler(user._id)}>
-                        Make Admin
+                        <box-icon name='shield-x'></box-icon>
                       </div>
                     ) : (
-                      <div className='remove-admin-button'>Remove Admin</div>
+                      <div
+                        className='remove-admin-button'
+                        onClick={() => changeUserLevelHandler(user._id)}>
+                        <box-icon name='check-shield'></box-icon>
+                      </div>
                     )}
                   </td>
                   <td>
