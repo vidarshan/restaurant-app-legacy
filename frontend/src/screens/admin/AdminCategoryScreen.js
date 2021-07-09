@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { listCategories } from '../../actions/categoryActions';
 import { map } from '../../lodash';
 
@@ -24,9 +25,22 @@ const AdminCategoriesScreen = () => {
         <Loader></Loader>
       ) : (
         <>
-          <div className='category-form'>
-            <div className='button-primary'>Add New Category</div>
+          <div className='add-search-container'>
+            <input type='text' className='text-input' />
+            <div className='add-category-button'>
+              <Link to='/admin/category'>
+                <box-icon name='plus'></box-icon>
+              </Link>
+            </div>
           </div>
+          {/* <div className='category-form-container'>
+            <div className='heading-3'>Add New Category</div>
+            <div className='category-form'>
+              <input type='text' className='text-input' />
+              <input type='text' className='text-input' />
+              <div className='add-category-button'>Add Category</div>
+            </div>
+          </div> */}
           <table>
             <tr>
               <th>Category Name</th>
@@ -43,7 +57,9 @@ const AdminCategoriesScreen = () => {
                   </td>
                   <td>
                     <div className='action-icon-edit'>
-                      <box-icon name='edit'></box-icon>
+                      <Link to={`/admin/category/${category._id}`}>
+                        <box-icon name='edit'></box-icon>
+                      </Link>
                     </div>
                   </td>
                   <td>

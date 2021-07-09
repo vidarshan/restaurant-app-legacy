@@ -17,6 +17,7 @@ import AdminUserScreen from './screens/admin/AdminUserScreen';
 import AdminOrderScreen from './screens/admin/AdminOrderScreen';
 import AdminMenuScreen from './screens/admin/AdminMenuScreen';
 import AdminCategoryScreen from './screens/admin/AdminCategoryScreen';
+import CategoryForm from './screens/forms/CategoryForm';
 
 const App = () => {
   return (
@@ -37,6 +38,7 @@ const App = () => {
       <Route path='/admin/orders' component={AdminOrderScreen}></Route>
       <Route path='/admin/users' component={AdminUserScreen}></Route>
       <Route path='/admin/categories' component={AdminCategoryScreen}></Route>
+      <Route path='/admin/category/:id?' component={CategoryForm}></Route>
       <Route path='/about' component={AboutScreen}></Route>
       <Footer></Footer>
     </Router>
