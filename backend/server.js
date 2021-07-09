@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 import colors from 'colors';
@@ -15,6 +16,7 @@ import mealsRoutes from './routes/mealsRoutes.js';
 import drinksRoutes from './routes/drinksRoutes.js';
 import categoriesRoutes from './routes/categoriesRoute.js';
 import userRoutes from './routes/userRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
 import index from './routes/index.js';
 
 dotenv.config();
@@ -55,6 +57,10 @@ app.use('/api/meals', mealsRoutes);
 app.use('/api/drinks', drinksRoutes);
 app.use('/api/categories', categoriesRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/upload', uploadRoutes);
+
+const __dirname = path.resolve();
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 app.use(notFound);
 app.use(errorHandler);

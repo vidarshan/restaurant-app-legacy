@@ -1,0 +1,48 @@
+.bd-container-forms {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: calc(100% - 2rem);
+  margin-left: auto;
+  max-width: 960px;
+  margin-right: auto;
+
+  .category-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: max-content;
+    background-color: var(--container-color);
+    border-radius: var(--card-border-radius);
+    padding: 1rem;
+
+    .category-name-input {
+      height: 2.5rem;
+      border: 2px solid var(--text-color);
+      margin: 0.5rem 0;
+      border-radius: var(--card-border-radius);
+      background-color: var(--container-color);
+      width: 100%;
+    }
+
+    input[type='file'] {
+      background-color: red;
+      height: 2.5rem;
+      width: 100%;
+      margin: 0.5rem 0;
+    }
+
+    .button-add-edit-category {
+      margin: 0.5rem 0;
+      width: 100%;
+      text-align: center;
+      background-color: var(--first-color);
+      font-size: var(--normal-font-size);
+      color: var(--text-color);
+      padding: 0.5rem;
+      border-radius: var(--card-border-radius);
+    }
+  }
+}

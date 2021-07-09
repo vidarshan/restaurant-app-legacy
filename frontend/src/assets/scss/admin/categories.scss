@@ -4,11 +4,6 @@
   max-width: 960px;
   margin-right: auto;
 
-  .category-form {
-    background-color: var(--container-color);
-    border-radius: var(--card-border-radius);
-  }
-
   @media screen and (max-width: 620px) {
     .bd-container-categories {
       display: flex;
@@ -39,11 +34,38 @@
     }
 
     .action-icon-edit {
+      cursor: pointer;
       fill: var(--success-color);
     }
 
     .action-icon-delete {
+      cursor: pointer;
       fill: var(--badge-color);
     }
   }
+
+  .add-search-container {
+    display: flex;
+    flex-direction: row;
+
+    .text-input {
+      width: 90%;
+    }
+
+    .add-category-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 5px;
+      background-color: var(--first-color);
+      border-radius: var(--card-border-radius);
+      height: auto;
+      width: 10%;
+      color: var(--text-color);
+    }
+  }
+}
+
+.full-screen {
+  height: 100vh;
 }
