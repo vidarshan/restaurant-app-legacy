@@ -8,6 +8,9 @@ import {
   MEAL_REQUEST,
   MEAL_SUCCESS,
   MEAL_FAIL,
+  MEAL_ADD_REQUEST,
+  MEAL_ADD_SUCCESS,
+  MEAL_ADD_FAIL,
 } from '../constants/mealConstants';
 
 export const mealListReducer = (state = { meals: [] }, action) => {
@@ -57,6 +60,19 @@ export const mealRecommendationReducer = (state = { meals: [] }, action) => {
       return { loading: false, meals: action.payload };
     case MEAL_RECOMMENDATIONS_FAIL:
       return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const mealCreateReducer = (state = { meal: {} }, action) => {
+  switch (action.type) {
+    case MEAL_ADD_REQUEST:
+      return { loading: true, meal: {} };
+    case MEAL_ADD_SUCCESS:
+      return { loading: false, success: true, meal: action.payload };
+    case MEAL_ADD_FAIL:
+      return { loading: false, success: false, error: action.payload };
     default:
       return state;
   }

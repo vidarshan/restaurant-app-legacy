@@ -1,13 +1,57 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import Message from '../../components/Message';
+import Loader from '../../components/Loader';
+import { useDispatch, useSelector } from 'react-redux';
+import { mealCreate } from '../../actions/mealActions';
+import { listCategories } from '../../actions/categoryActions';
+import { map } from '../../lodash';
 
 import '../../assets/scss/admin/forms.scss';
 import '../../assets/scss/admin/mealForm.scss';
 
 const CategoryForm = () => {
+  const dispatch = useDispatch();
+
+  const createMeal = useSelector((state) => state.mealCreate);
+  const categoryList = useSelector((state) => state.categories);
+
+  const { loading, success, error } = createMeal;
+
+  console.log(loading);
+  console.log(error);
+
+  const {
+    // loadingcategories: loading,
+    // successcategories: success,
+    categories,
+  } = categoryList;
+
   const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
   const [uploading, setUploading] = useState(false);
+  const [category, setCategory] = useState('');
+  const [vegan, setVegan] = useState(false);
+  const [price, setPrice] = useState(0);
+  const [addOn1Name, setAddOn1Name] = useState('');
+  const [addOn1Price, setAddOn1Price] = useState(0);
+  const [addOn2Name, setAddOn2Name] = useState('');
+  const [addOn2Price, setAddOn2Price] = useState(0);
+  const [addOn3Name, setAddOn3Name] = useState('');
+  const [addOn3Price, setAddOn3Price] = useState(0);
+  const [addOn4Name, setAddOn4Name] = useState('');
+  const [addOn4Price, setAddOn4Price] = useState(0);
+  const [addOn5Name, setAddOn5Name] = useState('');
+  const [addOn5Price, setAddOn5Price] = useState(0);
+  const [addOn6Name, setAddOn6Name] = useState('');
+  const [addOn6Price, setAddOn6Price] = useState(0);
+  const [size1Name, setSize1Name] = useState('');
+  const [size1Price, setSize1Price] = useState(0);
+  const [size2Name, setSize2Name] = useState('');
+  const [size2Price, setSize2Price] = useState(0);
+  const [size3Name, setSize3Name] = useState('');
+  const [size3Price, setSize3Price] = useState(0);
 
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
@@ -32,93 +76,257 @@ const CategoryForm = () => {
     }
   };
 
+  const addMealHandler = () => {
+    const newMeal = {
+      name,
+      foodType: category,
+      sizes: [
+        { size: size1Name, content: 4, price: size1Price },
+        { size: size2Name, content: 6, price: size2Price },
+        { size: size3Name, content: 8, price: size3Price },
+      ],
+      addons: [
+        { addOnName: addOn1Name, addOnPrice: addOn1Price },
+        { addOnName: addOn2Name, addOnPrice: addOn2Price },
+        { addOnName: addOn3Name, addOnPrice: addOn3Price },
+        { addOnName: addOn4Name, addOnPrice: addOn4Price },
+        { addOnName: addOn5Name, addOnPrice: addOn5Price },
+        { addOnName: addOn6Name, addOnPrice: addOn6Price },
+      ],
+      price,
+      image,
+      vegan,
+      orders: 0,
+      rating: 0,
+      description,
+      ordersThisWeek: 0,
+    };
+
+    console.log(newMeal);
+    dispatch(mealCreate(newMeal));
+  };
+
+  useEffect(() => {
+    dispatch(listCategories());
+
+    console.log(categories);
+  }, [dispatch]);
+
   return (
     <section className='section bd-container-forms'>
       <div className='meal__form'>
         <div className='meal__form-heading'>Add New Meal</div>
 
-        <div className='meal__form-subtitle'>Meal Information</div>
-        <div className='meal__form-row'>
-          <div className='meal__form-name'>
-            <input type='text' name='' id='' placeholder='Meal name' />
-          </div>
-          <div className='meal__form-description'>
-            <input type='text' name='' id='' placeholder='Meal description' />
-          </div>
-        </div>
-        <div className='meal__form-row'>
-          <div className='meal__form-image'>
-            <input type='file' name='' id='' placeholder='Upload meal image' />
-          </div>
-          <div className='meal__form-category'>
-            <select name='' id=''>
-              <option value=''>Select meal category</option>
-              <option value=''></option>
-            </select>
-          </div>
-        </div>
-        <div className='meal__form-row'>
-          <div className='meal__form-vegan'>
-            <input type='radio' name='' id='veganTrue' />
-            <label htmlFor='veganTrue'>Yes</label>
-            <input type='radio' name='' id='veganFalse' />{' '}
-            <label htmlFor='veganFalse'>No</label>
-          </div>
-          <div className='meal__form-price'>
-            <input type='number' name='' id='' placeholder='Unit Price' />
-          </div>
-        </div>
-        <div className='meal__form-addons'>
-          {' '}
-          <div className='meal__form-subtitle'>Meal Add on Information</div>
-          <div className='meal__form-row'>
-            <input type='text' placeholder='Add On 1' />
-            <input type='number' placeholder='Add On 1 Price' />
-          </div>
-          <div className='meal__form-row'>
-            <input type='text' placeholder='Add On 2' />
-            <input type='number' placeholder='Add On 2 Price' />
-          </div>
-          <div className='meal__form-row'>
-            <input type='text' placeholder='Add On 3' />
-            <input type='number' placeholder='Add On 3 Price' />
-          </div>
-          <div className='meal__form-row'>
-            <input type='text' placeholder='Add On 4' />
-            <input type='number' placeholder='Add On 4 Price' />
-          </div>
-          <div className='meal__form-row'>
-            <input type='text' placeholder='Add On 5' />
-            <input type='number' placeholder='Add On 5 Price' />
-          </div>
-          <div className='meal__form-row'>
-            <input type='text' placeholder='Add On 6' />
-            <input type='number' placeholder='Add On 6 Price' />
-          </div>
-        </div>
-        <div className='meal__form-sizes'>
-          <div className='meal__form-subtitle'>Meal Size Information</div>
+        {error && <Message message={error}></Message>}
 
-          <div className='meal__form-row'>
-            <input type='text' placeholder='Size 1 Name' />
-            <input type='number' placeholder='Size 1 Price' />
-          </div>
-          <div className='meal__form-row'>
-            <input type='text' placeholder='Size 2 Name' />
-            <input type='number' placeholder='Size 2 Price' />
-          </div>
-          <div className='meal__form-row'>
-            <input type='text' placeholder='Size 3 Name' />
-            <input type='number' placeholder='Size 3 Price' />
-          </div>
-        </div>
+        {loading ? (
+          <Loader></Loader>
+        ) : (
+          <>
+            <div className='meal__form-subtitle'>Meal Information</div>
 
-        <div className='meal__form-buttons'>
-          <div className='meal__form-row'>
-            <input type='button' value='Cancel' className='cancel' />
-            <input type='button' value='Add Meal' className='submit' />
-          </div>
-        </div>
+            <div className='meal__form-row'>
+              <div className='meal__form-name'>
+                <input
+                  type='text'
+                  name=''
+                  id=''
+                  placeholder='Meal name'
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div className='meal__form-description'>
+                <input
+                  type='text'
+                  name=''
+                  id=''
+                  placeholder='Meal description'
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className='meal__form-row'>
+              <div className='meal__form-image'>
+                <input
+                  type='file'
+                  name=''
+                  id=''
+                  placeholder='Upload meal image'
+                  onChange={uploadFileHandler}
+                />
+              </div>
+              <div className='meal__form-category'>
+                <select
+                  name=''
+                  id=''
+                  onChange={(e) => setCategory(e.target.value)}>
+                  <option value=''>Select meal category</option>
+                  {map(categories, (category) => {
+                    return (
+                      <option value={category.name}>{category.name}</option>
+                    );
+                  })}
+                </select>
+              </div>
+            </div>
+            <div className='meal__form-row'>
+              <div className='meal__form-vegan'>
+                <input
+                  type='radio'
+                  name=''
+                  id='veganTrue'
+                  onClick={(e) => setVegan(true)}
+                />
+                <label htmlFor='veganTrue'>Yes</label>
+                <input
+                  type='radio'
+                  name=''
+                  id='veganFalse'
+                  onClick={(e) => setVegan(false)}
+                />{' '}
+                <label htmlFor='veganFalse'>No</label>
+              </div>
+              <div className='meal__form-price'>
+                <input
+                  type='number'
+                  name=''
+                  id=''
+                  placeholder='Unit Price'
+                  onChange={(e) => setPrice(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className='meal__form-addons'>
+              {' '}
+              <div className='meal__form-subtitle'>Meal Add on Information</div>
+              <div className='meal__form-row'>
+                <input
+                  type='text'
+                  placeholder='Add On 1'
+                  onChange={(e) => setAddOn1Name(e.target.value)}
+                />
+                <input
+                  type='number'
+                  placeholder='Add On 1 Price'
+                  onChange={(e) => setAddOn1Price(e.target.value)}
+                />
+              </div>
+              <div className='meal__form-row'>
+                <input
+                  type='text'
+                  placeholder='Add On 2'
+                  onChange={(e) => setAddOn2Name(e.target.value)}
+                />
+                <input
+                  type='number'
+                  placeholder='Add On 2 Price'
+                  onChange={(e) => setAddOn2Price(e.target.value)}
+                />
+              </div>
+              <div className='meal__form-row'>
+                <input
+                  type='text'
+                  placeholder='Add On 3'
+                  onChange={(e) => setAddOn3Name(e.target.value)}
+                />
+                <input
+                  type='number'
+                  placeholder='Add On 3 Price'
+                  onChange={(e) => setAddOn3Price(e.target.value)}
+                />
+              </div>
+              <div className='meal__form-row'>
+                <input
+                  type='text'
+                  placeholder='Add On 4'
+                  onChange={(e) => setAddOn4Name(e.target.value)}
+                />
+                <input
+                  type='number'
+                  placeholder='Add On 4 Price'
+                  onChange={(e) => setAddOn4Price(e.target.value)}
+                />
+              </div>
+              <div className='meal__form-row'>
+                <input
+                  type='text'
+                  placeholder='Add On 5'
+                  onChange={(e) => setAddOn5Name(e.target.value)}
+                />
+                <input
+                  type='number'
+                  placeholder='Add On 5 Price'
+                  onChange={(e) => setAddOn5Price(e.target.value)}
+                />
+              </div>
+              <div className='meal__form-row'>
+                <input
+                  type='text'
+                  placeholder='Add On 6'
+                  onChange={(e) => setAddOn6Name(e.target.value)}
+                />
+                <input
+                  type='number'
+                  placeholder='Add On 6 Price'
+                  onChange={(e) => setAddOn6Price(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className='meal__form-sizes'>
+              <div className='meal__form-subtitle'>Meal Size Information</div>
+
+              <div className='meal__form-row'>
+                <input
+                  type='text'
+                  placeholder='Size 1 Name'
+                  onChange={(e) => setSize1Name(e.target.value)}
+                />
+                <input
+                  type='number'
+                  placeholder='Size 1 Price'
+                  onChange={(e) => setSize1Price(e.target.value)}
+                />
+              </div>
+              <div className='meal__form-row'>
+                <input
+                  type='text'
+                  placeholder='Size 2 Name'
+                  onChange={(e) => setSize2Name(e.target.value)}
+                />
+                <input
+                  type='number'
+                  placeholder='Size 2 Price'
+                  onChange={(e) => setSize2Price(e.target.value)}
+                />
+              </div>
+              <div className='meal__form-row'>
+                <input
+                  type='text'
+                  placeholder='Size 3 Name'
+                  onChange={(e) => setSize3Name(e.target.value)}
+                />
+
+                <input
+                  type='number'
+                  placeholder='Size 3 Price'
+                  onChange={(e) => setSize3Price(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className='meal__form-buttons'>
+              <div className='meal__form-row'>
+                <input type='button' value='Cancel' className='cancel' />
+                <input
+                  type='button'
+                  value='Add Meal'
+                  className='submit'
+                  onClick={() => addMealHandler()}
+                />
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       {/* <div className='category-form-container'>
