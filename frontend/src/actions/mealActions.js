@@ -9,6 +9,9 @@ import {
   MEAL_REQUEST,
   MEAL_SUCCESS,
   MEAL_FAIL,
+  MEAL_ADD_REQUEST,
+  MEAL_ADD_SUCCESS,
+  MEAL_ADD_FAIL,
 } from '../constants/mealConstants';
 
 export const listMeals = (category) => async (dispatch) => {
@@ -61,6 +64,44 @@ export const mealRecommendation = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: MEAL_RECOMMENDATIONS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const mealCreate = (meal) => async (dispatch, getState) => {
+  console.log(meal);
+
+  try {
+    dispatch({
+      type: MEAL_ADD_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    console.log(config);
+
+    const { data } = await axios.post(`/api/meals`, meal, config);
+
+    dispatch({
+      type: MEAL_ADD_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: MEAL_ADD_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

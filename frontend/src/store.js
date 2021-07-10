@@ -5,6 +5,7 @@ import {
   mealListReducer,
   mealReducer,
   mealRecommendationReducer,
+  mealCreateReducer,
 } from './reducers/mealReducers';
 import { orderReducer, orderCountReducer } from './reducers/orderReducer';
 import { categoryReducer } from './reducers/categoryReducers';
@@ -22,6 +23,7 @@ const reducer = combineReducers({
   mealList: mealListReducer,
   mealItem: mealReducer,
   mealRecommendation: mealRecommendationReducer,
+  mealCreate: mealCreateReducer,
   order: orderReducer,
   userSignup: userSignUpReducer,
   userLogin: userLoginReducer,
