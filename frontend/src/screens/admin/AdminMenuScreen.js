@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { listMeals } from '../../actions/mealActions';
 import { map } from '../../lodash';
 
-import '../../assets/scss/admin/meals.scss';
+import '../../assets/scss/admin/mealForm.scss';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 
@@ -19,6 +20,8 @@ const AdminMenuScreen = () => {
 
   return (
     <section className='section bd-container-meals' id='menu'>
+      <Link to='/admin/meal/new'>Add New Meal</Link>
+
       {error ? (
         <Message size='full' message={error}></Message>
       ) : loading ? (
