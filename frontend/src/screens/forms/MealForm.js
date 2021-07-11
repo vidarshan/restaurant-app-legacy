@@ -26,6 +26,7 @@ const CategoryForm = ({ match }) => {
     categories,
   } = categoryList;
 
+  const [title, setTitle] = useState('');
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
@@ -104,11 +105,13 @@ const CategoryForm = ({ match }) => {
     dispatch(mealCreate(newMeal));
   };
 
-  useEffect(() => {
-    dispatch(listCategories());
-    if (match.params.id) {
-      dispatch(mealItem(match.params.id));
-      console.log(meal);
+  const loadDetails = async () => {
+    if (match.params.id === 'new') {
+      setTitle('Add new meal');
+    } else {
+      setTitle('Edit meal details');
+      await dispatch(mealItem(match.params.id));
+
       setName(meal.name);
       setDescription(meal.description);
       setImage(meal.image);
@@ -116,16 +119,53 @@ const CategoryForm = ({ match }) => {
       setCategory(meal.foodType);
       setVegan(meal.vegan);
 
-      map(meal.addons, (addon, e) => {
-        console.log(e);
-      });
+      console.log(meal.sizes);
+
+      if (meal.addons) {
+        setAddOn1Name(meal.addons[0] && meal.addons[0].addOnName);
+        setAddOn1Price(meal.addons[0] && meal.addons[0].addOnName);
+
+        setAddOn2Name(meal.addons[1] && meal.addons[1].addOnName);
+        setAddOn2Price(meal.addons[1] && meal.addons[1].addOnName);
+
+        setAddOn3Name(meal.addons[2] && meal.addons[2].addOnName);
+        setAddOn3Price(meal.addons[2] && meal.addons[2].addOnName);
+
+        setAddOn4Name(meal.addons[3] && meal.addons[3].addOnName);
+        setAddOn4Price(meal.addons[3] && meal.addons[3].addOnPrice);
+
+        setAddOn5Name(meal.addons[4] && meal.addons[4].addOnName);
+        setAddOn5Price(meal.addons[4] && meal.addons[4].addOnPrice);
+
+        setAddOn6Name(meal.addons[5] && meal.addons[5].addOnName);
+        setAddOn6Price(meal.addons[5] && meal.addons[5].addOnPrice);
+      }
+
+      if (meal.sizes) {
+        setSize1Name(meal.sizes[0] && meal.sizes[0].size);
+        setSize1Price(meal.sizes[0] && meal.sizes[0].price);
+
+        setSize2Name(meal.sizes[1] && meal.sizes[1].size);
+        setSize2Price(meal.sizes[1] && meal.sizes[1].price);
+
+        setSize3Name(meal.sizes[2] && meal.sizes[2].size);
+        setSize3Price(meal.sizes[2] && meal.sizes[2].price);
+      }
     }
+  };
+
+  useEffect(() => {
+    dispatch(listCategories());
+    console.log(match.params);
+    loadDetails();
   }, [dispatch, match]);
 
   return (
     <section className='section bd-container-forms'>
       <div className='meal__form'>
-        <div className='meal__form-heading'>Add New Meal</div>
+        <div className='meal__form-heading'>{title}</div>
+
+        {error && <Message message={error}></Message>}
 
         {error || (mealerror && <Message message={error}></Message>)}
 
@@ -171,6 +211,7 @@ const CategoryForm = ({ match }) => {
                 <select
                   name='category'
                   id='category'
+                  value={category}
                   onChange={(e) => setCategory(e.target.value)}>
                   <option value=''>Select meal category</option>
                   {map(categories, (category) => {
@@ -217,11 +258,13 @@ const CategoryForm = ({ match }) => {
                 <input
                   type='text'
                   placeholder='Add On 1'
+                  value={addOn1Name}
                   onChange={(e) => setAddOn1Name(e.target.value)}
                 />
                 <input
                   type='number'
                   placeholder='Add On 1 Price'
+                  value={addOn1Price}
                   onChange={(e) => setAddOn1Price(e.target.value)}
                 />
               </div>
@@ -229,11 +272,13 @@ const CategoryForm = ({ match }) => {
                 <input
                   type='text'
                   placeholder='Add On 2'
+                  value={addOn2Name}
                   onChange={(e) => setAddOn2Name(e.target.value)}
                 />
                 <input
                   type='number'
                   placeholder='Add On 2 Price'
+                  value={addOn2Price}
                   onChange={(e) => setAddOn2Price(e.target.value)}
                 />
               </div>
@@ -241,11 +286,13 @@ const CategoryForm = ({ match }) => {
                 <input
                   type='text'
                   placeholder='Add On 3'
+                  value={addOn3Name}
                   onChange={(e) => setAddOn3Name(e.target.value)}
                 />
                 <input
                   type='number'
                   placeholder='Add On 3 Price'
+                  value={addOn3Price}
                   onChange={(e) => setAddOn3Price(e.target.value)}
                 />
               </div>
@@ -253,11 +300,13 @@ const CategoryForm = ({ match }) => {
                 <input
                   type='text'
                   placeholder='Add On 4'
+                  value={addOn4Name}
                   onChange={(e) => setAddOn4Name(e.target.value)}
                 />
                 <input
                   type='number'
                   placeholder='Add On 4 Price'
+                  value={addOn4Price}
                   onChange={(e) => setAddOn4Price(e.target.value)}
                 />
               </div>
@@ -265,11 +314,13 @@ const CategoryForm = ({ match }) => {
                 <input
                   type='text'
                   placeholder='Add On 5'
+                  value={addOn5Name}
                   onChange={(e) => setAddOn5Name(e.target.value)}
                 />
                 <input
                   type='number'
                   placeholder='Add On 5 Price'
+                  value={addOn5Price}
                   onChange={(e) => setAddOn5Price(e.target.value)}
                 />
               </div>
@@ -277,11 +328,13 @@ const CategoryForm = ({ match }) => {
                 <input
                   type='text'
                   placeholder='Add On 6'
+                  value={addOn6Name}
                   onChange={(e) => setAddOn6Name(e.target.value)}
                 />
                 <input
                   type='number'
                   placeholder='Add On 6 Price'
+                  value={addOn6Price}
                   onChange={(e) => setAddOn6Price(e.target.value)}
                 />
               </div>
@@ -293,11 +346,13 @@ const CategoryForm = ({ match }) => {
                 <input
                   type='text'
                   placeholder='Size 1 Name'
+                  value={size1Name}
                   onChange={(e) => setSize1Name(e.target.value)}
                 />
                 <input
                   type='number'
                   placeholder='Size 1 Price'
+                  value={size1Price}
                   onChange={(e) => setSize1Price(e.target.value)}
                 />
               </div>
@@ -305,11 +360,13 @@ const CategoryForm = ({ match }) => {
                 <input
                   type='text'
                   placeholder='Size 2 Name'
+                  value={size2Name}
                   onChange={(e) => setSize2Name(e.target.value)}
                 />
                 <input
                   type='number'
                   placeholder='Size 2 Price'
+                  value={size2Price}
                   onChange={(e) => setSize2Price(e.target.value)}
                 />
               </div>
@@ -317,12 +374,14 @@ const CategoryForm = ({ match }) => {
                 <input
                   type='text'
                   placeholder='Size 3 Name'
+                  value={size3Name}
                   onChange={(e) => setSize3Name(e.target.value)}
                 />
 
                 <input
                   type='number'
                   placeholder='Size 3 Price'
+                  value={size3Price}
                   onChange={(e) => setSize3Price(e.target.value)}
                 />
               </div>
