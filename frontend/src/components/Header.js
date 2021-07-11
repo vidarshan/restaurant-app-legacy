@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Badge from '../components/Badge';
 import 'boxicons';
@@ -8,6 +8,8 @@ import { logout } from '../actions/userActions';
 
 const Header = () => {
   const dispatch = useDispatch();
+
+  const history = useHistory();
 
   const userLogin = useSelector((state) => state.userLogin);
   const ordercount = useSelector((state) => state.orderCount);
@@ -19,6 +21,7 @@ const Header = () => {
 
   const logoutHandler = () => {
     dispatch(logout());
+    history.push('/');
   };
 
   const activateTheme = () => {
@@ -80,7 +83,7 @@ const Header = () => {
               Chillie
             </Link>
           ) : (
-            <Link to='#' className='nav__logo'>
+            <Link to='/admin/dashboard' className='nav__logo'>
               Admin Panel
             </Link>
           )}
@@ -127,7 +130,7 @@ const Header = () => {
                 ) : (
                   <li className='nav__item'>
                     <Link to='/login' className='nav__link'>
-                      <box-icon name='log-in' color='#a6a6a6'></box-icon>
+                      <box-icon name='log-in-circle'></box-icon>
                     </Link>
                   </li>
                 )}

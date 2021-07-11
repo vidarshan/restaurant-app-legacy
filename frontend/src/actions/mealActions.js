@@ -73,8 +73,6 @@ export const mealRecommendation = (id) => async (dispatch) => {
 };
 
 export const mealCreate = (meal) => async (dispatch, getState) => {
-  console.log(meal);
-
   try {
     dispatch({
       type: MEAL_ADD_REQUEST,
@@ -90,8 +88,6 @@ export const mealCreate = (meal) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-
-    console.log(config);
 
     const { data } = await axios.post(`/api/meals`, meal, config);
 

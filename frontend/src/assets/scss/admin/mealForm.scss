@@ -1,3 +1,13 @@
+.add-meal-button {
+  background-color: var(--first-color);
+  padding: 0.5rem;
+  float: right;
+  margin-bottom: 0.4rem;
+  width: fit-content;
+  border-radius: var(--card-border-radius);
+  color: var(--text-color);
+}
+
 .meal__form {
   background-color: var(--container-color);
   border-radius: var(--card-border-radius);

@@ -1,5 +1,6 @@
 import { map } from 'lodash';
 import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   listUsers,
@@ -12,16 +13,25 @@ import Loader from '../../components/Loader';
 
 const AdminUserScreen = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const userLogin = useSelector((state) => state.userLogin);
   const userList = useSelector((state) => state.userList);
   const changeLevel = useSelector((state) => state.changeUserLevel);
   const deletedUser = useSelector((state) => state.deleteUser);
 
+  const { loading: userloading, error: usererror, userInfo } = userLogin;
   const { users, loading, error } = userList;
+
   const { success: successchangelevel } = changeLevel;
 
   const { success: successdelete } = deletedUser;
 
   useEffect(() => {
+    if (!userInfo) {
+      history.push('/');
+    }
+
     dispatch(listUsers());
   }, [successdelete, successchangelevel, dispatch]);
 
