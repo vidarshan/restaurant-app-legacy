@@ -3,23 +3,22 @@ import React, { useState, useEffect } from 'react';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import { useDispatch, useSelector } from 'react-redux';
-import { mealCreate } from '../../actions/mealActions';
+import { mealCreate, mealItem } from '../../actions/mealActions';
 import { listCategories } from '../../actions/categoryActions';
 import { map } from '../../lodash';
 
 import '../../assets/scss/admin/forms.scss';
-import '../../assets/scss/admin/mealForm.scss';
+import '../../assets/scss/admin/meals.scss';
 
-const CategoryForm = () => {
+const CategoryForm = ({ match }) => {
   const dispatch = useDispatch();
 
   const createMeal = useSelector((state) => state.mealCreate);
   const categoryList = useSelector((state) => state.categories);
+  const item = useSelector((state) => state.mealItem);
 
   const { loading, success, error } = createMeal;
-
-  console.log(loading);
-  console.log(error);
+  const { loading: mealloading, error: mealerror, meal } = item;
 
   const {
     // loadingcategories: loading,
@@ -102,24 +101,35 @@ const CategoryForm = () => {
       ordersThisWeek: 0,
     };
 
-    console.log(newMeal);
     dispatch(mealCreate(newMeal));
   };
 
   useEffect(() => {
     dispatch(listCategories());
+    if (match.params.id) {
+      dispatch(mealItem(match.params.id));
+      console.log(meal);
+      setName(meal.name);
+      setDescription(meal.description);
+      setImage(meal.image);
+      setPrice(meal.price);
+      setCategory(meal.foodType);
+      setVegan(meal.vegan);
 
-    console.log(categories);
-  }, [dispatch]);
+      map(meal.addons, (addon, e) => {
+        console.log(e);
+      });
+    }
+  }, [dispatch, match]);
 
   return (
     <section className='section bd-container-forms'>
       <div className='meal__form'>
         <div className='meal__form-heading'>Add New Meal</div>
 
-        {error && <Message message={error}></Message>}
+        {error || (mealerror && <Message message={error}></Message>)}
 
-        {loading ? (
+        {loading || mealloading ? (
           <Loader></Loader>
         ) : (
           <>
@@ -129,8 +139,9 @@ const CategoryForm = () => {
               <div className='meal__form-name'>
                 <input
                   type='text'
-                  name=''
-                  id=''
+                  name='name'
+                  id='name'
+                  value={name}
                   placeholder='Meal name'
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -138,8 +149,9 @@ const CategoryForm = () => {
               <div className='meal__form-description'>
                 <input
                   type='text'
-                  name=''
-                  id=''
+                  name='description'
+                  id='description'
+                  value={description}
                   placeholder='Meal description'
                   onChange={(e) => setDescription(e.target.value)}
                 />
@@ -149,16 +161,16 @@ const CategoryForm = () => {
               <div className='meal__form-image'>
                 <input
                   type='file'
-                  name=''
-                  id=''
+                  name='image'
+                  id='image'
                   placeholder='Upload meal image'
                   onChange={uploadFileHandler}
                 />
               </div>
               <div className='meal__form-category'>
                 <select
-                  name=''
-                  id=''
+                  name='category'
+                  id='category'
                   onChange={(e) => setCategory(e.target.value)}>
                   <option value=''>Select meal category</option>
                   {map(categories, (category) => {
@@ -173,15 +185,17 @@ const CategoryForm = () => {
               <div className='meal__form-vegan'>
                 <input
                   type='radio'
-                  name=''
+                  name='veganTrue'
+                  checked={vegan && 'checked'}
                   id='veganTrue'
                   onClick={(e) => setVegan(true)}
                 />
                 <label htmlFor='veganTrue'>Yes</label>
                 <input
                   type='radio'
-                  name=''
+                  name='veganFalse'
                   id='veganFalse'
+                  checked={!vegan && 'checked'}
                   onClick={(e) => setVegan(false)}
                 />{' '}
                 <label htmlFor='veganFalse'>No</label>
@@ -189,15 +203,15 @@ const CategoryForm = () => {
               <div className='meal__form-price'>
                 <input
                   type='number'
-                  name=''
-                  id=''
+                  name='price'
+                  value={price}
+                  id='price'
                   placeholder='Unit Price'
                   onChange={(e) => setPrice(e.target.value)}
                 />
               </div>
             </div>
             <div className='meal__form-addons'>
-              {' '}
               <div className='meal__form-subtitle'>Meal Add on Information</div>
               <div className='meal__form-row'>
                 <input

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { listMeals } from '../../actions/mealActions';
 import { map } from '../../lodash';
 
@@ -10,6 +10,7 @@ import Loader from '../../components/Loader';
 
 const AdminMenuScreen = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const mealList = useSelector((state) => state.mealList);
 
   const { meals, loading, error } = mealList;
@@ -20,7 +21,11 @@ const AdminMenuScreen = () => {
 
   return (
     <section className='section bd-container-meals' id='menu'>
-      <Link to='/admin/meal/new'>Add New Meal</Link>
+      <div
+        className='add-meal-button'
+        onClick={() => history.push('/admin/meal/new')}>
+        Add new meal
+      </div>
 
       {error ? (
         <Message size='full' message={error}></Message>
@@ -62,7 +67,9 @@ const AdminMenuScreen = () => {
                 </td>
                 <td>{meal.price}</td>
                 <td>
-                  <div className='action-icon-edit'>
+                  <div
+                    className='action-icon-edit'
+                    onClick={() => history.push(`/admin/meal/${meal._id}`)}>
                     <box-icon name='edit'></box-icon>
                   </div>
                 </td>
